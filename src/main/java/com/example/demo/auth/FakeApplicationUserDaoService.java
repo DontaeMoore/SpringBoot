@@ -38,12 +38,12 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
         List<User>  userList = userDAO.list();
 
         for(User u: userList){
-            System.out.println("Defined a new user with username " + u.getUsername());
+            System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword());
 
             appUser.add(
                     new ApplicationUser(
                             u.getUsername(),
-                            passwordEncoder.encode(u.getPassword()),
+                            u.getPassword(),
                             true,
                             true,
                             true,
