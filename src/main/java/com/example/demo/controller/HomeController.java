@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,15 +42,47 @@ public class HomeController {
         return new ModelAndView("yo");
     }
 
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView viewTrack(HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Contact contact = contactDAO.get(id);
+
+        ModelAndView model = new ModelAndView("view");
+
+        model.addObject("contact",contact);
+
+
+        return model;
+
+    }
+
 
 
     @RequestMapping(value = {"/", "home"})
     public ModelAndView listContact(ModelAndView model) throws IOException {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String login = "";
+
+        if(authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        }
+        else {
+             login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+
+
+
+
+
         List<Contact> listContact = contactDAO.list();
         List<User>  userList = userDAO.list();
         System.out.println(userList);
         model.addObject("listContact",listContact);
+        model.addObject("WelcomeMessage", login);
 
         model.setViewName("home");
 

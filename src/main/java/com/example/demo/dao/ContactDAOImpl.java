@@ -78,9 +78,11 @@ public class ContactDAOImpl implements ContactDAO {
 				t.setId(rs.getInt("id"));
 				t.setName(rs.getString("name"));
 				t.setCity(rs.getString("city"));
-				t.setState(rs.getString("state"));
+				t.setState(rs.getString("state").toUpperCase());
 				t.setZip(rs.getString("zip"));
 				t.setOwnership(rs.getString("ownership"));
+				t.findTemp();
+
 
 				return t;
 			}

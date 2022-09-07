@@ -29,7 +29,7 @@ public class HorseController {
 
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Lexington&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial");
 
-
+           // url for zip, useful for our tracks api.openweathermap.org/data/2.5/weather?zip=40511&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial
 
 
 
