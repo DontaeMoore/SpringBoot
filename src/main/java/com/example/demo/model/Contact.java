@@ -164,7 +164,7 @@ public Contact() {
 				Weather w = new Weather(temp, description, icon, wind);
 				String[] weatherData = w.getList();
 
-
+				System.out.println(getTemp() + " " + getIcon());
 
 			}
 		} catch (Exception e) {
