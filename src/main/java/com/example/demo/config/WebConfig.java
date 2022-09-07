@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.dao.ContactDAO;
+import com.example.demo.dao.TrackDAO;
 import com.example.demo.dao.UserDAO;
 import com.example.demo.dao.UserDAOImpl;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import com.example.demo.dao.ContactDAOImpl;
+import com.example.demo.dao.TrackDAOImpl;
 
 import javax.sql.DataSource;
 
@@ -49,8 +49,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ContactDAO getCOntactDAO() {
-        return new ContactDAOImpl(getDataSource());
+    public TrackDAO getCOntactDAO() {
+        return new TrackDAOImpl(getDataSource());
     }
 
     @Bean

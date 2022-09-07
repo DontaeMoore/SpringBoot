@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Contact;
 import com.example.demo.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

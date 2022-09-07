@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Contact;
+import com.example.demo.model.Track;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -11,36 +11,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ContactDAOImpl implements ContactDAO {
+public class TrackDAOImpl implements TrackDAO {
 
 	private JdbcTemplate jdbcTemplate;
 
-	public ContactDAOImpl(DataSource dataSource) {
+	public TrackDAOImpl(DataSource dataSource) {
 
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public int save(Contact c) {
+	public int save(Track c) {
 		String sql = "INSERT INTO tracks (name, city, state, zip, ownership) VALUES (?, ?, ?, ?, ?)";
 		return jdbcTemplate.update(sql, c.getName(), c.getCity(), c.getState(), c.getZip(), c.getOwnership());
 
 	}
 
 	@Override
-	public int update(Contact c) {
+	public int update(Track c) {
 		String sql = "UPDATE  tracks SET name = ?, city = ?, state = ?, zip = ?, ownership = ? WHERE id =?";
 		return jdbcTemplate.update(sql, c.getName(), c.getCity(), c.getState(), c.getZip(), c.getOwnership(), c.getId());
 	}
 
 	@Override
-	public Contact get(final Integer id) {
+	public Track get(final Integer id) {
 		String sql = "SELECT * FROM  tracks WHERE id =" + id;
 
-		ResultSetExtractor<Contact> extractor = new ResultSetExtractor<Contact>() {
+		ResultSetExtractor<Track> extractor = new ResultSetExtractor<Track>() {
 
 			@Override
-			public Contact extractData(ResultSet rs) throws SQLException, DataAccessException {
+			public Track extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if(rs.next()) {
 					String name = rs.getString("name");
 					String city = rs.getString("city");
@@ -48,7 +48,7 @@ public class ContactDAOImpl implements ContactDAO {
 					String zip = rs.getString("zip");
 					String ownership = rs.getString("ownership");
 
-					return new Contact(id, name, city, state, zip, ownership);
+					return new Track(id, name, city, state, zip, ownership);
 				}
 
 				return null;
@@ -68,12 +68,12 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public List<Contact> list() {
-		List<Contact> list = jdbcTemplate.query("SELECT * FROM TRACKS", new RowMapper<Contact>() {
+	public List<Track> list() {
+		List<Track> list = jdbcTemplate.query("SELECT * FROM TRACKS", new RowMapper<Track>() {
 
 			@Override
-			public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Contact t = new Contact();
+			public Track mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Track t = new Track();
 
 				t.setId(rs.getInt("id"));
 				t.setName(rs.getString("name"));

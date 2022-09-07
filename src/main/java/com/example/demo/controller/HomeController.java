@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.dao.ContactDAO;
+import com.example.demo.dao.TrackDAO;
 import com.example.demo.dao.UserDAO;
-import com.example.demo.model.Contact;
+import com.example.demo.model.Track;
 import com.example.demo.model.User;
 
 
@@ -27,7 +27,7 @@ import com.example.demo.model.User;
 public class HomeController {
 
     @Autowired
-   private ContactDAO contactDAO;
+   private TrackDAO trackDAO;
 
     @Autowired
     private UserDAO userDAO;
@@ -45,11 +45,11 @@ public class HomeController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView viewTrack(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Contact contact = contactDAO.get(id);
+        Track track = trackDAO.get(id);
 
         ModelAndView model = new ModelAndView("view");
 
-        model.addObject("contact",contact);
+        model.addObject("contact", track);
 
 
         return model;
@@ -78,10 +78,10 @@ public class HomeController {
 
 
 
-        List<Contact> listContact = contactDAO.list();
+        List<Track> listTrack = trackDAO.list();
         List<User>  userList = userDAO.list();
         System.out.println(userList);
-        model.addObject("listContact",listContact);
+        model.addObject("listContact", listTrack);
         model.addObject("WelcomeMessage", login);
 
         model.setViewName("home");
@@ -93,10 +93,10 @@ public class HomeController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView newTrack(ModelAndView model) throws IOException {
 
-        Contact newContact = new Contact();
+        Track newTrack = new Track();
 
 
-        model.addObject("contact",newContact);
+        model.addObject("contact", newTrack);
 
         model.setViewName("add");
 
@@ -105,13 +105,13 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView saveContact(@ModelAttribute Contact contact) {
+    public ModelAndView saveContact(@ModelAttribute Track track) {
 
-        if(contact.getId() == null) {
-            contactDAO.save(contact);
+        if(track.getId() == null) {
+            trackDAO.save(track);
         }
         else {
-            contactDAO.update(contact);
+            trackDAO.update(track);
         }
 
 
@@ -122,11 +122,11 @@ public class HomeController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Contact contact = contactDAO.get(id);
+        Track track = trackDAO.get(id);
 
         ModelAndView model = new ModelAndView("add");
 
-        model.addObject("contact",contact);
+        model.addObject("contact", track);
 
 
         return model;
@@ -136,7 +136,7 @@ public class HomeController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteContact(@RequestParam Integer id) {
 
-        contactDAO.delete(id);
+        trackDAO.delete(id);
 
         return new ModelAndView("redirect:/");
 

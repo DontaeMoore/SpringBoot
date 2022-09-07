@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class Contact {
+public class Track {
 //tracks
 
 	private Integer id;
@@ -21,14 +21,14 @@ public class Contact {
 
 	private String icon;
 
-	public Contact(Integer id, String name, String city, String state, String zip, String ownership) {
+	public Track(Integer id, String name, String city, String state, String zip, String ownership) {
 		
 		this(name, city, state, zip,ownership);
 		this.id = id;
 		
 	}
 	
-	public Contact(String name, String city, String state, String zip, String ownership) {
+	public Track(String name, String city, String state, String zip, String ownership) {
 
 		this.name = name;
 		this.city = city;
@@ -37,7 +37,7 @@ public class Contact {
 		this.ownership = ownership;
 	}
 	
-public Contact() {
+public Track() {
 		
 	}
 
