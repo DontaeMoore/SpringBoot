@@ -1,17 +1,15 @@
-package com.example.demo.controller;
+package com.TB_Challenge.controller;
 
 
-import com.example.demo.model.Weather;
+import com.TB_Challenge.model.Weather;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 import org.json.*;
 

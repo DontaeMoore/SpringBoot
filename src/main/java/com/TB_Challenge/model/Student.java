@@ -1,4 +1,4 @@
-package com.example.demo.student;
+package com.TB_Challenge.model;
 
 public class Student {
 

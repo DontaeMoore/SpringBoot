@@ -1,11 +1,10 @@
-package com.example.demo.auth;
+package com.TB_Challenge.authorization;
 
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 public class ApplicationUser implements UserDetails {
 

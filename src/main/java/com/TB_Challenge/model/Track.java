@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.TB_Challenge.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

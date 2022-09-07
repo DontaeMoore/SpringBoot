@@ -1,8 +1,7 @@
-package com.example.demo.auth;
+package com.TB_Challenge.authorization;
 
-import com.example.demo.dao.UserDAO;
-import com.example.demo.model.User;
-import com.google.common.collect.Lists;
+import com.TB_Challenge.model.User;
+import com.TB_Challenge.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;

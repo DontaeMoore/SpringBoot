@@ -1,10 +1,10 @@
-package com.example.demo;
+package com.TB_Challenge;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class TBChallengeApplicationTests {
 
 	@Test
 	void contextLoads() {

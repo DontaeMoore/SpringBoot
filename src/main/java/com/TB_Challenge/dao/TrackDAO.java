@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.TB_Challenge.dao;
 
-import com.example.demo.model.Track;
+import com.TB_Challenge.model.Track;
 
 import java.util.List;
 

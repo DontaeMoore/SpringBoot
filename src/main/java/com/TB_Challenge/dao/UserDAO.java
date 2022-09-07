@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.TB_Challenge.dao;
 
-import com.example.demo.model.User;
+import com.TB_Challenge.model.User;
 
 import java.util.List;
 

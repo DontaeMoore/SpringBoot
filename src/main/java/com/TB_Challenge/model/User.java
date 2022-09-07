@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.TB_Challenge.model;
 
 public class User {
     private Integer id;

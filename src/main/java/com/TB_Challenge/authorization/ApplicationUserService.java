@@ -1,4 +1,4 @@
-package com.example.demo.auth;
+package com.TB_Challenge.authorization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

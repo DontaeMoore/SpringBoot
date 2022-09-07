@@ -1,8 +1,9 @@
-package com.example.demo.config;
+package com.TB_Challenge.config;
 
-import com.example.demo.dao.TrackDAO;
-import com.example.demo.dao.UserDAO;
-import com.example.demo.dao.UserDAOImpl;
+import com.TB_Challenge.dao.TrackDAO;
+import com.TB_Challenge.dao.TrackDAOImpl;
+import com.TB_Challenge.dao.UserDAO;
+import com.TB_Challenge.dao.UserDAOImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import com.example.demo.dao.TrackDAOImpl;
 
 import javax.sql.DataSource;
 
