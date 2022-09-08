@@ -14,6 +14,13 @@ public class User {
         this.status = status;
     }
 
+    public User (Integer id, String username, String role, String status) {
+        this.id = id;
+        this.username = username;
+        this.role = role;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }

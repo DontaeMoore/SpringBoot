@@ -2,10 +2,10 @@ package com.TB_Challenge.model;
 
 public class Weather {
 
-    private String wSpeed;
-    private String description;
-    private String icon;
-    private String temp;
+    private final String wSpeed;
+    private final String description;
+    private final String icon;
+    private final String temp;
 
     public Weather(String temp, String description, String icon, String wSpeed) {
 

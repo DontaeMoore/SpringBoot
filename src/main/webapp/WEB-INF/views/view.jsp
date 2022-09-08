@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -10,7 +11,8 @@
         <title>View Track Details!</title>
     </head>
     <body>
-    <div style="padding-left: 100px;">
+    <div align="center">
+    <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
     <a href="home"><input type="submit" value="Back"/></a>
     </div>
 

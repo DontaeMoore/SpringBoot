@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface TrackDAO {
 
-	public int save(Track track);
+	int save(Track track);
 	
-	public int update(Track track);
+	int update(Track track);
 	
-	public Track get(Integer id);
+	Track get(Integer id);
 	
-	public int delete(Integer id);
+	int delete(Integer id);
 	
-	public List<Track> list();
+	List<Track> list();
 	
 	
 	

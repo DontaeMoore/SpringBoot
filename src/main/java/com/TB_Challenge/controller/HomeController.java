@@ -27,18 +27,18 @@ import com.TB_Challenge.model.User;
 public class HomeController {
 
     @Autowired
-   private TrackDAO trackDAO;
+    private TrackDAO trackDAO;
 
     @Autowired
     private UserDAO userDAO;
 
-    @RequestMapping(value="/2")
-    public ModelAndView test(HttpServletResponse response) throws IOException{
+    @RequestMapping(value = "/2")
+    public ModelAndView test(HttpServletResponse response) throws IOException {
         return new ModelAndView("home");
     }
 
-    @RequestMapping(value="/yo")
-    public ModelAndView test2(HttpServletResponse response) throws IOException{
+    @RequestMapping(value = "/yo")
+    public ModelAndView test2(HttpServletResponse response) throws IOException {
 
 
         ModelAndView model = new ModelAndView("yo");
@@ -46,11 +46,10 @@ public class HomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
 
-        if(authentication.getName().equals("anonymousUser")) {
+        if (authentication.getName().equals("anonymousUser")) {
             login = "You are not logged in";
             System.out.println(login);
-        }
-        else {
+        } else {
             login = "Welcome " + StringUtils.capitalize(authentication.getName());
             System.out.println(login);
         }
@@ -67,6 +66,11 @@ public class HomeController {
 
         ModelAndView model = new ModelAndView("view");
 
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+
+        User user = grabLoggedinUser();
+        model.addObject("user", user);
         model.addObject("contact", track);
 
 
@@ -75,31 +79,19 @@ public class HomeController {
     }
 
 
-
     @RequestMapping(value = {"/", "home"})
     public ModelAndView listContact(ModelAndView model) throws IOException {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String login = "";
-
-        if(authentication.getName().equals("anonymousUser")) {
-            login = "You are not logged in";
-            System.out.println(login);
-        }
-        else {
-             login = "Welcome " + StringUtils.capitalize(authentication.getName());
-            System.out.println(login);
-        }
-
-
-
-
 
         List<Track> listTrack = trackDAO.list();
-        List<User>  userList = userDAO.list();
+        List<User> userList = userDAO.list();
         System.out.println(userList);
         model.addObject("listContact", listTrack);
+
+        String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
+        User user = grabLoggedinUser();
+        model.addObject("user", user);
 
         model.setViewName("home");
 
@@ -112,8 +104,11 @@ public class HomeController {
 
         Track newTrack = new Track();
 
-
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
         model.addObject("contact", newTrack);
+        User user = grabLoggedinUser();
+        model.addObject("user", user);
 
         model.setViewName("add");
 
@@ -123,13 +118,22 @@ public class HomeController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveContact(@ModelAttribute Track track) {
+        System.out.println("save was called");
 
-        if(track.getId() == null) {
+        if (track.getId() == null) {
             trackDAO.save(track);
-        }
-        else {
+        } else {
             trackDAO.update(track);
         }
+
+
+        return new ModelAndView("redirect:/");
+
+    }
+
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    public ModelAndView saveUser(@ModelAttribute User user) {
+        System.out.println("save was called for user" + user.toString());
 
 
         return new ModelAndView("redirect:/");
@@ -139,11 +143,33 @@ public class HomeController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("This is id " + id);
         Track track = trackDAO.get(id);
 
         ModelAndView model = new ModelAndView("add");
 
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+        User user = grabLoggedinUser();
+        model.addObject("user", user);
+
         model.addObject("contact", track);
+
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/editUser", method = RequestMethod.GET)
+    public ModelAndView editUser(HttpServletRequest request) {
+
+
+        ModelAndView model = new ModelAndView("editUser");
+
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+        User user = grabLoggedinUser();
+        model.addObject("user", user);
 
 
         return model;
@@ -157,6 +183,30 @@ public class HomeController {
 
         return new ModelAndView("redirect:/");
 
+    }
+
+    public String securityLoginInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = "";
+
+        if (authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        } else {
+            login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+
+
+        return login;
+    }
+
+    public User grabLoggedinUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = userDAO.getUserInfo(authentication.getName());
+
+        return user;
     }
 
 

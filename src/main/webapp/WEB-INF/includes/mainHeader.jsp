@@ -8,6 +8,6 @@
         <title>Home</title>
     </head>
     <body>
-    <h3>${WelcomeMessage} &emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a> </h3>
+    <h3><a href="editUser">${WelcomeMessage}</a>&emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a> </h3>
     </body>
 </html>

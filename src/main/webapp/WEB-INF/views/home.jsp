@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,10 +9,10 @@
 <body>
 <div align="center">
 <h1>Derby Tracks List</h1>
-
+<%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
 <div>
-<h3>${WelcomeMessage} &emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a> </h3>
+
 
 </div>
 <a href="horse"><input type="submit" value="Horse Page"/></a>

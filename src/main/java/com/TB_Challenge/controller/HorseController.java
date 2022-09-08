@@ -2,7 +2,10 @@ package com.TB_Challenge.controller;
 
 
 import com.TB_Challenge.model.Weather;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +24,19 @@ public class HorseController {
 
     @RequestMapping(value="/horse")
     public ModelAndView Weather (ModelAndView model)  throws IOException {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = "";
+
+        if(authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        }
+        else {
+            login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+        model.addObject("WelcomeMessage", login);
 
         //API call
         try {

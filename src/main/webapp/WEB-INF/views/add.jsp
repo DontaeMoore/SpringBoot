@@ -10,9 +10,10 @@
         <title>New/Edit Tracks</title>
     </head>
     <body>
-    <div style="padding-left: 100px;">
-    <a href="home"><input type="submit" value="Back"/></a> 
-    </div>
+     <div align="center">
+        <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
+        <a href="home"><input type="submit" value="Back"/></a>
+        </div>
    
         <div align="center">
         <h1>New/Edit Track</h1>

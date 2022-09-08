@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TrackDAOImpl implements TrackDAO {
 
-	private JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 
 	public TrackDAOImpl(DataSource dataSource) {
 
