@@ -32,7 +32,7 @@
         
          <tr>
         <td>State:</td>
-        <td><form:input path="state"/></td>
+        <td><form:input path="state" maxlength="2"/></td>
         </tr>
         
          <tr>

@@ -12,12 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserDAOImpl implements UserDAO {
 
     private final JdbcTemplate jdbcTemplate;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDAOImpl(DataSource dataSource) {
-
+        this.passwordEncoder = new BCryptPasswordEncoder();
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -72,5 +76,12 @@ public class UserDAOImpl implements UserDAO {
         return jdbcTemplate.query(sql, extractor);
 
 
+    }
+
+    @Override
+    public int update(User u) {
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
+        String sql = "UPDATE  Users SET password = ?, role = ?, status = ? WHERE id =?";
+        return jdbcTemplate.update(sql, u.getPassword(), u.getRole(), u.getStatus(), u.getId());
     }
 }

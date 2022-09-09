@@ -10,4 +10,6 @@ public interface UserDAO {
     List<User> list();
 
     User getUserInfo(String username);
+
+    int update(User user);
 }

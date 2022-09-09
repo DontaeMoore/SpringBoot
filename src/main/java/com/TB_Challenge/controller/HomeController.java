@@ -135,6 +135,8 @@ public class HomeController {
     public ModelAndView saveUser(@ModelAttribute User user) {
         System.out.println("save was called for user" + user.toString());
 
+        userDAO.update(user);
+
 
         return new ModelAndView("redirect:/");
 
