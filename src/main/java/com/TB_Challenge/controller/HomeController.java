@@ -65,7 +65,7 @@ public class HomeController {
         User user = grabLoggedinUser();
         model.addObject("user", user);
         model.addObject("contact", track);
-
+        model.setViewName("viewTracks");
 
         return model;
 
@@ -103,7 +103,7 @@ public class HomeController {
         User user = grabLoggedinUser();
         model.addObject("user", user);
 
-        model.setViewName("add");
+        model.setViewName("addTracks");
 
         return model;
 
@@ -141,7 +141,7 @@ public class HomeController {
         System.out.println("This is id " + id);
         Track track = trackDAO.get(id);
 
-        ModelAndView model = new ModelAndView("add");
+        ModelAndView model = new ModelAndView("addTracks");
 
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);

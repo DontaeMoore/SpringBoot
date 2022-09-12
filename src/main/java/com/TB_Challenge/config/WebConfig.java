@@ -60,4 +60,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Bean
+    public ChallengeDAO getChallengeDAO() { return new ChallengeDAOImpl(getDataSource());
+
+    }
+
 }

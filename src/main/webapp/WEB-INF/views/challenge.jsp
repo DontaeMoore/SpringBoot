@@ -8,7 +8,7 @@
 </head>
 <body>
 <div align="center">
-<h1>Derby Race List</h1>
+<h1>Derby Challenges</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
 <div>
@@ -16,31 +16,31 @@
 
 </div>
 <a href="horse"><input type="submit" value="Horse Page"/></a>
-<a href="challenge"><input type="submit" value="Challenge Page"/></a>
+<a href="race"><input type="submit" value="Races Page"/></a>
  <a href="home"><input type="submit" value="Back"/></a>
 
 <table border="1" cellpadding="5">
 <tr>
 
 	<th>Name</th>
-	<th>Year</th>
-	<th>Track</th>
-	<th>Date</th>
-	<th>Deadline</th>
-	<th>Distance</th>
-	<th>Finish Time</th>
+	<th>Description</th>
+	<th>1st Place </th>
+	<th>2nd Place </th>
+	<th>3rd Place </th>
+	<th>4th Place </th>
+	<th>Status</th>
 
 </tr>
-		<c:forEach items="${RaceList}" var="race" varStatus="status">
+		<c:forEach items="${challenge}" var="c" varStatus="status">
          <tr>
 
-       		 <td>${race.name}</td>
-       		 <td>${race.year}</td>
-       		  <td>${race.getTrackName()}</td>
-       		  <td>${race.date}</td>
-       		  <td>${race.deadline}</td>
-       		  <td>${race.distance}</td>
-               <td>${race.finish_time}</td>
+       		 <td>${c.name}</td>
+       		 <td>${c.desc}</td>
+       		 <td>${c.first_points}</td>
+       		 <td>${c.second_points}</td>
+       		 <td>${c.third_points}</td>
+       		 <td>${c.fourth_points}</td>
+             <td>${c.status}</td>
 
          </tr>
       </c:forEach>
