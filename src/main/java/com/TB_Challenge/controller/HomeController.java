@@ -44,15 +44,8 @@ public class HomeController {
         ModelAndView model = new ModelAndView("yo");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String login = "";
+        String login = securityLoginInfo();
 
-        if (authentication.getName().equals("anonymousUser")) {
-            login = "You are not logged in";
-            System.out.println(login);
-        } else {
-            login = "Welcome " + StringUtils.capitalize(authentication.getName());
-            System.out.println(login);
-        }
         model.addObject("WelcomeMessage", login);
 
 

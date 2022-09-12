@@ -1,9 +1,6 @@
 package com.TB_Challenge.config;
 
-import com.TB_Challenge.dao.TrackDAO;
-import com.TB_Challenge.dao.TrackDAOImpl;
-import com.TB_Challenge.dao.UserDAO;
-import com.TB_Challenge.dao.UserDAOImpl;
+import com.TB_Challenge.dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -55,6 +52,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public UserDAO getUserDAO() { return new UserDAOImpl(getDataSource());
+
+    }
+
+    @Bean
+    public RaceDAO getRaceDAO() { return new RaceDAOImpl(getDataSource());
 
     }
 
