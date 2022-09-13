@@ -2,7 +2,7 @@ package com.TB_Challenge.model;
 
 public class Challenge {
 
-    private int id;
+    private Integer id;
     private String name;
     private String desc;
     private int first_points;
@@ -14,7 +14,7 @@ public class Challenge {
     public Challenge() {
     }
 
-    public Challenge(int id, String name, String desc, int first_points, int second_points, int third_points, int fourth_points, String status) {
+    public Challenge(Integer id, String name, String desc, int first_points, int second_points, int third_points, int fourth_points, String status) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -25,11 +25,11 @@ public class Challenge {
         this.status = status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

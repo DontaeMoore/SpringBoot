@@ -23,6 +23,7 @@
 	<th>3rd Place </th>
 	<th>4th Place </th>
 	<th>Status</th>
+	<th>Action</th>
 
 </tr>
 		<c:forEach items="${challenge}" var="c" varStatus="status">
@@ -35,11 +36,19 @@
        		 <td>${c.third_points}</td>
        		 <td>${c.fourth_points}</td>
              <td>${c.status}</td>
+               <td>
+                                   		  <a href="viewChallenge?id=${c.id}">View Challenge</a> and
+                                   		  <a href="editChallenge?id=${c.id}">Edit Challenge</a>
+                                   		  &nbsp;&nbsp;
+                                   		   <a href="deleteChallenge?id=${c.id}">Delete Challenge</a>
+                                   		  </td>
+
+                      </tr>
 
          </tr>
       </c:forEach>
 </table>
-
+<h3><a href = "addChallenge">Add a Challenge</a></h3>
 
 </div>
 </body>

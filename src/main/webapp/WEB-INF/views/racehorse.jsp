@@ -22,6 +22,7 @@
 	<th>Owner </th>
 	<th>Trainer </th>
 	<th>Comments</th>
+	<th>Action</th>
 
 </tr>
 		<c:forEach items="${racehorse}" var="r" varStatus="status">
@@ -34,11 +35,19 @@
        		 <td>${r.owner}</td>
        		 <td>${r.trainer}</td>
              <td>${r.comments}</td>
+               <td>
+                                                		  <a href="viewRaceHorse?id=${r.id}">View Race Horse</a> and
+                                                		  <a href="editRaceHorse?id=${r.id}">Edit Race Horse</a>
+                                                		  &nbsp;&nbsp;
+                                                		   <a href="deleteRaceHorse?id=${r.id}">Delete Race Horse</a>
+                                                		  </td>
+
+                                   </tr>
 
          </tr>
       </c:forEach>
 </table>
-
+<h3><a href = "addRaceHorse">Add a Race Horse</a></h3>
 
 </div>
 </body>
