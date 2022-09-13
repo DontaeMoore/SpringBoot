@@ -4,37 +4,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Contact ManagerHome</title>
+<title>Race Horse Page</title>
 </head>
 <body>
 <div align="center">
-<h1>Derby Challenges</h1>
+<h1>Derby Race Horses</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 <a href="home"><input type="submit" value="Back"/></a>
-
 
 <table border="1" cellpadding="5">
 <tr>
 
 	<th>Name</th>
-	<th>Description</th>
-	<th>1st Place </th>
-	<th>2nd Place </th>
-	<th>3rd Place </th>
-	<th>4th Place </th>
-	<th>Status</th>
+	<th>Gender</th>
+	<th>Foal Year </th>
+	<th>Equibase Link</th>
+	<th>Owner </th>
+	<th>Trainer </th>
+	<th>Comments</th>
 
 </tr>
-		<c:forEach items="${challenge}" var="c" varStatus="status">
+		<c:forEach items="${racehorse}" var="r" varStatus="status">
          <tr>
 
-       		 <td>${c.name}</td>
-       		 <td>${c.desc}</td>
-       		 <td>${c.first_points}</td>
-       		 <td>${c.second_points}</td>
-       		 <td>${c.third_points}</td>
-       		 <td>${c.fourth_points}</td>
-             <td>${c.status}</td>
+       		 <td>${r.name}</td>
+       		 <td>${r.gender}</td>
+       		 <td>${r.foalyear}</td>
+       		 <td><a href="${r.link}">${r.name}</a></td>
+       		 <td>${r.owner}</td>
+       		 <td>${r.trainer}</td>
+             <td>${r.comments}</td>
 
          </tr>
       </c:forEach>

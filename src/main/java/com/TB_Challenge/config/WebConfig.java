@@ -65,4 +65,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Bean
+    public RaceHorseDAO getRaceHorseDAO() { return new RaceHorseDAOImpl(getDataSource());
+
+    }
+
 }

@@ -9,5 +9,9 @@
     </head>
     <body>
     <h3><a href="editUser">${WelcomeMessage}</a>&emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a> </h3>
+    <a href="horse"><input type="submit" value="Horse Page"/></a>
+    <a href="race"><input type="submit" value="Races Page"/></a>
+    <a href="challenge"><input type="submit" value="Challenge Page"/></a>
+    <a href="racehorse"><input type="submit" value="Race Horse Page"/></a>
     </body>
 </html>

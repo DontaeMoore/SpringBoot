@@ -10,14 +10,8 @@
 <div align="center">
 <h1>Derby Race List</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
+<a href="home"><input type="submit" value="Back"/></a>
 
-<div>
-
-
-</div>
-<a href="horse"><input type="submit" value="Horse Page"/></a>
-<a href="challenge"><input type="submit" value="Challenge Page"/></a>
- <a href="home"><input type="submit" value="Back"/></a>
 
 <table border="1" cellpadding="5">
 <tr>

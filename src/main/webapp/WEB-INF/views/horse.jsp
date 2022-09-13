@@ -11,13 +11,12 @@
     <body>
     <div align="center">
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
+    <a href="home"><input type="submit" value="Back"/></a>
         <h1>Hello World!</h1>
          <p>This is the Horse Page</p>
 
 
-         <a href="race"><input type="submit" value="Races Page"/></a>
-         <a href="challenge"><input type="submit" value="Challenge Page"/></a>
-          <a href="home"><input type="submit" value="Back"/></a>
+
 
          <p><img src="resources/img/horsepic.jpg"/></p>
 
