@@ -23,8 +23,6 @@ public class RaceDAOImpl implements RaceDAO {
     }
 
 
-
-
     @Override
     public List<Race> list() {
         List<Race> list = jdbcTemplate.query("SELECT * FROM RACES ", new RowMapper<Race>() {
@@ -65,7 +63,7 @@ public class RaceDAOImpl implements RaceDAO {
 
             @Override
             public Track extractData(ResultSet rs) throws SQLException, DataAccessException {
-                if(rs.next()) {
+                if (rs.next()) {
                     String name = rs.getString("name");
                     String city = rs.getString("city");
                     String state = rs.getString("state");
@@ -85,6 +83,59 @@ public class RaceDAOImpl implements RaceDAO {
 
     }
 
+    @Override
+    public Race getRace(int raceID) {
+        String sql = "SELECT * FROM  races WHERE id =" + raceID;
+
+        ResultSetExtractor<Race> extractor = new ResultSetExtractor<Race>() {
+
+            @Override
+            public Race extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (rs.next()) {
+
+                    Race r = new Race();
+                    r.setId(raceID);
+                    r.setName(rs.getString("name"));
+                    r.setYear(rs.getString("year"));
+                    r.setTrack_id(rs.getInt("track_id"));
+                    r.setDate(rs.getString("date"));
+                    r.setDeadline(rs.getString("deadline"));
+                    r.setDistance(rs.getString("distance"));
+                    r.setFinish_time(rs.getString("finish_time"));
+                    Track t = getTrackName(r.getTrack_id());
+                    r.setTrackName(t.getName());
+
+                    return r;
+                }
+
+                return null;
+            }
+
+        };
+
+        return jdbcTemplate.query(sql, extractor);
+
+
+    }
+
+    @Override
+    public int save(Race r) {
+        String sql = "INSERT INTO races (year, name, track_id, date, deadline, distance, finish_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, r.getYear(), r.getName(), r.getTrack_id(), r.getDate(), r.getDeadline(), r.getDistance(), r.getFinish_time());
+
+    }
+
+    @Override
+    public int update(Race r) {
+        String sql = "UPDATE  races SET year = ?, name = ?, track_id = ?, date = ?, deadline = ?, distance = ?, finish_time = ? WHERE id =?";
+        return jdbcTemplate.update(sql, r.getYear(), r.getName(), r.getTrack_id(), r.getDate(), r.getDeadline(), r.getDistance(), r.getFinish_time(), r.getId());
+    }
+
+    @Override
+    public int delete(Integer id) {
+        String sql = "DELETE FROM  races WHERE id =" + id;
+        return jdbcTemplate.update(sql);
+    }
 
 
 }

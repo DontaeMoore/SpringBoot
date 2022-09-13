@@ -2,7 +2,7 @@ package com.TB_Challenge.model;
 
 public class Race {
 
-    private int id;
+    private Integer id;
     private String year;
     private String name;
     private int track_id;
@@ -18,7 +18,7 @@ public class Race {
     public Race() {
 
     }
-    public Race(int id, String year, String name, int track_id, String date, String deadline, String distance, String finishtime) {
+    public Race(Integer id, String year, String name, int track_id, String date, String deadline, String distance, String finishtime) {
         this.id = id;
         this.year = year;
         this.name = name;
@@ -29,11 +29,11 @@ public class Race {
         this.finish_time = finishtime;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -116,6 +116,7 @@ public class Race {
                 ", deadline='" + deadline + '\'' +
                 ", distance='" + distance + '\'' +
                 ", finishtime='" + finish_time + '\'' +
+                ", trackName='" + trackName + '\'' +
                 '}';
     }
 }

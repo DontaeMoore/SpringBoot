@@ -11,4 +11,14 @@ public interface RaceDAO {
 
     Track getTrackName(int trackID);
 
+    Race getRace(int raceID);
+
+    int save(Race race);
+
+    int update(Race race);
+
+    int delete(Integer id);
+
+
+
 }

@@ -23,6 +23,7 @@
 	<th>Deadline</th>
 	<th>Distance</th>
 	<th>Finish Time</th>
+	<th>Action</th>
 
 </tr>
 		<c:forEach items="${RaceList}" var="race" varStatus="status">
@@ -35,10 +36,17 @@
        		  <td>${race.deadline}</td>
        		  <td>${race.distance}</td>
                <td>${race.finish_time}</td>
+               <td>
+                      		  <a href="viewRace?id=${race.id}">View Race</a> and
+                      		  <a href="editRace?id=${race.id}">Edit Race</a>
+                      		  &nbsp;&nbsp;
+                      		   <a href="deleteRace?id=${race.id}">Delete</a>
+                      		  </td>
 
          </tr>
       </c:forEach>
 </table>
+<h3><a href = "addRace">Add Race</a></h3>
 
 
 </div>
