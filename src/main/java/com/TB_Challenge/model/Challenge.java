@@ -11,10 +11,12 @@ public class Challenge {
     private int fourth_points;
     private String status;
 
+    private String date;
+
     public Challenge() {
     }
 
-    public Challenge(Integer id, String name, String desc, int first_points, int second_points, int third_points, int fourth_points, String status) {
+    public Challenge(Integer id, String name, String desc, int first_points, int second_points, int third_points, int fourth_points, String status, String date) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -23,6 +25,15 @@ public class Challenge {
         this.third_points = third_points;
         this.fourth_points = fourth_points;
         this.status = status;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Integer getId() {

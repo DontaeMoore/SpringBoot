@@ -29,7 +29,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
     @Override
     public List<Challenge> list() {
-        List<Challenge> list = jdbcTemplate.query("SELECT * FROM challenge ", new RowMapper<Challenge>() {
+        List<Challenge> list = jdbcTemplate.query("SELECT * FROM challenge order by date", new RowMapper<Challenge>() {
 
             @Override
             public Challenge mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -43,6 +43,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
                 c.setThird_points(rs.getInt("third_points"));
                 c.setFourth_points(rs.getInt("fourth_points"));
                 c.setStatus(rs.getString("status"));
+                c.setDate(rs.getString("date"));
 
 
 
@@ -77,6 +78,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
                     c.setThird_points(rs.getInt("third_points"));
                     c.setFourth_points(rs.getInt("fourth_points"));
                     c.setStatus(rs.getString("status"));
+                    c.setDate(rs.getString("date"));
 
                     return c;
                 }
@@ -93,15 +95,15 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
     @Override
     public int save(Challenge c) {
-        String sql = "INSERT INTO challenge (name, description, first_points, second_points, third_points, fourth_points, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, c.getName(), c.getDesc(), c.getFirst_points(), c.getSecond_points(), c.getThird_points(), c.getFourth_points(), c.getStatus());
+        String sql = "INSERT INTO challenge (name, description, first_points, second_points, third_points, fourth_points, status, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, c.getName(), c.getDesc(), c.getFirst_points(), c.getSecond_points(), c.getThird_points(), c.getFourth_points(), c.getStatus(), c.getDate());
 
     }
 
     @Override
     public int update(Challenge c) {
-        String sql = "UPDATE  challenge SET name = ?, description = ?, first_points = ?,second_points = ?, third_points = ?, fourth_points = ?, status = ? WHERE id =?";
-        return jdbcTemplate.update(sql,c.getName(), c.getDesc(), c.getFirst_points(), c.getSecond_points(), c.getThird_points(), c.getFourth_points(), c.getStatus(), c.getId());
+        String sql = "UPDATE  challenge SET name = ?, description = ?, first_points = ?,second_points = ?, third_points = ?, fourth_points = ?, status = ?, date = ? WHERE id =?";
+        return jdbcTemplate.update(sql,c.getName(), c.getDesc(), c.getFirst_points(), c.getSecond_points(), c.getThird_points(), c.getFourth_points(), c.getStatus(), c.getDate(), c.getId());
     }
 
     @Override

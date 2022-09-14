@@ -3,12 +3,16 @@ package com.TB_Challenge.dao;
 import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.RaceHorse;
 import com.TB_Challenge.model.Track;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class RaceHorseDAOImpl implements RaceHorseDAO{
@@ -30,8 +34,19 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
                 r.setId(rs.getInt("horse_id"));
                 r.setName(rs.getString("name"));
-                r.setGender(rs.getString("gender").charAt(0));
-                r.setFoalyear(rs.getString("foalyear"));
+                r.setGender(rs.getString("gender"));
+
+
+                if(rs.getDate("foalyear") == null) {
+                    r.setFoalyear("N/A");
+                }
+                else {
+                    java.sql.Date date = rs.getDate("foalyear");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy");
+                    String dateStr = dateFormat.format(date);
+                    r.setFoalyear(dateStr);
+                }
+
                 r.setLink(rs.getString("equibaselink"));
                 r.setOwner(rs.getString("owner"));
                 r.setTrainer(rs.getString("trainer"));
@@ -49,6 +64,73 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
         return list;
 
+    }
+
+    @Override
+    public RaceHorse getRaceHorse(int racehorseID) {
+        String sql = "SELECT * FROM  Horse WHERE horse_id =" + racehorseID;
+
+        ResultSetExtractor<RaceHorse> extractor = new ResultSetExtractor<RaceHorse>() {
+
+            @Override
+            public RaceHorse extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (rs.next()) {
+
+                    RaceHorse r = new RaceHorse();
+                    r.setId(racehorseID);
+                    r.setName(rs.getString("name"));
+                    r.setGender(rs.getString("gender"));
+
+
+                    if(rs.getDate("foalyear") == null) {
+                        r.setFoalyear("N/A");
+                    }
+                    else {
+                        java.sql.Date date = rs.getDate("foalyear");
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+                        String dateStr = dateFormat.format(date);
+                        r.setFoalyear(dateStr);
+                    }
+
+
+                    r.setLink(rs.getString("equibaselink"));
+                    r.setOwner(rs.getString("owner"));
+                    r.setTrainer(rs.getString("trainer"));
+                    r.setComments(rs.getString("comments"));
+
+
+                    return r;
+                }
+
+                return null;
+            }
+
+        };
+
+        return jdbcTemplate.query(sql, extractor);
+
+
+    }
+
+    @Override
+    public int save(RaceHorse r) {
+        System.out.println("Save racehorse called" + r.getFoalyear());
+        String sql = "INSERT INTO horse (name, gender, foalyear, equibaselink, owner, trainer, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, r.getName(), r.getGender(), r.getFoalyear(), r.getLink(), r.getOwner(), r.getTrainer(), r.getComments());
+
+    }
+
+    @Override
+    public int update(RaceHorse r) {
+        System.out.println("update racehorse called" + r.getFoalyear());
+        String sql = "UPDATE  horse SET name = ?, gender = ?, foalyear = ?, equibaselink = ?, owner = ?, trainer = ?, comments = ? WHERE horse_id =?";
+        return jdbcTemplate.update(sql, r.getName(), r.getGender(), r.getFoalyear(), r.getLink(), r.getOwner(), r.getTrainer(), r.getComments(), r.getId());
+    }
+
+    @Override
+    public int delete(Integer id) {
+        String sql = "DELETE FROM  horse WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql);
     }
 
 }

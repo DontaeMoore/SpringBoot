@@ -17,53 +17,47 @@
     </div>
 
         <div align="center">
-        <h1>View Challenge Details!</h1>
-        <form:form action="save" method="post" modelAttribute="challenge">
+        <h1>View Race Details!</h1>
+        <form:form action="save" method="post" modelAttribute="racehorse">
         <table cellpadding="5">
         <form:hidden path="id" />
         <tr>
         <td>Name:</td>
-        <td>${challenge.name}</td>
+        <td>${racehorse.name}</td>
         </tr>
 
 
 
         <tr>
-        <td>Description:</td>
-        <td>${challenge.desc}</td>
+        <td>Foal Year:</td>
+        <td>${racehorse.foalyear}</td>
         </tr>
 
        <tr>
-       <td>First Place Points:</td>
-       <td>${challenge.first_points}</td>
+       <td>Gender:</td>
+       <td>${racehorse.gender}</td>
        </tr>
 
 
         <tr>
-        <td>Second Place Points:</td>
-        <td>${challenge.second_points}</td>
+        <td>Equibase Link:</td>
+        <td><a href = "${racehorse.link}">${racehorse.name}</td>
         </tr>
 
         <tr>
-        <td>Third Place Points:</td>
-        <td>${challenge.third_points}</td>
+        <td>Owner:</td>
+        <td>${racehorse.owner}</td>
         </tr>
 
         <tr>
-        <td>Fourth Place Points:</td>
-        <td>${challenge.fourth_points}</td>
+        <td>Trainer:</td>
+        <td>${racehorse.trainer}</td>
         </tr>
 
         <tr>
-        <td>Status:</td>
-        <td>${challenge.status}</td>
+        <td>Comments:</td>
+        <td>${racehorse.comments}</td>
         </tr>
-
-        <tr>
-        <td>Date:</td>
-        <td>${challenge.date}</td>
-        </tr>
-
 
 
 

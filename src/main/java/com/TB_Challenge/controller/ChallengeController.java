@@ -126,7 +126,7 @@ public class ChallengeController {
 
 
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/challenge");
 
     }
 
@@ -168,7 +168,7 @@ public class ChallengeController {
 
         challengeDAO.delete(id);
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/challenge");
 
     }
 

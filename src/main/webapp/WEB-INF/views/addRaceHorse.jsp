@@ -16,8 +16,8 @@
         </div>
 
         <div align="center">
-        <h1>New/Edit Race</h1>
-        <form:form action="saveChallenge" method="post" modelAttribute="challenge">
+        <h1>New/Edit Race Horse</h1>
+        <form:form action="saveRaceHorse" method="post" modelAttribute="race">
         <table cellpadding="5">
         <form:hidden path="id" />
         <tr>
@@ -26,38 +26,33 @@
         </tr>
 
          <tr>
-        <td>Description:</td>
-        <td><form:input path="desc"/></td>
+        <td>Gender:</td>
+        <td><form:input path="gender" maxlength="1"/></td>
         </tr>
 
          <tr>
-        <td>First Place:</td>
-        <td><form:input path="first_points"/></td>
+        <td>Foalyear:</td>
+        <td><form:input path="foalyear"/></td>
         </tr>
 
         <tr>
-        <td>Second Place:</td>
-        <td><form:input path="second_points"/></td>
+        <td>Equibase link:</td>
+        <td><form:input path="link"/></td>
         </tr>
 
         <tr>
-        <td>Third Place:</td>
-        <td><form:input path="third_points"/></td>
+        <td>Owner:</td>
+        <td><form:input path="owner"/></td>
         </tr>
 
         <tr>
-         <td>Fourth Place:</td>
-         <td><form:input path="fourth_points"/></td>
+         <td>Trainer:</td>
+         <td><form:input path="trainer"/></td>
          </tr>
 
         <tr>
-        <td>Status:</td>
-        <td><form:input path="status"/></td>
-        </tr>
-
-        <tr>
-        <td>Date:</td>
-        <td><form:input path="date"/></td>
+        <td>Comments:</td>
+        <td><form:input path="comments"/></td>
         </tr>
 
 

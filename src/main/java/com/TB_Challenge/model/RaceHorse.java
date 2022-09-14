@@ -2,9 +2,9 @@ package com.TB_Challenge.model;
 
 public class RaceHorse {
 
-    private int id;
+    private Integer id;
     private String name;
-    private char gender;
+    private String gender;
     private String foalyear;
     private String link;
     private String owner;
@@ -13,9 +13,10 @@ public class RaceHorse {
 
     public RaceHorse() {
 
+
     }
 
-    public RaceHorse(String name, char gender, String foalyear, String link, String owner, String trainer, String comments, int id) {
+    public RaceHorse(String name, String gender, String foalyear, String link, String owner, String trainer, String comments, Integer id) {
         this.name = name;
         this.gender = gender;
         this.foalyear = foalyear;
@@ -34,12 +35,14 @@ public class RaceHorse {
         this.name = name;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
+
         this.gender = gender;
+
     }
 
     public String getFoalyear() {
@@ -82,11 +85,11 @@ public class RaceHorse {
         this.comments = comments;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
