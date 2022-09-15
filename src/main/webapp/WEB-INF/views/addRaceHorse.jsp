@@ -9,10 +9,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Tracks</title>
     </head>
+
     <body>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-        <a href="home"><input type="submit" value="Back"/></a>
+        <a href="home"><input type="submit" value="Home"/></a>
         </div>
 
         <div align="center">
@@ -32,27 +33,27 @@
 
          <tr>
         <td>Foalyear:</td>
-        <td><form:input path="foalyear"/></td>
+        <td><form:input path="foalyear" type="number" maxlength="4"/></td>
         </tr>
 
         <tr>
         <td>Equibase link:</td>
-        <td><form:input path="link"/></td>
+        <td><form:input path="link" cssStyle="width:350%"/></td>
         </tr>
 
         <tr>
         <td>Owner:</td>
-        <td><form:input path="owner"/></td>
+        <td><form:input path="owner" cssStyle="width:250%"/></td>
         </tr>
 
         <tr>
          <td>Trainer:</td>
-         <td><form:input path="trainer"/></td>
+         <td><form:input path="trainer" cssStyle="width:250%"/></td>
          </tr>
 
         <tr>
         <td>Comments:</td>
-        <td><form:input path="comments"/></td>
+        <td><form:input path="comments" cssStyle="width:250%"/></td>
         </tr>
 
 

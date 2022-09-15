@@ -12,7 +12,7 @@
     <body>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-        <a href="home"><input type="submit" value="Back"/></a>
+        <a href="home"><input type="submit" value="Home"/></a>
         </div>
 
         <div align="center">
@@ -32,27 +32,30 @@
 
          <tr>
         <td>Date:</td>
-        <td><form:input path="date"/></td>
+        <td><form:input path="date" type="date"/></td>
         </tr>
 
         <tr>
         <td>Track ID:</td>
-        <td><form:input path="track_id"/></td>
+        <td><form:select path="track_id">
+        <form:options items="${l}"></form:options>
+        </form:select>
+        </td>
         </tr>
 
         <tr>
         <td>Deadline:</td>
-        <td><form:input path="deadline"/></td>
+        <td><form:input path="deadline" type="time"/></td>
         </tr>
 
         <tr>
-         <td>Distance:</td>
-         <td><form:input path="distance"/></td>
+         <td>Distance (m):</td>
+         <td><form:input path="distance" type="number" step="0.01"/></td>
          </tr>
 
         <tr>
-        <td>Finish Time:</td>
-        <td><form:input path="finish_time"/></td>
+        <td>Finish Time (s):</td>
+        <td><form:input path="finish_time" type="number" step="0.01"/></td>
         </tr>
 
 

@@ -36,9 +36,10 @@ public class RaceDAOImpl implements RaceDAO {
                 r.setYear(rs.getString("year"));
                 r.setTrack_id(rs.getInt("track_id"));
                 r.setDate(rs.getString("date"));
-                r.setDeadline(rs.getString("deadline"));
-                r.setDistance(rs.getString("distance"));
-                r.setFinish_time(rs.getString("finish_time"));
+                String time = rs.getString("deadline");
+                r.setDeadline(time.substring(0,5));
+                r.setDistance(rs.getDouble("distance"));
+                r.setFinish_time(rs.getDouble("finish_time"));
                 Track t = getTrackName(r.getTrack_id());
                 r.setTrackName(t.getName());
 
@@ -99,9 +100,10 @@ public class RaceDAOImpl implements RaceDAO {
                     r.setYear(rs.getString("year"));
                     r.setTrack_id(rs.getInt("track_id"));
                     r.setDate(rs.getString("date"));
-                    r.setDeadline(rs.getString("deadline"));
-                    r.setDistance(rs.getString("distance"));
-                    r.setFinish_time(rs.getString("finish_time"));
+                    String time = rs.getString("deadline");
+                    r.setDeadline(time.substring(0,5));
+                    r.setDistance(rs.getDouble("distance"));
+                    r.setFinish_time(rs.getDouble("finish_time"));
                     Track t = getTrackName(r.getTrack_id());
                     r.setTrackName(t.getName());
 

@@ -6,13 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Race Horse Page</title>
 </head>
+
+<style><%@include file="/WEB-INF/includes/style.css"%></style>
+
 <body>
 <div align="center">
 <h1>Derby Race Horses</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-<a href="home"><input type="submit" value="Back"/></a>
+<a href="home"><input type="submit" value="Home"/></a>
 
-<table border="1" cellpadding="5">
+<table border="2" cellpadding="5">
 <tr>
 
 	<th>Name</th>

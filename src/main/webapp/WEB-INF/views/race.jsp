@@ -6,11 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact ManagerHome</title>
 </head>
+ <style><%@include file="/WEB-INF/includes/style.css"%></style>
 <body>
 <div align="center">
 <h1>Derby Race List</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-<a href="home"><input type="submit" value="Back"/></a>
+<a href="home"><input type="submit" value="Home"/></a>
 
 
 <table border="1" cellpadding="5">
@@ -20,9 +21,9 @@
 	<th>Year</th>
 	<th>Track</th>
 	<th>Date</th>
-	<th>Deadline</th>
-	<th>Distance</th>
-	<th>Finish Time</th>
+	<th>Deadline (military time)</th>
+	<th>Distance (m)</th>
+	<th>Finish Time (s) </th>
 	<th>Action</th>
 
 </tr>

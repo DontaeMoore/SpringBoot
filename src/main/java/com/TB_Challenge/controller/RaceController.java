@@ -1,6 +1,7 @@
 package com.TB_Challenge.controller;
 
 import com.TB_Challenge.dao.RaceDAO;
+import com.TB_Challenge.dao.TrackDAO;
 import com.TB_Challenge.dao.UserDAO;
 import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.Track;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,9 @@ public class RaceController {
 
     @Autowired
     private RaceDAO raceDAO;
+
+    @Autowired
+    private TrackDAO trackDAO;
 
     @RequestMapping(value = "/race")
     public ModelAndView race(ModelAndView model) throws IOException {
@@ -117,7 +122,7 @@ public class RaceController {
         System.out.println("we want to edit this race" + race.toString());
 
         ModelAndView model = new ModelAndView("addRace");
-
+        List<Integer> list2 = trackDAO.getTrackID();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
@@ -135,6 +140,8 @@ public class RaceController {
 
         model.addObject("WelcomeMessage", login);
         model.addObject("race", race);
+        model.addObject("l", list2);
+
 
 
 
@@ -146,7 +153,7 @@ public class RaceController {
     @RequestMapping(value = "/saveRace", method = RequestMethod.POST)
     public ModelAndView saveRace(@ModelAttribute Race race) {
         System.out.println("save was called for race");
-        race.toString();
+        System.out.println(race.toString());
 
 
        if(race.getId() == null){
@@ -159,7 +166,7 @@ public class RaceController {
 
 
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/race");
 
     }
 
@@ -168,7 +175,7 @@ public class RaceController {
 
         raceDAO.delete(id);
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/race");
 
     }
 

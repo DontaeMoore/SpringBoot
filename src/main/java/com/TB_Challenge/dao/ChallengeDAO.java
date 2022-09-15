@@ -16,4 +16,6 @@ public interface ChallengeDAO {
     int update(Challenge challenge);
 
     int delete(Integer id);
+
+    List<Race> listRaces(int challengeID);
 }

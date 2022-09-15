@@ -56,6 +56,19 @@ public class ChallengeController {
         Challenge c = challengeDAO.getChallenge(id);
         System.out.println("we want to view this challenge" + c.toString());
 
+        List<Race> RaceList = challengeDAO.listRaces(id);
+
+        for(Race r : RaceList){
+            System.out.println(r.toString() + " _Race");
+        }
+
+        if(RaceList.isEmpty()){
+            Race r = new Race("N/A", "N/A", "N/A","N/A");
+            RaceList.add(r);
+        }
+
+
+
         ModelAndView model = new ModelAndView("view");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -71,6 +84,7 @@ public class ChallengeController {
         }
         model.addObject("WelcomeMessage", login);
         model.addObject("challenge", c);
+        model.addObject("r", RaceList);
 
 
 

@@ -15,6 +15,8 @@ public interface TrackDAO {
 	int delete(Integer id);
 	
 	List<Track> list();
+
+	List<Integer> getTrackID();
 	
 	
 	

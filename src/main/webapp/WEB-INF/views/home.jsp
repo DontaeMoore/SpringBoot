@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact ManagerHome</title>
 </head>
+ <style><%@include file="/WEB-INF/includes/style.css"%></style>
 <body>
 <div align="center">
 <h1>Derby Tracks List</h1>

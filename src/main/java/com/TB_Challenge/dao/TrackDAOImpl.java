@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TrackDAOImpl implements TrackDAO {
@@ -90,6 +92,30 @@ public class TrackDAOImpl implements TrackDAO {
 		});
 
 		return list;
+
+	}
+
+	@Override
+	public List<Integer> getTrackID() {
+
+		ArrayList<Integer> slist = new ArrayList<Integer>();
+
+		List<Track> list = jdbcTemplate.query("SELECT * FROM TRACKS", new RowMapper<Track>() {
+
+			@Override
+			public Track mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Track t = new Track();
+
+
+				slist.add(rs.getInt("id"));
+
+				return t;
+			}
+
+		});
+
+		return slist;
+
 
 	}
 

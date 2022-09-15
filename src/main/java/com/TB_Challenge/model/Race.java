@@ -8,8 +8,8 @@ public class Race {
     private int track_id;
     private String date;
     private String deadline;
-    private String distance;
-    private String finish_time;
+    private double distance = 0.00;
+    private double finish_time = 0.00;
 
     private String trackName;
 
@@ -18,7 +18,14 @@ public class Race {
     public Race() {
 
     }
-    public Race(Integer id, String year, String name, int track_id, String date, String deadline, String distance, String finishtime) {
+
+    public Race(String year, String name, String date, String trackName) {
+        this.year = year;
+        this.name = name;
+        this.date = date;
+        this.trackName = trackName;
+    }
+    public Race(Integer id, String year, String name, int track_id, String date, String deadline, double distance, double finishtime) {
         this.id = id;
         this.year = year;
         this.name = name;
@@ -89,19 +96,19 @@ public class Race {
         this.deadline = deadline;
     }
 
-    public String getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public String getFinish_time() {
+    public double getFinish_time() {
         return finish_time;
     }
 
-    public void setFinish_time(String finish_time) {
+    public void setFinish_time(double finish_time) {
         this.finish_time = finish_time;
     }
 

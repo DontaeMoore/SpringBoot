@@ -3,6 +3,7 @@ package com.TB_Challenge.dao;
 import com.TB_Challenge.model.Challenge;
 import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.Track;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -23,6 +24,9 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    @Autowired
+    private RaceDAO raceDAO;
 
 
 
@@ -110,6 +114,39 @@ public class ChallengeDAOImpl implements ChallengeDAO {
     public int delete(Integer id) {
         String sql = "DELETE FROM  challenge WHERE id =" + id;
         return jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public List<Race> listRaces(int challengeID) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM RACES Where challenge_id =" + challengeID, new RowMapper<Race>() {
+
+            @Override
+            public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+
+                    Race r = new Race();
+
+                    r.setId(rs.getInt("id"));
+                    r.setName(rs.getString("name"));
+                    int track_id = rs.getInt("track_id");
+                    r.setTrack_id(track_id);
+                    Track trackName = raceDAO.getTrackName(track_id);
+                    r.setTrackName(trackName.getName());
+                    r.setYear(rs.getString("year"));
+                    r.setDate(rs.getString("date"));
+
+
+                    System.out.println(r.toString());
+
+
+                    return r;
+                }
+
+
+        });
+
+        return list;
+
     }
 
 
