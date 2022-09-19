@@ -18,7 +18,7 @@
 <tr>
 
 	<th>Name</th>
-	<th>Year</th>
+	<script type="text/javascript" src="../resources/test.js" ></script>
 	<th>Track</th>
 	<th>Date</th>
 	<th>Deadline (military time)</th>
@@ -31,7 +31,6 @@
          <tr>
 
        		 <td>${race.name}</td>
-       		 <td>${race.year}</td>
        		  <td>${race.getTrackName()}</td>
        		  <td>${race.date}</td>
        		  <td>${race.deadline}</td>

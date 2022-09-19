@@ -126,7 +126,7 @@ public class ChallengeController {
     @RequestMapping(value = "/saveChallenge", method = RequestMethod.POST)
     public ModelAndView saveChallenge(@ModelAttribute Challenge challenge) {
         System.out.println("save was called for challenge");
-        challenge.toString();
+        System.out.println(challenge.toString());
 
 
         if(challenge.getId() == null){

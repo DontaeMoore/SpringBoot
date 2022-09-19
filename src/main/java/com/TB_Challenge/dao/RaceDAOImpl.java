@@ -139,5 +139,11 @@ public class RaceDAOImpl implements RaceDAO {
         return jdbcTemplate.update(sql);
     }
 
+    @Override
+    public int changefinish(Integer id, double new_finish) {
+        String sql = "Update races set finish_time = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, new_finish);
+    }
+
 
 }

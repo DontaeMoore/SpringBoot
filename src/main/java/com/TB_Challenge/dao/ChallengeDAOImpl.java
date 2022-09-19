@@ -99,7 +99,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
     @Override
     public int save(Challenge c) {
-        String sql = "INSERT INTO challenge (name, description, first_points, second_points, third_points, fourth_points, status, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO challenge (name, description, first_points, second_points, third_points, fourth_points, status, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         return jdbcTemplate.update(sql, c.getName(), c.getDesc(), c.getFirst_points(), c.getSecond_points(), c.getThird_points(), c.getFourth_points(), c.getStatus(), c.getDate());
 
     }

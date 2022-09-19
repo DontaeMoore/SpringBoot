@@ -19,6 +19,8 @@ public interface RaceDAO {
 
     int delete(Integer id);
 
+    int changefinish(Integer id, double new_finish);
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.TB_Challenge.model;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 public class Race {
 
     private Integer id;
@@ -125,5 +127,18 @@ public class Race {
                 ", finishtime='" + finish_time + '\'' +
                 ", trackName='" + trackName + '\'' +
                 '}';
+    }
+
+    public void checkBox(@RequestParam(value = "checkboxName", required = false) String checkboxValue)
+    {
+        System.out.println("checkbox is somethings");
+        if(checkboxValue != null)
+        {
+            System.out.println("checkbox is checked");
+        }
+        else
+        {
+            System.out.println("checkbox is not checked");
+        }
     }
 }
