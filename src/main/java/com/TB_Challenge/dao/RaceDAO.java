@@ -21,6 +21,16 @@ public interface RaceDAO {
 
     int changefinish(Integer id, double new_finish);
 
+    int changedist(Integer id, double new_dist);
+
+    int changedead(Integer id, String dead);
+
+    int changetrackID(Integer id, Integer trackID);
+
+    int changeDate(Integer id, String date);
+    int changeName(Integer id, String name);
+
+
 
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.metadata.IIOMetadataNode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -91,7 +92,7 @@ public class RaceController {
     }
 
     @RequestMapping(value = "/addRace", method = RequestMethod.GET)
-    public ModelAndView newRace(ModelAndView model) throws IOException {
+    public ModelAndView newRace(ModelAndView model, HttpSession session) throws IOException {
 
         Race newRace = new Race();
 
@@ -113,6 +114,7 @@ public class RaceController {
         model.addObject("WelcomeMessage", login);
         model.addObject("race", newRace);
         model.addObject("l", list2);
+        session.setAttribute("checkbox", "disabled");
 
 
         model.setViewName("addRace");
@@ -124,6 +126,7 @@ public class RaceController {
     @ModelAttribute("race")
     @RequestMapping(value = "/editRace", method = RequestMethod.GET)
     public ModelAndView editRace(HttpServletRequest request, HttpSession session) {
+        session.setAttribute("checkbox", "");
         Integer id = Integer.parseInt(request.getParameter("id"));
         Race race = raceDAO.getRace(id);
         System.out.println("we want to edit this race" + race.toString());
@@ -194,15 +197,17 @@ public class RaceController {
 
     @RequestMapping(value = "/saveRace", method = RequestMethod.POST, params = "clearSession")
     @ModelAttribute("race")
-    public ModelAndView clearSession(@ModelAttribute Race race, HttpSession session, SessionStatus status, WebRequest request) {
+    public ModelAndView clearSession(@ModelAttribute Race race, HttpSession session) {
         System.out.println("clear Session" + race.getName());
-        status.setComplete();
-        request.removeAttribute("race2", WebRequest.SCOPE_SESSION);
-        request.removeAttribute("sessionMessage", WebRequest.SCOPE_SESSION);
+        //session.invalidate();
+       // status.setComplete();
+        session.removeAttribute("race2");
+        session.removeAttribute("sessionMessage");
 
         return new ModelAndView("redirect:/editRace?id=" + race.getId());
 
     }
+
 
 
     @RequestMapping(value = "/deleteRace", method = RequestMethod.GET)
@@ -215,23 +220,78 @@ public class RaceController {
     }
 
     @RequestMapping(value = "/autoSaveFinish", method = RequestMethod.GET)
-    public ModelAndView test(@ModelAttribute Race race, HttpSession session, @RequestParam double finish) {
+    public ModelAndView autoFinish(@ModelAttribute Race race, HttpSession session, @RequestParam double finish) {
 
-        //take new value for finish line, update database with new value
-        //return to page
-
-        System.out.println("HELLO" + race.getId());
-        System.out.println("save Session" + race.getName());
 
         //make sql call
         //update race, pass it back to the page
         raceDAO.changefinish(race.getId(), finish);
-        session.setAttribute("race2", race);
+
 
 
         return new ModelAndView("redirect:/editRace?id=" + race.getId());
 
     }
+
+    @RequestMapping(value = "/autoSaveDist", method = RequestMethod.GET)
+    public ModelAndView autoDist(@ModelAttribute Race race, HttpSession session, @RequestParam double dist) {
+
+
+        //make sql call
+        //update race, pass it back to the page
+        raceDAO.changedist(race.getId(), dist);
+
+        return new ModelAndView("redirect:/editRace?id=" + race.getId());
+
+    }
+
+    @RequestMapping(value = "/autoSaveDead", method = RequestMethod.GET)
+    public ModelAndView autoDead(@ModelAttribute Race race, HttpSession session, @RequestParam String dead) {
+
+
+        //make sql call
+        //update race, pass it back to the page
+        raceDAO.changedead(race.getId(), dead);
+
+        return new ModelAndView("redirect:/editRace?id=" + race.getId());
+
+    }
+
+    @RequestMapping(value = "/autoSavetrackID", method = RequestMethod.GET)
+    public ModelAndView autotrackID(@ModelAttribute Race race, HttpSession session, @RequestParam Integer trackID) {
+
+
+        //make sql call
+        //update race, pass it back to the page
+        raceDAO.changetrackID(race.getId(), trackID);
+
+        return new ModelAndView("redirect:/editRace?id=" + race.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveDate", method = RequestMethod.GET)
+    public ModelAndView autoDate(@ModelAttribute Race race, HttpSession session, @RequestParam String date) {
+
+
+        //make sql call
+        //update race, pass it back to the page
+        raceDAO.changeDate(race.getId(), date);
+
+        return new ModelAndView("redirect:/editRace?id=" + race.getId());
+    }
+
+    @RequestMapping(value = "/autoSaveName", method = RequestMethod.GET)
+    public ModelAndView autoName(@ModelAttribute Race race, HttpSession session, @RequestParam String name) {
+
+
+        //make sql call
+        //update race, pass it back to the page
+        raceDAO.changeName(race.getId(), name);
+
+        return new ModelAndView("redirect:/editRace?id=" + race.getId());
+    }
+
+
+
 
     @RequestMapping(value = "/updateCheck", method = RequestMethod.GET)
     public ModelAndView updateCheck(@ModelAttribute Race race, HttpSession session, @RequestParam boolean check) {
@@ -245,6 +305,11 @@ public class RaceController {
         else {
             session.setAttribute("checkValue", "");
         }
+
+        System.out.println(race.getDistance());
+        System.out.println(race.getFinish_time());
+
+
 
 
         return new ModelAndView("redirect:/editRace?id=" + race.getId());

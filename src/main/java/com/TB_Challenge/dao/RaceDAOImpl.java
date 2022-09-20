@@ -145,5 +145,33 @@ public class RaceDAOImpl implements RaceDAO {
         return jdbcTemplate.update(sql, new_finish);
     }
 
+    @Override
+    public int changedist(Integer id, double new_dist) {
+        String sql = "Update races set distance = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, new_dist);
+    }
+
+    @Override
+    public int changedead(Integer id, String dead) {
+        String sql = "Update races set deadline = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, dead);
+    }
+
+    @Override
+    public int changetrackID(Integer id, Integer trackid) {
+        String sql = "Update races set track_id = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, trackid);
+    }
+    @Override
+    public int changeDate(Integer id, String date) {
+        String sql = "Update races set date = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, date);
+    }
+    @Override
+    public int changeName(Integer id, String name) {
+        String sql = "Update races set name = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, name);
+    }
+
 
 }
