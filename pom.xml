@@ -8,15 +8,19 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.TB_Challenge</groupId>
+	<artifactId>demoSec</artifactId>
+
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<cglib.version>2.2.2</cglib.version>
+		<junit-jupiter.version>5.4.0</junit-jupiter.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -43,6 +47,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
+
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -81,6 +86,9 @@
 		<!--			<version>${spring.version}</version>-->
 		<!--		</dependency>-->
 
+
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -96,6 +104,14 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+
 
 
 	</dependencies>
