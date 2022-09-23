@@ -10,16 +10,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+@SessionAttributes("challenge")
 @Controller
 public class ChallengeController {
 
@@ -95,10 +94,10 @@ public class ChallengeController {
     }
 
     @RequestMapping(value = "/addChallenge", method = RequestMethod.GET)
-    public ModelAndView newChallenge(ModelAndView model) throws IOException {
+    public ModelAndView newChallenge(ModelAndView model, HttpSession session) throws IOException {
 
         Challenge c = new Challenge();
-
+        session.setAttribute("checkbox", "disabled");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
 
@@ -127,6 +126,7 @@ public class ChallengeController {
     public ModelAndView saveChallenge(@ModelAttribute Challenge challenge) {
         System.out.println("save was called for challenge");
         System.out.println(challenge.toString());
+        System.out.println();
 
 
         if(challenge.getId() == null){
@@ -144,11 +144,33 @@ public class ChallengeController {
 
     }
 
+    @RequestMapping(value = "/updateChallengeCheck", method = RequestMethod.GET)
+    public ModelAndView updateCheck(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam boolean check) {
+        System.out.println("BOOLEAN Challenge check is " + check);
+
+
+        if(check == true){
+            session.setAttribute("checkValue", "checked");
+        }
+        else {
+            session.setAttribute("checkValue", "");
+        }
+
+
+
+
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+
+    @ModelAttribute("challenge")
     @RequestMapping(value = "/editChallenge", method = RequestMethod.GET)
-    public ModelAndView editChallenge(HttpServletRequest request) {
+    public ModelAndView editChallenge(HttpServletRequest request, HttpSession session) {
+        session.setAttribute("checkbox", "");
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Challenge c = challengeDAO.getChallenge(id);
-        System.out.println("we want to edit this race" + c.toString());
+        Challenge challenge = challengeDAO.getChallenge(id);
+        System.out.println("we want to edit this Challenge" + challenge.toString());
 
         ModelAndView model = new ModelAndView("addChallenge");
 
@@ -168,7 +190,7 @@ public class ChallengeController {
 
 
         model.addObject("WelcomeMessage", login);
-        model.addObject("challenge", c);
+        model.addObject("challenge", challenge);
 
 
 
@@ -185,6 +207,91 @@ public class ChallengeController {
         return new ModelAndView("redirect:/challenge");
 
     }
+
+    @RequestMapping(value = "/autoSaveCName", method = RequestMethod.GET)
+    public ModelAndView autoName(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam String name) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeName(challenge.getId(), name);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+
+    @RequestMapping(value = "/autoSaveCDesc", method = RequestMethod.GET)
+    public ModelAndView autoDesc(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam String desc) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeDesc(challenge.getId(), desc);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCFirst", method = RequestMethod.GET)
+    public ModelAndView autoFirst(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam Integer first) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeFirst(challenge.getId(), first);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCSecond", method = RequestMethod.GET)
+    public ModelAndView autoSecond(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam Integer second) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeSecond(challenge.getId(), second);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCThird", method = RequestMethod.GET)
+    public ModelAndView autoThird(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam Integer third) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeThird(challenge.getId(), third);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCFourth", method = RequestMethod.GET)
+    public ModelAndView autoFourth(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam Integer fourth) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeFourth(challenge.getId(), fourth);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCStatus", method = RequestMethod.GET)
+    public ModelAndView autoStatus(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam String status) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeStatus(challenge.getId(), status);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveCDate", method = RequestMethod.GET)
+    public ModelAndView autoDate(@ModelAttribute Challenge challenge, HttpSession session, @RequestParam String date) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        challengeDAO.changeDate(challenge.getId(), date);
+
+        return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
+
+    }
+
+
+
 
 
 }

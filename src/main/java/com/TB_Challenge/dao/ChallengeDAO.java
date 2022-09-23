@@ -18,4 +18,15 @@ public interface ChallengeDAO {
     int delete(Integer id);
 
     List<Race> listRaces(int challengeID);
+
+    int changeName(Integer id, String name);
+
+    int changeDesc(Integer id, String desc);
+    int changeFirst(Integer id, Integer first);
+    int changeSecond(Integer id, Integer second);
+    int changeThird(Integer id, Integer third);
+    int changeFourth(Integer id, Integer fourth);
+    int changeStatus(Integer id, String status);
+    int changeDate(Integer id, String date);
+
 }

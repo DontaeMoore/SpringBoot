@@ -149,5 +149,47 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
     }
 
+    @Override
+    public int changeName(Integer id, String name) {
+        String sql = "Update challenge set name = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, name);
+    }
+
+    @Override
+    public int changeDesc(Integer id, String desc) {
+        String sql = "Update challenge set description = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, desc);
+    }
+    @Override
+    public int changeFirst(Integer id, Integer first) {
+        String sql = "Update challenge set first_points = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, first);
+    }
+    @Override
+    public int changeSecond(Integer id, Integer second) {
+        String sql = "Update challenge set second_points = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, second);
+    }
+    @Override
+    public int changeThird(Integer id, Integer third) {
+        String sql = "Update challenge set third_points = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, third);
+    }
+    @Override
+    public int changeFourth(Integer id, Integer fourth) {
+        String sql = "Update challenge set fourth_points = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, fourth);
+    }
+    @Override
+    public int changeStatus(Integer id, String status) {
+        String sql = "Update challenge set status = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, status);
+    }
+    @Override
+    public int changeDate(Integer id, String date) {
+        String sql = "Update challenge set date = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, date);
+    }
+
 
 }

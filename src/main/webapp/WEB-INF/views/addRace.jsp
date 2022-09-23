@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Tracks</title>
     </head>
-    <body onload="checkURL()">
+    <body>
     <script type="text/javascript" src="../resources/RaceFunctions.js" ></script>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
