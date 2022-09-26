@@ -133,4 +133,40 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
         return jdbcTemplate.update(sql);
     }
 
+    @Override
+    public int changeName(Integer id, String name) {
+        String sql = "Update horse set name = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, name);
+    }
+    @Override
+    public int changeGender(Integer id, String gender) {
+        String sql = "Update horse set gender = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, gender);
+    }
+    @Override
+    public int changeFoal(Integer id, String foalyear) {
+        String sql = "Update horse set foalyear = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, foalyear);
+    }
+    @Override
+    public int changeLink(Integer id, String link) {
+        String sql = "Update horse set equibaselink = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, link);
+    }
+    @Override
+    public int changeOwner(Integer id, String owner) {
+        String sql = "Update horse set owner = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, owner);
+    }
+    @Override
+    public int changeTrainer(Integer id, String trainer) {
+        String sql = "Update horse set trainer = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, trainer);
+    }
+    @Override
+    public int changeComments(Integer id, String comments) {
+        String sql = "Update horse set comments = ? WHERE horse_id =" + id;
+        return jdbcTemplate.update(sql, comments);
+    }
+
 }

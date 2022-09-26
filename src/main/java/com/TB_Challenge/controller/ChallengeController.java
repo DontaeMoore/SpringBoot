@@ -157,14 +157,15 @@ public class ChallengeController {
         }
 
 
-
+            Challenge c = (Challenge)session.getAttribute("challenge");
+            System.out.println("Challenge session attribute: " + c.toString());
 
 
         return new ModelAndView("redirect:/editChallenge?id=" + challenge.getId());
 
     }
 
-    @ModelAttribute("challenge")
+
     @RequestMapping(value = "/editChallenge", method = RequestMethod.GET)
     public ModelAndView editChallenge(HttpServletRequest request, HttpSession session) {
         session.setAttribute("checkbox", "");

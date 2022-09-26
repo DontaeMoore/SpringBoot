@@ -10,6 +10,7 @@
         <title>New/Edit Tracks</title>
     </head>
     <body>
+    <script type="text/javascript" src="../resources/TrackFunctions.js" ></script>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
         <a href="home"><input type="submit" value="Home"/></a>
@@ -17,32 +18,39 @@
    
         <div align="center">
         <h1>New/Edit Track</h1>
-        <form:form action="save" method="post" modelAttribute="contact">
+        <form:form action="save" method="post" modelAttribute="track">
         <table cellpadding="5">
         <form:hidden path="id" />
         <tr>
+                                 <td>
+                                <input type="checkbox" ${checkbox}  onclick="ToggleCheck()"  id = "remember"  ${checkValue} />Enable AutoSave
+                                </td>
+                                </tr>
+
+
+        <tr>
         <td>Name:</td>
-        <td><form:input path="name"/></td>
+        <td><form:input path="name" onchange="checkName(track.name)"/></td>
         </tr>
         
          <tr>
         <td>City:</td>
-        <td><form:input path="city"/></td>
+        <td><form:input path="city" onchange="checkCity(track.city)"/></td>
         </tr>
         
          <tr>
         <td>State:</td>
-        <td><form:input path="state" maxlength="2"/></td>
+        <td><form:input path="state" maxlength="2" onchange="checkState(track.state)"/></td>
         </tr>
         
          <tr>
         <td>Zip:</td>
-        <td><form:input path="zip"/></td>
+        <td><form:input path="zip" onchange="checkZip(track.zip)"/></td>
         </tr>
         
          <tr>
         <td>Ownership:</td>
-        <td><form:input path="ownership"/></td>
+        <td><form:input path="ownership" onchange="checkOwner(track.ownership)"/></td>
         </tr>
         <tr>
         <td colspan="2" align="center"><input type="submit" value="Save"/></td>

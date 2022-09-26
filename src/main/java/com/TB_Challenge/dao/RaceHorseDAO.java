@@ -17,7 +17,13 @@ public interface RaceHorseDAO {
     int update(RaceHorse race);
 
     int delete(Integer id);
+    int changeName(Integer id, String name);
 
-
+    int changeGender(Integer id, String gender);
+    int changeFoal(Integer id, String foal);
+    int changeLink(Integer id, String link);
+    int changeOwner(Integer id, String owner);
+    int changeTrainer(Integer id, String trainer);
+    int changeComments(Integer id, String comments);
 
 }

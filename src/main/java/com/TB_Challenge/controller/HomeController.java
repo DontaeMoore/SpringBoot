@@ -5,24 +5,23 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.TB_Challenge.dao.TrackDAO;
+import com.TB_Challenge.model.Challenge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TB_Challenge.dao.UserDAO;
 import com.TB_Challenge.model.Track;
 import com.TB_Challenge.model.User;
 
-
+@SessionAttributes("track")
 @Controller
 public class HomeController {
 
@@ -57,6 +56,8 @@ public class HomeController {
         Integer id = Integer.parseInt(request.getParameter("id"));
         Track track = trackDAO.get(id);
 
+
+
         ModelAndView model = new ModelAndView("view");
 
         String login = securityLoginInfo();
@@ -73,13 +74,13 @@ public class HomeController {
 
 
     @RequestMapping(value = {"/", "home"})
-    public ModelAndView listContact(ModelAndView model) throws IOException {
-
+    public ModelAndView track(ModelAndView model) throws IOException {
 
         List<Track> listTrack = trackDAO.list();
         List<User> userList = userDAO.list();
         System.out.println(userList);
         model.addObject("listContact", listTrack);
+
 
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
@@ -135,12 +136,14 @@ public class HomeController {
 
     }
 
+
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("This is id " + id);
+        System.out.println("This is id ");
         Track track = trackDAO.get(id);
 
+        System.out.println(track.toString());
         ModelAndView model = new ModelAndView("addTracks");
 
         String login = securityLoginInfo();
@@ -148,7 +151,7 @@ public class HomeController {
         User user = grabLoggedinUser();
         model.addObject("user", user);
 
-        model.addObject("contact", track);
+        model.addObject("track", track);
 
 
         return model;
@@ -202,6 +205,74 @@ public class HomeController {
         User user = userDAO.getUserInfo(authentication.getName());
 
         return user;
+    }
+
+    @RequestMapping(value = "/updateTrackCheck", method = RequestMethod.GET)
+    public ModelAndView updateCheck(@ModelAttribute Track track, HttpSession session, @RequestParam boolean check) {
+        System.out.println("BOOLEAN Track check is " + check + " " + track.getName());
+
+
+        if(check == true){
+            session.setAttribute("checkValue", "checked");
+        }
+        else {
+            session.setAttribute("checkValue", "");
+        }
+
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveTName", method = RequestMethod.GET)
+    public ModelAndView autoName(@ModelAttribute Track track, HttpSession session, @RequestParam String name) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        trackDAO.changeName(track.getId(), name);
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveTCity", method = RequestMethod.GET)
+    public ModelAndView autoCity(@ModelAttribute Track track, HttpSession session, @RequestParam String city) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        trackDAO.changeCity(track.getId(), city);
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveTState", method = RequestMethod.GET)
+    public ModelAndView autoState(@ModelAttribute Track track, HttpSession session, @RequestParam String state) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        trackDAO.changeState(track.getId(), state);
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
+    }
+
+    @RequestMapping(value = "/autoSaveTZip", method = RequestMethod.GET)
+    public ModelAndView autoZip(@ModelAttribute Track track, HttpSession session, @RequestParam String zip) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        trackDAO.changeZip(track.getId(), zip);
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveTOwner", method = RequestMethod.GET)
+    public ModelAndView autoOwner(@ModelAttribute Track track, HttpSession session, @RequestParam String owner) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        trackDAO.changeOwner(track.getId(), owner);
+
+        return new ModelAndView("redirect:/edit?id=" + track.getId());
+
     }
 
 

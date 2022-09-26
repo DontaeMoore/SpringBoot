@@ -118,5 +118,30 @@ public class TrackDAOImpl implements TrackDAO {
 
 
 	}
+	@Override
+	public int changeName(Integer id, String name) {
+		String sql = "Update tracks set name = ? WHERE id =" + id;
+		return jdbcTemplate.update(sql, name);
+	}
 
+	@Override
+	public int changeCity(Integer id, String city) {
+		String sql = "Update tracks set city = ? WHERE id =" + id;
+		return jdbcTemplate.update(sql, city);
+	}
+	@Override
+	public int changeState(Integer id, String state) {
+		String sql = "Update tracks set state = ? WHERE id =" + id;
+		return jdbcTemplate.update(sql, state);
+	}
+	@Override
+	public int changeZip(Integer id, String zip) {
+		String sql = "Update tracks set zip = ? WHERE id =" + id;
+		return jdbcTemplate.update(sql, zip);
+	}
+	@Override
+	public int changeOwner(Integer id, String owner) {
+		String sql = "Update tracks set ownership = ? WHERE id =" + id;
+		return jdbcTemplate.update(sql, owner);
+	}
 }

@@ -17,6 +17,12 @@ public interface TrackDAO {
 	List<Track> list();
 
 	List<Integer> getTrackID();
+
+	int changeName(Integer id, String name);
+	int changeCity(Integer id, String city);
+	int changeState(Integer id, String state);
+	int changeZip(Integer id, String zip);
+	int changeOwner(Integer id, String owner);
 	
 	
 	
