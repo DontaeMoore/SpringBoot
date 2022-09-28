@@ -124,8 +124,10 @@ public Track() {
 
 
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(100);
 			conn.setRequestMethod("GET");
 			conn.connect();
+
 
 			//Check if connect is made
 			int responseCode = conn.getResponseCode();
