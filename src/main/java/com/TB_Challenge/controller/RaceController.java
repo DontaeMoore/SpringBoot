@@ -115,6 +115,7 @@ public class RaceController {
         model.addObject("race", newRace);
         model.addObject("l", list2);
         session.setAttribute("checkbox", "disabled");
+        session.setAttribute("checkValue", "");
 
 
         model.setViewName("addRace");

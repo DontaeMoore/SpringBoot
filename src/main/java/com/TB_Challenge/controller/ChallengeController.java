@@ -98,6 +98,7 @@ public class ChallengeController {
 
         Challenge c = new Challenge();
         session.setAttribute("checkbox", "disabled");
+        session.setAttribute("checkValue", "");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
 

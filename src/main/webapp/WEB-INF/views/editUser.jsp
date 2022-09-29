@@ -29,12 +29,12 @@
 
                                          <tr>
                                         <td>Role:</td>
-                                        <td><form:input path="role"/></td>
+                                        <td><form:input path="role" type="number"/></td>
                                         </tr>
 
                                          <tr>
                                         <td>Status:</td>
-                                        <td><form:input path="status"/></td>
+                                        <td><form:input path="status" type="number"/></td>
                                         </tr>
 
                                          <tr>

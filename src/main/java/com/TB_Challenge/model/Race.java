@@ -47,7 +47,8 @@ public class Race {
     }
 
     public String getYear() {
-        return year;
+
+        return date.substring(0,4);
     }
 
     public void setYear(String year) {

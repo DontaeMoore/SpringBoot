@@ -10,7 +10,7 @@ else {
 check = false;
 }
 console.log("The toggle was flipped, the value is " + check);
-window.location = '/updateChallengeCheck?check='+check;
+window.location = 'updateChallengeCheck?check='+check;
 
 
 
@@ -31,7 +31,7 @@ console.log("Autosave is not on, so nothing happens");
  else {
  console.log("Autosave is on, so we should call the save function for this specific field");
  //pass in new value for name
- window.location = '/autoSaveCName?name='+name.value;
+ window.location = 'autoSaveCName?name='+name.value;
  }
 
  }
@@ -51,7 +51,7 @@ console.log("Autosave is not on, so nothing happens");
   else {
   console.log("Autosave is on, so we should call the save function for this specific field");
   //pass in new value for name
-  window.location = '/autoSaveCDesc?desc='+desc.value;
+  window.location = 'autoSaveCDesc?desc='+desc.value;
   }
 
   }
@@ -70,7 +70,7 @@ console.log("Autosave is not on, so nothing happens");
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for name
-    window.location = '/autoSaveCFirst?first='+first.value;
+    window.location = 'autoSaveCFirst?first='+first.value;
     }
 
     }
@@ -89,7 +89,7 @@ console.log("Autosave is not on, so nothing happens");
       else {
       console.log("Autosave is on, so we should call the save function for this specific field");
       //pass in new value for name
-      window.location = '/autoSaveCSecond?second='+second.value;
+      window.location = 'autoSaveCSecond?second='+second.value;
       }
 
       }
@@ -108,7 +108,7 @@ console.log("Autosave is not on, so nothing happens");
         else {
         console.log("Autosave is on, so we should call the save function for this specific field");
         //pass in new value for name
-        window.location = '/autoSaveCThird?third='+third.value;
+        window.location = 'autoSaveCThird?third='+third.value;
         }
 
         }
@@ -127,7 +127,7 @@ console.log("Autosave is not on, so nothing happens");
           else {
           console.log("Autosave is on, so we should call the save function for this specific field");
           //pass in new value for name
-          window.location = '/autoSaveCFourth?fourth='+fourth.value;
+          window.location = 'autoSaveCFourth?fourth='+fourth.value;
           }
 
           }
@@ -146,7 +146,7 @@ console.log("Autosave is not on, so nothing happens");
             else {
             console.log("Autosave is on, so we should call the save function for this specific field");
             //pass in new value for name
-            window.location = '/autoSaveCStatus?status='+status.value;
+            window.location = 'autoSaveCStatus?status='+status.value;
             }
 
             }
@@ -165,7 +165,7 @@ console.log("Autosave is not on, so nothing happens");
               else {
               console.log("Autosave is on, so we should call the save function for this specific field");
               //pass in new value for name
-              window.location = '/autoSaveCDate?date='+date.value;
+              window.location = 'autoSaveCDate?date='+date.value;
               }
 
               }

@@ -128,6 +128,7 @@ public class RaceHorseController {
     @RequestMapping(value = "/addRaceHorse", method = RequestMethod.GET)
     public ModelAndView newRaceHorse(ModelAndView model, HttpSession session) throws IOException {
         session.setAttribute("checkbox", "disabled");
+        session.setAttribute("checkValue", "");
 
         RaceHorse newRaceHorse = new RaceHorse();
 

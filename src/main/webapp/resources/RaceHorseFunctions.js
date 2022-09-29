@@ -10,7 +10,7 @@ else {
 check = false;
 }
 console.log("The toggle was flipped, the value is " + check);
-window.location = '/updateRHCheck?check='+check;
+window.location = 'updateRHCheck?check='+check;
 
  }
 
@@ -33,7 +33,7 @@ window.location = '/updateRHCheck?check='+check;
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for name)
-         window.location = '/autoSaveRHName?name='+name.value;
+         window.location = 'autoSaveRHName?name='+name.value;
          }
 
          }
@@ -56,7 +56,7 @@ window.location = '/updateRHCheck?check='+check;
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for name)
-         window.location = '/autoSaveRHGender?gender='+gender.value;
+         window.location = 'autoSaveRHGender?gender='+gender.value;
          }
 
          }
@@ -79,7 +79,7 @@ function checkFoal(foal) {
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for foal
-         window.location = '/autoSaveRHFoal?foal='+foal.value;
+         window.location = 'autoSaveRHFoal?foal='+foal.value;
          }
 
          }
@@ -102,7 +102,7 @@ function checkLink(link) {
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for link
-         window.location = '/autoSaveRHLink?link='+link.value;
+         window.location = 'autoSaveRHLink?link='+link.value;
          }
 
          }
@@ -125,7 +125,7 @@ function checkOwner(owner) {
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for owner
-         window.location = '/autoSaveRHOwner?owner='+owner.value;
+         window.location = 'autoSaveRHOwner?owner='+owner.value;
          }
 
          }
@@ -148,7 +148,7 @@ function checkTrainer(trainer) {
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for trainer
-         window.location = '/autoSaveRHTrainer?trainer='+trainer.value;
+         window.location = 'autoSaveRHTrainer?trainer='+trainer.value;
          }
 
          }
@@ -171,7 +171,7 @@ function checkComments(comments) {
          console.log("Autosave is on, so we should call the save function for this specific field");
 
          //pass in new value for comments
-         window.location = '/autoSaveRHComments?comments='+comments.value;
+         window.location = 'autoSaveRHComments?comments='+comments.value;
          }
 
          }

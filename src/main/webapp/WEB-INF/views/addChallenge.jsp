@@ -10,7 +10,7 @@
         <title>New/Edit Challenge</title>
     </head>
     <body>
-    <script type="text/javascript" src="../resources/ChallengeFunctions.js" ></script>
+    <script type="text/javascript" src="resources/ChallengeFunctions.js" ></script>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
         <a href="home"><input type="submit" value="Home"/></a>
@@ -61,7 +61,7 @@
 
         <tr>
         <td>Status:</td>
-        <td><form:input path="status" onchange="checkStatus(challenge.status)"/></td>
+        <td><form:input path="status" type="number" onchange="checkStatus(challenge.status)"/></td>
         </tr>
 
         <tr>

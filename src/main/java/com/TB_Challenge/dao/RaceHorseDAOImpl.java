@@ -26,7 +26,7 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
     @Override
     public List<RaceHorse> list() {
-        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM HORSE ", new RowMapper<RaceHorse>() {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse ", new RowMapper<RaceHorse>() {
 
             @Override
             public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -68,7 +68,7 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
     @Override
     public RaceHorse getRaceHorse(int racehorseID) {
-        String sql = "SELECT * FROM  Horse WHERE horse_id =" + racehorseID;
+        String sql = "SELECT * FROM  horse WHERE horse_id =" + racehorseID;
 
         ResultSetExtractor<RaceHorse> extractor = new ResultSetExtractor<RaceHorse>() {
 

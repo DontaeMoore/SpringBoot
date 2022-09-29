@@ -81,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int update(User u) {
         u.setPassword(passwordEncoder.encode(u.getPassword()));
-        String sql = "UPDATE  Users SET password = ?, role = ?, status = ? WHERE id =?";
+        String sql = "UPDATE  users SET password = ?, role_id = ?, status_id = ? WHERE id =?";
         return jdbcTemplate.update(sql, u.getPassword(), u.getRole(), u.getStatus(), u.getId());
     }
 }

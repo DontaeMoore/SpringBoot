@@ -100,7 +100,7 @@ public class TrackDAOImpl implements TrackDAO {
 
 		ArrayList<Integer> slist = new ArrayList<Integer>();
 
-		List<Track> list = jdbcTemplate.query("SELECT * FROM TRACKS", new RowMapper<Track>() {
+		List<Track> list = jdbcTemplate.query("SELECT * FROM tracks", new RowMapper<Track>() {
 
 			@Override
 			public Track mapRow(ResultSet rs, int rowNum) throws SQLException {

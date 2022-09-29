@@ -98,6 +98,7 @@ public class HomeController {
 
         Track newTrack = new Track();
         session.setAttribute("checkbox", "disabled");
+        session.setAttribute("checkValue", "");
 
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);

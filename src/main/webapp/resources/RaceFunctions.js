@@ -10,7 +10,7 @@ else {
 check = false;
 }
 console.log("The toggle was flipped, the value is " + check);
-window.location = '/updateCheck?check='+check;
+window.location = 'updateCheck?check='+check;
 
 
  }
@@ -34,7 +34,7 @@ window.location = '/updateCheck?check='+check;
  else {
  console.log("Autosave is on, so we should call the save function for this specific field");
  //pass in new value for finishLine
- window.location = '/autoSaveFinish?finish='+finishTime.value;
+ window.location = 'autoSaveFinish?finish='+finishTime.value;
  }
 
  }
@@ -57,7 +57,7 @@ window.location = '/updateCheck?check='+check;
   else {
   console.log("Autosave is on, so we should call the save function for this specific field");
   //pass in new value for dist
-  window.location = '/autoSaveDist?dist='+dist.value;
+  window.location = 'autoSaveDist?dist='+dist.value;
   }
 
   }
@@ -80,7 +80,7 @@ window.location = '/updateCheck?check='+check;
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for dead)
-    window.location = '/autoSaveDead?dead='+dead.value;
+    window.location = 'autoSaveDead?dead='+dead.value;
     }
 
     }
@@ -103,7 +103,7 @@ window.location = '/updateCheck?check='+check;
       else {
       console.log("Autosave is on, so we should call the save function for this specific field");
       //pass in new value for trackID)
-      window.location = '/autoSavetrackID?trackID='+trackID.value;
+      window.location = 'autoSavetrackID?trackID='+trackID.value;
       }
 
       }
@@ -126,7 +126,7 @@ window.location = '/updateCheck?check='+check;
         else {
         console.log("Autosave is on, so we should call the save function for this specific field");
         //pass in new value for date)
-        window.location = '/autoSaveDate?date='+date.value;
+        window.location = 'autoSaveDate?date='+date.value;
         }
 
         }
@@ -150,7 +150,7 @@ window.location = '/updateCheck?check='+check;
         console.log("Autosave is on, so we should call the save function for this specific field");
         console.log(name.value);
         //pass in new value for name)
-        window.location = '/autoSaveName?name='+name.value;
+        window.location = 'autoSaveName?name='+name.value;
         }
 
         }
