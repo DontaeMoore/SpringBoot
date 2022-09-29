@@ -10,7 +10,7 @@
         <title>New/Edit Tracks</title>
     </head>
     <body>
-    <script type="text/javascript" src="../resources/TrackFunctions.js" ></script>
+    <script type="text/javascript" src="resources/TrackFunctions.js" ></script>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
         <a href="home"><input type="submit" value="Home"/></a>

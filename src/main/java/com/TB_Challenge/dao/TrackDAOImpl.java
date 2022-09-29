@@ -71,7 +71,7 @@ public class TrackDAOImpl implements TrackDAO {
 
 	@Override
 	public List<Track> list() {
-		List<Track> list = jdbcTemplate.query("SELECT * FROM TRACKS", new RowMapper<Track>() {
+		List<Track> list = jdbcTemplate.query("SELECT * FROM tracks", new RowMapper<Track>() {
 
 			@Override
 			public Track mapRow(ResultSet rs, int rowNum) throws SQLException {

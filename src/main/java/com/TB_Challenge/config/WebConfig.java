@@ -22,11 +22,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public DataSource getDataSource() {
 
+
         DriverManagerDataSource dataSource= new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_dd751a813852f9a?reconnect=true");
-        dataSource.setUsername("b1631fd1775aa1");
-        dataSource.setPassword("a2e4a06d");
+        dataSource.setUrl("jdbc:mysql://www.thompsonprojects.com:3306/thompson_challenge?reconnect=true");
+        dataSource.setUsername("thompson_dontaedb");
+        dataSource.setPassword("Progamer102345678");
+
+
 
         return dataSource;
     }

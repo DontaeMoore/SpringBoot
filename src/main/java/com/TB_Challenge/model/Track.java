@@ -118,7 +118,7 @@ public Track() {
 
 			//URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Lexington&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial");
 
-			String urlString = "https://api.openweathermap.org/data/2.5/weather?zip=" + getZip() + "&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial";
+			String urlString = "http://api.weatherapi.com/v1/current.json?key=30b9cc8f53d547e083d151418222809&q=" + getZip() + "&aqi=no";
 			URL url = new URL(urlString);
 
 
@@ -148,25 +148,26 @@ public Track() {
 
 				String content = informationString.toString();
 				JSONObject obj = new JSONObject(content);
+				System.out.println(obj);
 
 
-
-				String temp = obj.getJSONObject("main").get("temp").toString();
-				setTemp(temp + "°");
-
-				JSONArray desc = obj.getJSONArray("weather");
-
-
-				String icon = desc.getJSONObject(0).getString("icon");
+				String temp_f = obj.getJSONObject("current").get("temp_f").toString();
+				setTemp(temp_f);
+				String icon = obj.getJSONObject("current").getJSONObject("condition").get("icon").toString();
 				setIcon(icon);
 
-				String description = desc.getJSONObject(0).getString("description");
-				String wind = obj.getJSONObject("wind").get("speed").toString();
 
-				Weather w = new Weather(temp, description, icon, wind);
+
+
+				Weather w = new Weather(temp_f, "test", "test", "test");
+
+
+
+
+
 				String[] weatherData = w.getList();
 
-				System.out.println(getTemp() + " " + getIcon());
+
 
 			}
 		} catch (Exception e) {

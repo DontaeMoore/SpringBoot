@@ -27,17 +27,17 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> list() {
-        List<User> list = jdbcTemplate.query("SELECT * FROM USERS", new RowMapper<User>() {
+        List<User> list = jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
 
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {
                 User t = new User();
 
                 t.setId(rs.getInt("id"));
-                t.setUsername(rs.getString("username"));
+                t.setUsername(rs.getString("user_name"));
                 t.setPassword(rs.getString("password"));
-                t.setRole(rs.getString("role"));
-                t.setStatus(rs.getString("status"));
+                t.setRole(rs.getInt("role_id"));
+                t.setStatus(rs.getInt("status_id"));
 
 
                 return t;
@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
     public User getUserInfo(String username) {
         username = "\"" + username + "\"";
 
-        String sql = "SELECT * FROM  users WHERE username =" + username;
+        String sql = "SELECT * FROM  users WHERE user_name =" + username;
             System.out.println(sql);
         ResultSetExtractor<User> extractor = new ResultSetExtractor<User>() {
 
@@ -60,9 +60,9 @@ public class UserDAOImpl implements UserDAO {
             public User extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if(rs.next()) {
                     Integer id = rs.getInt("id");
-                    String username = rs.getString("username");
-                    String role = rs.getString("role");
-                    String status = rs.getString("status");
+                    String username = rs.getString("user_name");
+                     int role = rs.getInt("role_id");
+                    int status = rs.getInt("status_id");
 
 
                     return new User(id, username, role, status);

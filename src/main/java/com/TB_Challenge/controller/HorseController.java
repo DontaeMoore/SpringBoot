@@ -38,84 +38,12 @@ public class HorseController {
         }
         model.addObject("WelcomeMessage", login);
 
-        //API call
-        try {
-
-            System.out.println("in try call");
-            URL url2 = new URL("http://time.jsontest.com");
-            System.out.println(url2);
-           // url for zip, useful for our tracks api.openweathermap.org/data/2.5/weather?zip=40511&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial
-
-
-
-            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-            System.out.println(conn);
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            //Check if connect is made
-            int responseCode = conn.getResponseCode();
-
-            // 200 OK
-            if (responseCode != 200) {
-                System.out.println("HttpResponseCode: " + responseCode);
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                System.out.println("HttpResponseCode: " + responseCode);
-                StringBuilder informationString = new StringBuilder();
-                Scanner scanner = new Scanner(url2.openStream());
-
-                while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
-                }
-                //Close the scanner
-                scanner.close();
-
-                String content = informationString.toString();
-                System.out.println(informationString.toString());
-                System.out.println("we have the data");
-                JSONObject obj = new JSONObject(content);
-
-                System.out.println(obj);
-
-
-                String temp = obj.getJSONObject("main").get("temp").toString();
-                System.out.println(temp);
-
-                JSONArray desc = obj.getJSONArray("weather");
-                System.out.println(desc.getJSONObject(0).getString("icon"));
-                System.out.println(desc.getJSONObject(0).getString("description"));
-
-                String icon = desc.getJSONObject(0).getString("icon");
-                String description = desc.getJSONObject(0).getString("description");
-
-
-                String wind = obj.getJSONObject("wind").get("speed").toString();
-                System.out.println(wind);
-
-                Weather w = new Weather(temp, description, icon, wind);
-                String[] weatherData = w.getList();
-                for(int i = 0; i < weatherData.length; i++){
-                    System.out.println(weatherData[i]);
-                }
-                System.out.println("final ");
-
-
-                model.addObject("Weather",weatherData);
-                model.setViewName("horse");
-
-
-            }
-        } catch (Exception e) {
-            System.out.println("Didnt work ");
-            e.printStackTrace(System.out);
-        }
 
         //API call
         try {
 
             System.out.println("in try call");
-            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Lexington&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial");
+            URL url = new URL("http://api.weatherapi.com/v1/current.json?key=30b9cc8f53d547e083d151418222809&q=40511&aqi=no");
 
             System.out.println(url);
             // url for zip, useful for our tracks api.openweathermap.org/data/2.5/weather?zip=40511&appid=a3dcf5faec94e922e2963d2d8f950464&units=imperial
@@ -154,26 +82,21 @@ public class HorseController {
                 System.out.println(obj);
 
 
-                String temp = obj.getJSONObject("main").get("temp").toString();
-                System.out.println(temp);
-
-                JSONArray desc = obj.getJSONArray("weather");
-                System.out.println(desc.getJSONObject(0).getString("icon"));
-                System.out.println(desc.getJSONObject(0).getString("description"));
-
-                String icon = desc.getJSONObject(0).getString("icon");
-                String description = desc.getJSONObject(0).getString("description");
-
-
-                String wind = obj.getJSONObject("wind").get("speed").toString();
+                String temp_f = obj.getJSONObject("current").get("temp_f").toString();
+                String desc = obj.getJSONObject("current").getJSONObject("condition").get("text").toString();
+                String wind = obj.getJSONObject("current").get("wind_mph").toString();
+                String icon = obj.getJSONObject("current").getJSONObject("condition").get("icon").toString();
+                String replacedIcon = icon.replaceAll("64", "128");
+                System.out.println(temp_f);
+                System.out.println(desc);
                 System.out.println(wind);
+                System.out.println(replacedIcon);
 
-                Weather w = new Weather(temp, description, icon, wind);
+
+
+                Weather w = new Weather(temp_f, desc,replacedIcon, wind);
                 String[] weatherData = w.getList();
-                for(int i = 0; i < weatherData.length; i++){
-                    System.out.println(weatherData[i]);
-                }
-                System.out.println("final ");
+
 
 
                 model.addObject("Weather",weatherData);
@@ -182,7 +105,6 @@ public class HorseController {
 
             }
         } catch (Exception e) {
-            System.out.println("Didnt work ");
             e.printStackTrace(System.out);
         }
 

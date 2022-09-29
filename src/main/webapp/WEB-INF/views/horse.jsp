@@ -25,7 +25,7 @@
          <p> It is ${Weather[0]} Degrees Fahrenheit , With ${Weather[1]}, The wind speed is ${Weather[3]} MPH  </p>
 
 
-            <img src="resources/img/icons/${Weather[2]}.png">
+            <img src="${Weather[2]}">
 
     </div>
     </body>

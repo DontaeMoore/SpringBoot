@@ -32,7 +32,7 @@
        		 <td>${contact.city}</td>
        		  <td>${contact.state}</td>
        		  <td>${contact.temp}</td>
-       		  <td><img src="resources/img/icons/${contact.icon}.png" width="40" height="40" alt = "N/A"></td>
+       		  <td><img src="${contact.icon}" width="40" height="40" alt = "N/A"></td>
 
        		  <td>
        		  <a href="view?id=${contact.id}">View Details</a> and

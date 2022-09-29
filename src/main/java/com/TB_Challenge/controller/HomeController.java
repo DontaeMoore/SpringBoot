@@ -94,13 +94,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView newTrack(ModelAndView model) throws IOException {
+    public ModelAndView newTrack(ModelAndView model, HttpSession session) throws IOException {
 
         Track newTrack = new Track();
+        session.setAttribute("checkbox", "disabled");
 
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
-        model.addObject("contact", newTrack);
+        model.addObject("track", newTrack);
         User user = grabLoggedinUser();
         model.addObject("user", user);
 
@@ -138,7 +139,7 @@ public class HomeController {
 
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView editContact(HttpServletRequest request) {
+    public ModelAndView editContact(HttpServletRequest request, HttpSession session) {
         Integer id = Integer.parseInt(request.getParameter("id"));
         System.out.println("This is id ");
         Track track = trackDAO.get(id);
@@ -148,6 +149,7 @@ public class HomeController {
 
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
+        session.setAttribute("checkbox", "");
         User user = grabLoggedinUser();
         model.addObject("user", user);
 
