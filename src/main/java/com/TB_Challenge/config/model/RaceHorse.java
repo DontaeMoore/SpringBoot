@@ -1,4 +1,4 @@
-package com.TB_Challenge.model;
+package com.TB_Challenge.config.model;
 
 public class RaceHorse {
 

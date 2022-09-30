@@ -1,7 +1,7 @@
 package com.TB_Challenge.dao;
 
-import com.TB_Challenge.model.Race;
-import com.TB_Challenge.model.Track;
+import com.TB_Challenge.config.model.Race;
+import com.TB_Challenge.config.model.Track;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;

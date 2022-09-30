@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.TB_Challenge.dao.TrackDAO;
-import com.TB_Challenge.model.Challenge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TB_Challenge.dao.UserDAO;
-import com.TB_Challenge.model.Track;
-import com.TB_Challenge.model.User;
+import com.TB_Challenge.config.model.Track;
+import com.TB_Challenge.config.model.User;
 
 @SessionAttributes("track")
 @Controller
@@ -74,7 +73,7 @@ public class HomeController {
 
 
     @RequestMapping(value = {"/", "home"})
-    public ModelAndView track(ModelAndView model) throws IOException {
+    public ModelAndView track(ModelAndView model, HttpSession session) throws IOException {
 
         List<Track> listTrack = trackDAO.list();
         List<User> userList = userDAO.list();
@@ -86,6 +85,8 @@ public class HomeController {
         model.addObject("WelcomeMessage", login);
         User user = grabLoggedinUser();
         model.addObject("user", user);
+        session.setAttribute("rolename", user.getRoleName(user.getRole()));
+
 
         model.setViewName("home");
 
@@ -176,6 +177,26 @@ public class HomeController {
         return model;
 
     }
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView adminView(HttpServletRequest request) {
+
+
+        ModelAndView model = new ModelAndView("admin");
+        User user = grabLoggedinUser();
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+
+        model.addObject("user", user);
+        List<User> userList = userDAO.list();
+        for(User c : userList){
+            System.out.println("user " + c.getUsername());
+        }
+        model.addObject("userList", userList);
+
+
+        return model;
+
+    }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteContact(@RequestParam Integer id) {
@@ -206,6 +227,7 @@ public class HomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userDAO.getUserInfo(authentication.getName());
+
 
         return user;
     }

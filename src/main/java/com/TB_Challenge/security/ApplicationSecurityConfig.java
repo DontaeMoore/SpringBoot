@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.TB_Challenge.security.ApplicationUserRole.ADMIN;
+
+
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,8 +31,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
        http
                .authorizeRequests()
-               .antMatchers("/", "index", "/css*", "/js/*", "/resources/**")
-               .permitAll()
+               .antMatchers("/", "index", "/css*", "/js/*", "/resources/**").permitAll()
+               .antMatchers("/admin").hasRole(ADMIN.name())
                .anyRequest()
                .authenticated()
                .and()

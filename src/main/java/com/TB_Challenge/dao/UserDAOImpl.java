@@ -1,7 +1,8 @@
 package com.TB_Challenge.dao;
 
-import com.TB_Challenge.model.Track;
-import com.TB_Challenge.model.User;
+import com.TB_Challenge.config.model.Challenge;
+import com.TB_Challenge.config.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -61,11 +62,43 @@ public class UserDAOImpl implements UserDAO {
                 if(rs.next()) {
                     Integer id = rs.getInt("id");
                     String username = rs.getString("user_name");
+
                      int role = rs.getInt("role_id");
+                     int status = rs.getInt("status_id");
+                     String password = rs.getString("password");
+
+                    return new User(id, username, password, role, status);
+                }
+
+                return null;
+            }
+
+        };
+
+        return jdbcTemplate.query(sql, extractor);
+
+
+    }
+
+    @Override
+    public User getUser(Integer id) {
+
+
+        String sql = "SELECT * FROM  users WHERE id =" + id;
+        System.out.println(sql);
+        ResultSetExtractor<User> extractor = new ResultSetExtractor<User>() {
+
+            @Override
+            public User extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if(rs.next()) {
+                    Integer id = rs.getInt("id");
+                    String username = rs.getString("user_name");
+                    String password = rs.getString("password");
+                    int role = rs.getInt("role_id");
                     int status = rs.getInt("status_id");
 
 
-                    return new User(id, username, role, status);
+                    return new User(id, username, password, role, status);
                 }
 
                 return null;
@@ -84,4 +117,26 @@ public class UserDAOImpl implements UserDAO {
         String sql = "UPDATE  users SET password = ?, role_id = ?, status_id = ? WHERE id =?";
         return jdbcTemplate.update(sql, u.getPassword(), u.getRole(), u.getStatus(), u.getId());
     }
+
+    @Override
+    public int delete(Integer id) {
+        String sql = "DELETE FROM  users WHERE id =" + id;
+        return jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public int updateAdmin(User u) {
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
+        String sql = "UPDATE  users SET user_name = ?,password = ?, role_id = ?, status_id = ? WHERE id =?";
+        return jdbcTemplate.update(sql, u.getUsername(), u.getPassword(), u.getRole(), u.getStatus(), u.getId());
+    }
+
+    @Override
+    public int saveAdmin(User u) {
+        u.setPassword(passwordEncoder.encode(u.getPassword()));
+        String sql = "INSERT INTO users (user_name, password, role_id, status_id) VALUES (?, ?, ?, ?)";
+        return jdbcTemplate.update(sql,u.getUsername(), u.getPassword(), u.getRole(), u.getStatus());
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.TB_Challenge.model;
+package com.TB_Challenge.config.model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 

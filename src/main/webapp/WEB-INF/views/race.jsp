@@ -46,7 +46,7 @@
          </tr>
       </c:forEach>
 </table>
-<h3><a href = "addRace">Add Race</a></h3>
+<h3><span><a href = "addRace">Add Race</a></span></h3>
 
 
 </div>

@@ -2,26 +2,18 @@ package com.TB_Challenge.controller;
 
 import com.TB_Challenge.dao.RaceDAO;
 import com.TB_Challenge.dao.TrackDAO;
-import com.TB_Challenge.dao.UserDAO;
-import com.TB_Challenge.model.Race;
-import com.TB_Challenge.model.Track;
-import com.TB_Challenge.model.User;
+import com.TB_Challenge.config.model.Race;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.metadata.IIOMetadataNode;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @SessionAttributes("race")

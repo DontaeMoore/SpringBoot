@@ -1,4 +1,4 @@
-package com.TB_Challenge.model;
+package com.TB_Challenge.config.model;
 
 public class User {
     private Integer id;
@@ -14,9 +14,10 @@ public class User {
         this.status = status;
     }
 
-    public User (Integer id, String username, int role, int status) {
+    public User (Integer id, String username, String password, int role, int status) {
         this.id = id;
         this.username = username;
+        this.password = password;
         this.role = role;
         this.status = status;
     }
@@ -59,6 +60,18 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getRoleName(int role)
+    {
+
+        if(role == 1){
+            return "USER";
+        }
+        if(role == 2){
+            return "ADMIN";
+        }
+        return "NO ROLE ASSIGNED";
     }
 
     public User() {

@@ -1,6 +1,5 @@
-package com.TB_Challenge.model;
+package com.TB_Challenge.config.model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
