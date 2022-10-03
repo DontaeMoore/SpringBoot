@@ -1,4 +1,4 @@
-package com.TB_Challenge.config.model;
+package com.TB_Challenge.model;
 
 public class Weather {
 

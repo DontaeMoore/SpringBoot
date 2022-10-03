@@ -2,7 +2,7 @@ package com.TB_Challenge.controller;
 
 
 import com.TB_Challenge.dao.RaceHorseDAO;
-import com.TB_Challenge.config.model.RaceHorse;
+import com.TB_Challenge.model.RaceHorse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

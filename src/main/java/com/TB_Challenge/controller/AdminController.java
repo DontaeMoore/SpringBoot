@@ -1,8 +1,6 @@
 package com.TB_Challenge.controller;
 
-import com.TB_Challenge.config.model.Challenge;
-import com.TB_Challenge.config.model.Race;
-import com.TB_Challenge.config.model.User;
+import com.TB_Challenge.model.User;
 import com.TB_Challenge.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class AdminController {

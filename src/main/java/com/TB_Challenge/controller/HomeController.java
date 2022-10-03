@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TB_Challenge.dao.UserDAO;
-import com.TB_Challenge.config.model.Track;
-import com.TB_Challenge.config.model.User;
-
-@SessionAttributes("track")
+import com.TB_Challenge.model.Track;
+import com.TB_Challenge.model.User;
 @Controller
+@SessionAttributes("track")
 public class HomeController {
 
     @Autowired
@@ -72,7 +71,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = {"/", "home"})
+    @RequestMapping(value = {"/", "/home"})
     public ModelAndView track(ModelAndView model, HttpSession session) throws IOException {
 
         List<Track> listTrack = trackDAO.list();
@@ -81,11 +80,12 @@ public class HomeController {
         model.addObject("listContact", listTrack);
 
 
-        String login = securityLoginInfo();
-        model.addObject("WelcomeMessage", login);
+
         User user = grabLoggedinUser();
         model.addObject("user", user);
-        session.setAttribute("rolename", user.getRoleName(user.getRole()));
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+
 
 
         model.setViewName("home");
@@ -93,6 +93,9 @@ public class HomeController {
         return model;
 
     }
+
+
+
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView newTrack(ModelAndView model, HttpSession session) throws IOException {
@@ -163,7 +166,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/editUser", method = RequestMethod.GET)
-    public ModelAndView editUser(HttpServletRequest request) {
+    public ModelAndView editUser(HttpServletRequest request, HttpSession session) {
 
 
         ModelAndView model = new ModelAndView("editUser");
@@ -172,6 +175,7 @@ public class HomeController {
         model.addObject("WelcomeMessage", login);
         User user = grabLoggedinUser();
         model.addObject("user", user);
+        session.setAttribute("rolename", user.getRoleName(user.getRole()));
 
 
         return model;
@@ -216,12 +220,15 @@ public class HomeController {
             System.out.println(login);
         } else {
             login = "Welcome " + StringUtils.capitalize(authentication.getName());
+
             System.out.println(login);
         }
 
 
         return login;
     }
+
+
 
     public User grabLoggedinUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

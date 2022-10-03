@@ -2,8 +2,8 @@ package com.TB_Challenge.controller;
 
 
 import com.TB_Challenge.dao.ChallengeDAO;
-import com.TB_Challenge.config.model.Challenge;
-import com.TB_Challenge.config.model.Race;
+import com.TB_Challenge.model.Challenge;
+import com.TB_Challenge.model.Race;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

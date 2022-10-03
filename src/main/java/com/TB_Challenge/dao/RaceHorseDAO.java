@@ -1,7 +1,7 @@
 package com.TB_Challenge.dao;
 
 
-import com.TB_Challenge.config.model.RaceHorse;
+import com.TB_Challenge.model.RaceHorse;
 
 import java.util.List;
 

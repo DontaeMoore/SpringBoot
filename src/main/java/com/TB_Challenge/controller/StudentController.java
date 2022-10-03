@@ -1,6 +1,6 @@
 package com.TB_Challenge.controller;
 
-import com.TB_Challenge.config.model.Student;
+import com.TB_Challenge.model.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

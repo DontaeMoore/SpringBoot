@@ -1,7 +1,7 @@
 package com.TB_Challenge.controller;
 
 
-import com.TB_Challenge.config.model.Weather;
+import com.TB_Challenge.model.Weather;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
