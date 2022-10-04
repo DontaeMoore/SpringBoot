@@ -24,7 +24,9 @@
 	<th>Deadline (military time)</th>
 	<th>Distance (m)</th>
 	<th>Finish Time (s) </th>
-	<th>Action</th>
+	<th>Action/Sort By <a href="raceNameSort"><input type="submit" value="Name"/></a>
+                           <a href="raceDateSort"><input type="submit" value="Date"/></a></th>
+
 
 </tr>
 		<c:forEach items="${RaceList}" var="race" varStatus="status">

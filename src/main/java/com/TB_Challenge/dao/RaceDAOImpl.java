@@ -1,6 +1,7 @@
 package com.TB_Challenge.dao;
 
 import com.TB_Challenge.model.Race;
+import com.TB_Challenge.model.Status;
 import com.TB_Challenge.model.Track;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,7 +25,7 @@ public class RaceDAOImpl implements RaceDAO {
 
 
     @Override
-    public List<Race> list() {
+    public List<Race> list(List<Track> t) {
         List<Race> list = jdbcTemplate.query("SELECT * FROM race ", new RowMapper<Race>() {
 
             @Override
@@ -40,9 +41,83 @@ public class RaceDAOImpl implements RaceDAO {
                 r.setDeadline(time.substring(0,5));
                 r.setDistance(rs.getDouble("distance"));
                 r.setFinish_time(rs.getDouble("finish_time"));
-                //Track t = getTrackName(r.getTrack_id());
-                //r.setTrackName(t.getName());
-                r.setTrackName(r.getTrack_id() + " ");
+
+                for(Track track : t){
+                    if(rs.getString("track_id").equals(track.getId().toString())){
+                        r.setTrackName(track.getName());
+                    }
+                }
+
+
+
+                System.out.println(r.toString() + " " + r.getFinish_time());
+
+
+                return r;
+            }
+
+        });
+
+        return list;
+
+    }
+    @Override
+    public List<Race> listSortByName(List<Track> t) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by name ", new RowMapper<Race>() {
+
+            @Override
+            public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Race r = new Race();
+
+                r.setId(rs.getInt("id"));
+                r.setName(rs.getString("name"));
+                r.setYear(rs.getString("year"));
+                r.setTrack_id(rs.getInt("track_id"));
+                r.setDate(rs.getString("date"));
+                String time = rs.getString("deadline");
+                r.setDeadline(time.substring(0,5));
+                r.setDistance(rs.getDouble("distance"));
+                r.setFinish_time(rs.getDouble("finish_time"));
+                for(Track track : t){
+                    if(rs.getString("track_id").equals(track.getId().toString())){
+                        r.setTrackName(track.getName());
+                    }
+                }
+
+
+                System.out.println(r.toString() + " " + r.getFinish_time());
+
+
+                return r;
+            }
+
+        });
+
+        return list;
+
+    }
+    @Override
+    public List<Race> listSortByDate(List<Track> t) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by date ", new RowMapper<Race>() {
+
+            @Override
+            public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Race r = new Race();
+
+                r.setId(rs.getInt("id"));
+                r.setName(rs.getString("name"));
+                r.setYear(rs.getString("year"));
+                r.setTrack_id(rs.getInt("track_id"));
+                r.setDate(rs.getString("date"));
+                String time = rs.getString("deadline");
+                r.setDeadline(time.substring(0,5));
+                r.setDistance(rs.getDouble("distance"));
+                r.setFinish_time(rs.getDouble("finish_time"));
+                for(Track track : t){
+                    if(rs.getString("track_id").equals(track.getId().toString())){
+                        r.setTrackName(track.getName());
+                    }
+                }
 
 
                 System.out.println(r.toString() + " " + r.getFinish_time());
@@ -58,32 +133,35 @@ public class RaceDAOImpl implements RaceDAO {
     }
 
     @Override
-    public Track getTrackName(int trackID) {
-        String sql = "SELECT name FROM  tracks WHERE id =" + trackID;
-
-        ResultSetExtractor<Track> extractor = new ResultSetExtractor<Track>() {
+    public List<Track> getTracks() {
+        List<Track> list = jdbcTemplate.query("SELECT * FROM tracks ", new RowMapper<Track>() {
 
             @Override
-            public Track extractData(ResultSet rs) throws SQLException, DataAccessException {
-                if (rs.next()) {
-                    String name = rs.getString("name");
+            public Track mapRow(ResultSet rs, int rowNum) throws SQLException {
+               Track t = new Track();
+
+                t.setId(rs.getInt("id"));
+                t.setName(rs.getString("name"));
 
 
-                    return new Track(trackID, name, "", "", "", "");
-                }
 
-                return null;
+
+                System.out.println(t.toString());
+
+
+                return t;
             }
 
-        };
+        });
 
-        return jdbcTemplate.query(sql, extractor);
+        return list;
+
 
 
     }
 
     @Override
-    public Race getRace(int raceID) {
+    public Race getRace(int raceID, List<Track> t) {
         String sql = "SELECT * FROM  race WHERE id =" + raceID;
 
         ResultSetExtractor<Race> extractor = new ResultSetExtractor<Race>() {
@@ -102,9 +180,11 @@ public class RaceDAOImpl implements RaceDAO {
                     r.setDeadline(time.substring(0,5));
                     r.setDistance(rs.getDouble("distance"));
                     r.setFinish_time(rs.getDouble("finish_time"));
-                    Track t = getTrackName(r.getTrack_id());
-                    r.setTrackName(t.getName());
-
+                    for(Track track : t){
+                        if(rs.getString("track_id").equals(track.getId().toString())){
+                            r.setTrackName(track.getName());
+                        }
+                    }
                     return r;
                 }
 

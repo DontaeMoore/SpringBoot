@@ -8,6 +8,8 @@ import java.util.List;
 public interface RaceHorseDAO {
 
     List<RaceHorse> list();
+    List<RaceHorse> listSortByName();
+    List<RaceHorse> listSortByFoalYear();
 
     RaceHorse getRaceHorse(int racehorseID);
 

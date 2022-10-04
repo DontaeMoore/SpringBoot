@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View/Edit User Account</title>
+        <title>View/Edit ${rolename} Account</title>
     </head>
     <body>
      <div align="center">
@@ -17,7 +17,7 @@
              </div>
 
              <div align="center">
-             <h1>View/Edit User Account</h1>
+             <h1>View/Edit ${rolename} Account</h1>
              <form:form action="saveUser" method="post" modelAttribute="user">
                <table cellpadding="5">
                 <form:hidden path="id" />

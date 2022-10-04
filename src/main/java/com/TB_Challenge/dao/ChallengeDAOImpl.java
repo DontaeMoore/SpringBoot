@@ -2,6 +2,7 @@ package com.TB_Challenge.dao;
 
 import com.TB_Challenge.model.Challenge;
 import com.TB_Challenge.model.Race;
+import com.TB_Challenge.model.Status;
 import com.TB_Challenge.model.Track;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChallengeDAOImpl implements ChallengeDAO {
@@ -32,7 +34,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
 
     @Override
-    public List<Challenge> list() {
+    public List<Challenge> list(List<Status> s) {
         List<Challenge> list = jdbcTemplate.query("SELECT * FROM challenge order by date", new RowMapper<Challenge>() {
 
             @Override
@@ -46,7 +48,15 @@ public class ChallengeDAOImpl implements ChallengeDAO {
                 c.setSecond_points(rs.getInt("second_points"));
                 c.setThird_points(rs.getInt("third_points"));
                 c.setFourth_points(rs.getInt("fourth_points"));
+
                 c.setStatus(rs.getString("status"));
+
+                for(Status stat : s){
+                    if(rs.getString("status").equals(stat.getId().toString())){
+                        c.setStatus(stat.getName());
+                    }
+                }
+
                 c.setDate(rs.getString("date"));
 
 
@@ -62,6 +72,30 @@ public class ChallengeDAOImpl implements ChallengeDAO {
         return list;
 
     }
+    @Override
+    public List<Status> status() {
+        List<Status> list = jdbcTemplate.query("SELECT * FROM statuslookup", new RowMapper<Status>() {
+
+            @Override
+            public Status mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Status c = new Status();
+
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                c.setDesc(rs.getString("description"));
+                c.setStatus(rs.getString("status"));
+
+                System.out.println(c.toString());
+
+                return c;
+            }
+
+        });
+
+        return list;
+
+    }
+
 
     @Override
     public Challenge getChallenge(int challengeID) {
@@ -117,7 +151,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
     }
 
     @Override
-    public List<Race> listRaces(int challengeID) {
+    public List<Race> listRaces(int challengeID, List<Track> t) {
         List<Race> list = jdbcTemplate.query("SELECT * FROM race Where id =" + challengeID, new RowMapper<Race>() {
 
             @Override
@@ -130,8 +164,11 @@ public class ChallengeDAOImpl implements ChallengeDAO {
                     r.setName(rs.getString("name"));
                     int track_id = rs.getInt("track_id");
                     r.setTrack_id(track_id);
-                    Track trackName = raceDAO.getTrackName(track_id);
-                    r.setTrackName(trackName.getName());
+                for(Track track : t){
+                    if(rs.getString("track_id").equals(track.getId().toString())){
+                        r.setTrackName(track.getName());
+                    }
+                }
                     r.setYear(rs.getString("year"));
                     r.setDate(rs.getString("date"));
 

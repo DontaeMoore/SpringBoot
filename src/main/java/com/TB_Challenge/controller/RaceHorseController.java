@@ -2,6 +2,7 @@ package com.TB_Challenge.controller;
 
 
 import com.TB_Challenge.dao.RaceHorseDAO;
+import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.RaceHorse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,11 +33,22 @@ public class RaceHorseController {
 
 
     @RequestMapping(value = "/racehorse")
-    public ModelAndView race(ModelAndView model) throws IOException {
+    public ModelAndView race(ModelAndView model, HttpSession session) throws IOException {
+
+        List<RaceHorse> raceHorseList = new ArrayList<RaceHorse>();
+
+        if(session.getAttribute("racehorsesort") == "name"){
+            System.out.println("yo");
+            raceHorseList = raceHorseDAO.listSortByName();
+        }
+        else if (session.getAttribute("racehorsesort") == "date"){
+            raceHorseList = raceHorseDAO.listSortByFoalYear();
+        }
+        else {
+            raceHorseList = raceHorseDAO.list();
+        }
 
 
-
-        List<RaceHorse> raceHorseList = raceHorseDAO.list();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
@@ -54,6 +67,18 @@ public class RaceHorseController {
 
 
         return model;
+    }
+    @RequestMapping(value = "/racehorseNameSort")
+    public ModelAndView RaceNameSort(ModelAndView model, HttpSession session) throws IOException {
+        session.setAttribute("racehorsesort", "name");
+        return new ModelAndView("redirect:/racehorse");
+
+    }
+    @RequestMapping(value = "/racehorseYearSort")
+    public ModelAndView RaceDateSort(ModelAndView model, HttpSession session) throws IOException {
+        session.setAttribute("racehorsesort", "year");
+        return new ModelAndView("redirect:/racehorse");
+
     }
 
     @RequestMapping(value = "/viewRaceHorse", method = RequestMethod.GET)

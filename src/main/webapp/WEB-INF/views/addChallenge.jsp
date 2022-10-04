@@ -59,14 +59,13 @@
          <td><form:input path="fourth_points" type="number" onchange="checkFourth(challenge.fourth_points)"/></td>
          </tr>
 
-        <tr>
-        <td>Status:</td>
-        <td><form:input path="status" type="number" onchange="checkStatus(challenge.status)"/></td>
-        </tr>
 
         <tr>
-        <td>Date:</td>
-        <td><form:input path="date" type="date" onchange="checkDate(challenge.date)"/></td>
+        <td>Status:</td>
+        <td><form:select path="status" onchange="checkStatus(challenge.status)">
+        <form:options items="${statusIDs}"></form:options>
+        </form:select>
+        </td>
         </tr>
 
 

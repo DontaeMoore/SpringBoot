@@ -21,20 +21,19 @@
 	<th>Name</th>
 	<th>Gender</th>
 	<th>Foal Year </th>
-	<th>Equibase Link</th>
 	<th>Owner </th>
 	<th>Trainer </th>
 	<th>Comments</th>
-	<th>Action</th>
+	<th>Action/Sort By <a href="racehorseNameSort"><input type="submit" value="Name"/></a>
+                                         <a href="racehorseYearSort"><input type="submit" value="Foal Year"/></a></th>
 
 </tr>
 		<c:forEach items="${racehorse}" var="r" varStatus="status">
          <tr>
 
-       		 <td>${r.name}</td>
+       		 <td><a href="${r.link}">${r.name}</a></td>
        		 <td>${r.gender}</td>
        		 <td>${r.foalyear}</td>
-       		 <td><a href="${r.link}">${r.name}</a></td>
        		 <td>${r.owner}</td>
        		 <td>${r.trainer}</td>
              <td>${r.comments}</td>

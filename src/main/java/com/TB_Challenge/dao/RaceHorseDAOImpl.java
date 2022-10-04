@@ -63,6 +63,88 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
         return list;
 
     }
+    @Override
+    public List<RaceHorse> listSortByName() {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by name ", new RowMapper<RaceHorse>() {
+
+            @Override
+            public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                RaceHorse r = new RaceHorse();
+
+                r.setId(rs.getInt("horse_id"));
+                r.setName(rs.getString("name"));
+                r.setGender(rs.getString("gender"));
+
+
+                if(rs.getDate("foalyear") == null) {
+                    r.setFoalyear("N/A");
+                }
+                else {
+                    java.sql.Date date = rs.getDate("foalyear");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy");
+                    String dateStr = dateFormat.format(date);
+                    r.setFoalyear(dateStr);
+                }
+
+                r.setLink(rs.getString("equibaselink"));
+                r.setOwner(rs.getString("owner"));
+                r.setTrainer(rs.getString("trainer"));
+                r.setComments(rs.getString("comments"));
+
+
+
+                System.out.println(r.toString() + " " );
+
+
+                return r;
+            }
+
+        });
+
+        return list;
+
+    }
+    @Override
+    public List<RaceHorse> listSortByFoalYear() {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by foalyear ", new RowMapper<RaceHorse>() {
+
+            @Override
+            public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                RaceHorse r = new RaceHorse();
+
+                r.setId(rs.getInt("horse_id"));
+                r.setName(rs.getString("name"));
+                r.setGender(rs.getString("gender"));
+
+
+                if(rs.getDate("foalyear") == null) {
+                    r.setFoalyear("N/A");
+                }
+                else {
+                    java.sql.Date date = rs.getDate("foalyear");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy");
+                    String dateStr = dateFormat.format(date);
+                    r.setFoalyear(dateStr);
+                }
+
+                r.setLink(rs.getString("equibaselink"));
+                r.setOwner(rs.getString("owner"));
+                r.setTrainer(rs.getString("trainer"));
+                r.setComments(rs.getString("comments"));
+
+
+
+                System.out.println(r.toString() + " " );
+
+
+                return r;
+            }
+
+        });
+
+        return list;
+
+    }
 
     @Override
     public RaceHorse getRaceHorse(int racehorseID) {

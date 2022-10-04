@@ -2,8 +2,11 @@ package com.TB_Challenge.controller;
 
 
 import com.TB_Challenge.dao.ChallengeDAO;
+import com.TB_Challenge.dao.RaceDAO;
 import com.TB_Challenge.model.Challenge;
 import com.TB_Challenge.model.Race;
+import com.TB_Challenge.model.Status;
+import com.TB_Challenge.model.Track;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @SessionAttributes("challenge")
@@ -23,11 +27,15 @@ public class ChallengeController {
 
     @Autowired
     private ChallengeDAO challengeDAO;
+    @Autowired
+    private RaceDAO raceDAO;
 
     @RequestMapping(value = "/challenge")
     public ModelAndView challenge(ModelAndView model) throws IOException {
 
-        List<Challenge> challengeList = challengeDAO.list();
+        List<Status> s = challengeDAO.status();
+        List<Challenge> challengeList = challengeDAO.list(s);
+
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
@@ -54,7 +62,10 @@ public class ChallengeController {
         Challenge c = challengeDAO.getChallenge(id);
         System.out.println("we want to view this challenge" + c.toString());
 
-        List<Race> RaceList = challengeDAO.listRaces(id);
+        List<Track> trackList = raceDAO.getTracks();
+        List<Race> RaceList = challengeDAO.listRaces(id, trackList);
+
+
 
         for(Race r : RaceList){
             System.out.println(r.toString() + " _Race");
@@ -172,6 +183,13 @@ public class ChallengeController {
         Integer id = Integer.parseInt(request.getParameter("id"));
         Challenge challenge = challengeDAO.getChallenge(id);
         System.out.println("we want to edit this Challenge" + challenge.toString());
+        List<Status> s = challengeDAO.status();
+        List<Integer> sID = new ArrayList<>();
+        System.out.println("Each status id needed to be shown in edit challenge");
+        for(Status status : s){
+            sID.add(status.getId());
+            System.out.println(status.getId());
+        }
 
         ModelAndView model = new ModelAndView("addChallenge");
 
@@ -192,6 +210,7 @@ public class ChallengeController {
 
         model.addObject("WelcomeMessage", login);
         model.addObject("challenge", challenge);
+        model.addObject("statusIDs", sID);
 
 
 

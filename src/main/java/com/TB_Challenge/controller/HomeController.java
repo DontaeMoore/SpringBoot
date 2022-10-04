@@ -172,10 +172,13 @@ public class HomeController {
         ModelAndView model = new ModelAndView("editUser");
 
         String login = securityLoginInfo();
-        model.addObject("WelcomeMessage", login);
+
         User user = grabLoggedinUser();
+        model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
-        session.setAttribute("rolename", user.getRoleName(user.getRole()));
+        System.out.println(user.getRoleName(user.getRole()));
+        model.addObject("rolename", user.getRoleName(user.getRole()));
+
 
 
         return model;

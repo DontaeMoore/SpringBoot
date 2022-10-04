@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface RaceDAO {
 
-    List<Race> list();
+    List<Race> list(List<Track> t);
+    List<Race> listSortByDate(List<Track> t);
+    List<Race> listSortByName(List<Track> t);
 
-    Track getTrackName(int trackID);
+    List<Track> getTracks();
 
-    Race getRace(int raceID);
+    Race getRace(int raceID, List<Track> t);
 
     int save(Race race);
 

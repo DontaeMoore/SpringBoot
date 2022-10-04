@@ -24,7 +24,6 @@
 	<th>3rd Place </th>
 	<th>4th Place </th>
 	<th>Status</th>
-	<th>Date</th>
 	<th>Action</th>
 
 </tr>
@@ -38,7 +37,7 @@
        		 <td>${c.third_points}</td>
        		 <td>${c.fourth_points}</td>
              <td>${c.status}</td>
-             <td>${c.date}</td>
+
                <td>
                                    		  <a href="viewChallenge?id=${c.id}">View Challenge</a> and
                                    		  <a href="editChallenge?id=${c.id}">Edit Challenge</a>

@@ -3,6 +3,7 @@ package com.TB_Challenge.controller;
 import com.TB_Challenge.dao.RaceDAO;
 import com.TB_Challenge.dao.TrackDAO;
 import com.TB_Challenge.model.Race;
+import com.TB_Challenge.model.Track;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @SessionAttributes("race")
@@ -30,7 +32,19 @@ public class RaceController {
     @RequestMapping(value = "/race")
     public ModelAndView race(ModelAndView model, HttpSession session) throws IOException {
 
-        List<Race> raceList = raceDAO.list();
+        List<Race> raceList = new ArrayList<Race>();
+        List<Track> trackList = raceDAO.getTracks();
+
+        if(session.getAttribute("sort") == "name"){
+             raceList = raceDAO.listSortByName(trackList);
+        }
+        else if (session.getAttribute("sort") == "date"){
+             raceList = raceDAO.listSortByDate(trackList);
+        }
+        else {
+             raceList = raceDAO.list(trackList);
+        }
+
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -51,11 +65,24 @@ public class RaceController {
 
         return model;
     }
+    @RequestMapping(value = "/raceNameSort")
+    public ModelAndView RaceNameSort(ModelAndView model, HttpSession session) throws IOException {
+        session.setAttribute("sort", "name");
+        return new ModelAndView("redirect:/race");
+
+    }
+    @RequestMapping(value = "/raceDateSort")
+    public ModelAndView RaceDateSort(ModelAndView model, HttpSession session) throws IOException {
+        session.setAttribute("sort", "date");
+        return new ModelAndView("redirect:/race");
+
+    }
 
     @RequestMapping(value = "/viewRace", method = RequestMethod.GET)
     public ModelAndView viewTrack(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Race race = raceDAO.getRace(id);
+        List<Track> trackList = raceDAO.getTracks();
+        Race race = raceDAO.getRace(id, trackList);
         System.out.println("we want to view this race" + race.toString());
 
         ModelAndView model = new ModelAndView("view");
@@ -121,11 +148,12 @@ public class RaceController {
     public ModelAndView editRace(HttpServletRequest request, HttpSession session) {
         session.setAttribute("checkbox", "");
         Integer id = Integer.parseInt(request.getParameter("id"));
-        Race race = raceDAO.getRace(id);
+        List<Track> trackList = raceDAO.getTracks();
+        Race race = raceDAO.getRace(id, trackList);
         System.out.println("we want to edit this race" + race.toString());
 
         ModelAndView model = new ModelAndView("addRace");
-        List<Integer> list2 = trackDAO.getTrackID();
+        List<Integer> TrackIDs = trackDAO.getTrackID();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = "";
@@ -143,8 +171,8 @@ public class RaceController {
 
         model.addObject("WelcomeMessage", login);
         model.addObject("race", race);
-        model.addObject("l", list2);
-        session.setAttribute("raceS", "raceS");
+        model.addObject("l", TrackIDs);
+
 
 
 
