@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Base64;
 
 @Controller
 public class AdminController {
@@ -28,6 +29,9 @@ public class AdminController {
         session.setAttribute("checkbox", "");
         Integer id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getUser(id);
+        byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());
+        String decodedPass = new String(decodedPassBytes);
+        user.setPassword(decodedPass);
         System.out.println("we want to edit this User " + user.toString());
 
         ModelAndView model = new ModelAndView("addUser");
@@ -58,6 +62,12 @@ public class AdminController {
     public ModelAndView viewUserAdmin(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getUser(id);
+
+        byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());
+        String decodedPass = new String(decodedPassBytes);
+        user.setPassword(decodedPass);
+
+
         System.out.println("we want to view this User " + user.toString());
 
 

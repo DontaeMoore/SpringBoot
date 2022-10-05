@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.TB_Challenge.dao.ChallengeDAO;
 import com.TB_Challenge.dao.TrackDAO;
+import com.TB_Challenge.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,9 @@ public class HomeController {
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private ChallengeDAO challengeDAO;
 
     @RequestMapping(value = "/2")
     public ModelAndView test(HttpServletResponse response) throws IOException {
@@ -194,7 +199,9 @@ public class HomeController {
         model.addObject("WelcomeMessage", login);
 
         model.addObject("user", user);
-        List<User> userList = userDAO.list();
+        List<Status> s = challengeDAO.status();
+        List<User> userList = userDAO.Adminlist(s);
+
         for(User c : userList){
             System.out.println("user " + c.getUsername());
         }

@@ -5,16 +5,16 @@ public class User {
     private String username;
     private String password;
     private int role;
-    private int status;
+    private String status;
 
-    public User (String username, String password, int role, int status) {
+    public User (String username, String password, int role, String status) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.status = status;
     }
 
-    public User (Integer id, String username, String password, int role, int status) {
+    public User (Integer id, String username, String password, int role, String status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -54,11 +54,11 @@ public class User {
         this.role = role;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
