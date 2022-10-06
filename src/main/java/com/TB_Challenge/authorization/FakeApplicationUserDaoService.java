@@ -71,37 +71,37 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
             byte[] decodedPassBytes = Base64.getDecoder().decode(u.getPassword());
             String decodedPass = new String(decodedPassBytes);
             System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword()
-                    + " decoded password -> " +decodedPass+  " role " +u.getRole());
+                    + " decoded password -> " +decodedPass+  " role " +u.getRole() + " status " + u.getStatus());
 
 
 
+            if(!u.getStatus().equals("2")) { //don't make accounts for users with inactive status
+                if (u.getRole().equals("1")) {
+                    appUser.add(
+                            new ApplicationUser(
+                                    u.getUsername(),
+                                    decodedPass,
+                                    ADMIN.getGrantedAuthorities(),
+                                    true,
+                                    true,
+                                    true,
+                                    true
+                            )
+                    );
+                } else {
+                    appUser.add(
+                            new ApplicationUser(
 
-            if(u.getRole() == 2){
-                appUser.add(
-                        new ApplicationUser(
-                                u.getUsername(),
-                                decodedPass,
-                                ADMIN.getGrantedAuthorities(),
-                                true,
-                                true,
-                                true,
-                                true
-                        )
-                );
-            }
-            else {
-                appUser.add(
-                        new ApplicationUser(
-
-                                u.getUsername(),
-                                decodedPass,
-                                USER.getGrantedAuthorities(),
-                                true,
-                                true,
-                                true,
-                                true
-                        )
-                );
+                                    u.getUsername(),
+                                    decodedPass,
+                                    USER.getGrantedAuthorities(),
+                                    true,
+                                    true,
+                                    true,
+                                    true
+                            )
+                    );
+                }
             }
 
 

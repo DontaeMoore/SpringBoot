@@ -1,15 +1,18 @@
 package com.TB_Challenge.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.TB_Challenge.config.EmailSenderService;
 import com.TB_Challenge.dao.ChallengeDAO;
+import com.TB_Challenge.dao.RoleDAO;
 import com.TB_Challenge.dao.TrackDAO;
-import com.TB_Challenge.model.Status;
+import com.TB_Challenge.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +21,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.TB_Challenge.dao.UserDAO;
-import com.TB_Challenge.model.Track;
-import com.TB_Challenge.model.User;
+
 @Controller
 @SessionAttributes("track")
 public class HomeController {
@@ -33,6 +36,12 @@ public class HomeController {
 
     @Autowired
     private ChallengeDAO challengeDAO;
+
+    @Autowired
+    private EmailSenderService senderService;
+
+    @Autowired
+    private RoleDAO roleDAO;
 
     @RequestMapping(value = "/2")
     public ModelAndView test(HttpServletResponse response) throws IOException {
@@ -83,6 +92,7 @@ public class HomeController {
         List<User> userList = userDAO.list();
         System.out.println(userList);
         model.addObject("listContact", listTrack);
+        session.setAttribute("forgotConfirm", "Enter your email to reset your password!");
 
 
 
@@ -181,8 +191,8 @@ public class HomeController {
         User user = grabLoggedinUser();
         model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
-        System.out.println(user.getRoleName(user.getRole()));
-        model.addObject("rolename", user.getRoleName(user.getRole()));
+
+
 
 
 
@@ -199,14 +209,82 @@ public class HomeController {
         model.addObject("WelcomeMessage", login);
 
         model.addObject("user", user);
+        List<Role> roleList = roleDAO.roleList();
         List<Status> s = challengeDAO.status();
-        List<User> userList = userDAO.Adminlist(s);
+        List<User> userList = userDAO.Adminlist(s, roleList);
 
         for(User c : userList){
             System.out.println("user " + c.getUsername());
         }
         model.addObject("userList", userList);
 
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/saveForget", method = RequestMethod.POST)
+    public ModelAndView saveUser(@ModelAttribute ForgotPassword fp, HttpSession session) {
+        System.out.println("save was called for email" + fp.getEmail());
+
+        User user = userDAO.getUserInfo(fp.getEmail());
+        if(user == null){
+            session.setAttribute("forgotConfirm", "The email " + fp.getEmail() + " does not exist in our database!");
+        }
+        else {
+
+            session.setAttribute("forgotConfirm", "The email " + fp.getEmail() + " was found, and the password reset " +
+                    "link was send!");
+            senderService.sendEmail(fp.getEmail(), "Derby App Password Reset", "https://thompsonprojects.com/passwordReset?id=" +
+                    user.getId());
+        }
+
+
+
+
+
+
+        return new ModelAndView("redirect:/forgot");
+
+
+    }
+    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
+    public ModelAndView forgotView(HttpServletRequest request) {
+
+       ForgotPassword fp = new ForgotPassword();
+        System.out.println(fp.toString());
+        ModelAndView model = new ModelAndView("forgot");
+        String login = securityLoginInfo();
+        model.addObject("WelcomeMessage", login);
+        model.addObject("forgot", fp);
+
+        return model;
+
+    }
+    @RequestMapping(value = "/passwordReset", method = RequestMethod.GET)
+    public ModelAndView passwordReset(HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        User u = userDAO.getUser(id);
+        u.setPassword("");
+        System.out.println("we want to update this users forgotten password" + u.toString());
+
+        ModelAndView model = new ModelAndView("view");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = "";
+
+        if(authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        }
+        else {
+            login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+        model.addObject("WelcomeMessage", login);
+        model.addObject("user", u);
+
+        model.setViewName("resetPassword");
 
         return model;
 

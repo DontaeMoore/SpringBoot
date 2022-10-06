@@ -1,5 +1,6 @@
 package com.TB_Challenge.dao;
 
+import com.TB_Challenge.model.Role;
 import com.TB_Challenge.model.Status;
 import com.TB_Challenge.model.User;
 import org.springframework.dao.DataAccessException;
@@ -37,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
                 t.setId(rs.getInt("id"));
                 t.setUsername(rs.getString("user_name"));
                 t.setPassword(rs.getString("password"));
-                t.setRole(rs.getInt("role_id"));
+                t.setRole(rs.getString("role_id"));
                 t.setStatus(rs.getString("status_id"));
 
 
@@ -49,7 +50,7 @@ public class UserDAOImpl implements UserDAO {
         return list;
     }
 
-    public List<User> Adminlist(List<Status> s) {
+    public List<User> Adminlist(List<Status> s, List<Role> r) {
         List<User> list = jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
 
             @Override
@@ -63,12 +64,17 @@ public class UserDAOImpl implements UserDAO {
                 String decodedPass = new String(decodedPassBytes);
 
                 t.setPassword(decodedPass);
-                t.setRole(rs.getInt("role_id"));
+                t.setRole(rs.getString("role_id"));
                 t.setStatus(rs.getString("status_id"));
 
                 for(Status stat : s){
                     if(rs.getString("status_id").equals(stat.getId().toString())){
                         t.setStatus(stat.getName());
+                    }
+                }
+                for(Role roles : r){
+                    if(rs.getString("role_id").equals(roles.getId())){
+                        t.setRole(roles.getName());
                     }
                 }
 
@@ -95,7 +101,7 @@ public class UserDAOImpl implements UserDAO {
                     Integer id = rs.getInt("id");
                     String username = rs.getString("user_name");
 
-                     int role = rs.getInt("role_id");
+                    String role = rs.getString("role_id");
                     String status = rs.getString("status_id");
 
                     byte[] decodedPassBytes = Base64.getDecoder().decode(rs.getString("password"));
@@ -129,7 +135,7 @@ public class UserDAOImpl implements UserDAO {
                     Integer id = rs.getInt("id");
                     String username = rs.getString("user_name");
                     String password = rs.getString("password");
-                    int role = rs.getInt("role_id");
+                    String  role = rs.getString("role_id");
                     String status = rs.getString("status_id");
 
 

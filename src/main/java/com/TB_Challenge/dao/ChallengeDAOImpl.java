@@ -152,7 +152,8 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
     @Override
     public List<Race> listRaces(int challengeID, List<Track> t) {
-        List<Race> list = jdbcTemplate.query("SELECT * FROM race Where id =" + challengeID, new RowMapper<Race>() {
+
+        List<Race> list = jdbcTemplate.query("SELECT * FROM challengeraces join race where race_id = id AND challenge_id =" + challengeID, new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {

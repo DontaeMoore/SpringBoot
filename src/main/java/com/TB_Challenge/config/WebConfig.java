@@ -73,4 +73,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Bean
+    public RoleDAO getRoleDAO() { return new RoleDAOImpl(getDataSource());
+
+    }
+
 }

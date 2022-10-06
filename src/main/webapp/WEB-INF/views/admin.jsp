@@ -24,7 +24,7 @@
             <table border="1" cellpadding="5">
             <tr>
 
-            	<th>Username${userList[0].getUsername()}</th>
+            	<th>Username</th>
             	<th>Password</th>
             	<th>Role ID </th>
             	<th>Status ID </th>
@@ -37,7 +37,7 @@
 
                    		 <td>${c.getUsername()}</td>
                    		 <td>${c.password}</td>
-                   		 <td>${c.getRoleName(c.role)}</td>
+                   		 <td>${c.role}</td>
                    		 <td>${c.status}</td>
 
                            <td>

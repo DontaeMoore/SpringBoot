@@ -10,7 +10,7 @@
 <body>
 <div align="center">
 <h1>Derby Tracks List
-<a href="forgot"><input type="submit" value="Forgot password? Coming Soon!" disabled/></a>
+<a href="forgot"><input type="submit" value="Forgot password? Coming Soon!"/></a>
 </h1>
 
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
