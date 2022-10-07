@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface RaceDAO {
 
-    List<Race> list(List<Track> t);
-    List<Race> listSortByDate(List<Track> t);
-    List<Race> listSortByName(List<Track> t);
+    List<Race> list(List<Track> t, int offset);
+    List<Race> listSortByDate(List<Track> t, int offset);
+    List<Race> listSortByName(List<Track> t, int offset);
 
     List<Track> getTracks();
 

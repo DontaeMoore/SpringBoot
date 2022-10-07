@@ -25,8 +25,8 @@ public class RaceDAOImpl implements RaceDAO {
 
 
     @Override
-    public List<Race> list(List<Track> t) {
-        List<Race> list = jdbcTemplate.query("SELECT * FROM race ", new RowMapper<Race>() {
+    public List<Race> list(List<Track> t, int offset) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race LIMIT 10 OFFSET "+offset, new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -62,8 +62,8 @@ public class RaceDAOImpl implements RaceDAO {
 
     }
     @Override
-    public List<Race> listSortByName(List<Track> t) {
-        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by name ", new RowMapper<Race>() {
+    public List<Race> listSortByName(List<Track> t, int offset) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by name LIMIT 10 OFFSET " + offset, new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -97,8 +97,8 @@ public class RaceDAOImpl implements RaceDAO {
 
     }
     @Override
-    public List<Race> listSortByDate(List<Track> t) {
-        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by date ", new RowMapper<Race>() {
+    public List<Race> listSortByDate(List<Track> t, int offset) {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race order by date LIMIT 10 OFFSET " + offset, new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {

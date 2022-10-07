@@ -52,6 +52,9 @@
                      </tr>
                   </c:forEach>
             </table>
+            <div><a href="aOffset+"><input type="submit" value="Next 10"/></a>
+              <a href="aOffset-"><input type="submit" value="Previous 10"/></a>
+              </div>
             <h3><a href = "addUserAdmin">Add a new User!</a></h3>
 
 

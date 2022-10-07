@@ -34,8 +34,8 @@ public class ChallengeDAOImpl implements ChallengeDAO {
 
 
     @Override
-    public List<Challenge> list(List<Status> s) {
-        List<Challenge> list = jdbcTemplate.query("SELECT * FROM challenge order by date", new RowMapper<Challenge>() {
+    public List<Challenge> list(List<Status> s, int offset) {
+        List<Challenge> list = jdbcTemplate.query("SELECT * FROM challenge order by date LIMIT 10 OFFSET "+offset, new RowMapper<Challenge>() {
 
             @Override
             public Challenge mapRow(ResultSet rs, int rowNum) throws SQLException {

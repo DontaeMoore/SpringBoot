@@ -30,6 +30,8 @@ public class RaceHorseController {
     @Autowired
     private RaceHorseDAO raceHorseDAO;
 
+    private int raceHorseOffset = 0;
+
 
 
     @RequestMapping(value = "/racehorse")
@@ -38,14 +40,26 @@ public class RaceHorseController {
         List<RaceHorse> raceHorseList = new ArrayList<RaceHorse>();
 
         if(session.getAttribute("racehorsesort") == "name"){
-            System.out.println("yo");
-            raceHorseList = raceHorseDAO.listSortByName();
+            raceHorseList = raceHorseDAO.listSortByName(raceHorseOffset);
+            if(raceHorseList.isEmpty()){
+                raceHorseOffset-=10;
+                raceHorseList = raceHorseDAO.listSortByName(raceHorseOffset);
+            }
         }
         else if (session.getAttribute("racehorsesort") == "date"){
-            raceHorseList = raceHorseDAO.listSortByFoalYear();
+            raceHorseList = raceHorseDAO.listSortByFoalYear(raceHorseOffset);
+            if(raceHorseList.isEmpty()){
+                raceHorseOffset-=10;
+                raceHorseList = raceHorseDAO.listSortByFoalYear(raceHorseOffset);
+            }
+
         }
         else {
-            raceHorseList = raceHorseDAO.list();
+            raceHorseList = raceHorseDAO.list(raceHorseOffset);
+            if(raceHorseList.isEmpty()){
+                raceHorseOffset-=10;
+                raceHorseList = raceHorseDAO.list(raceHorseOffset);
+            }
         }
 
 
@@ -77,6 +91,23 @@ public class RaceHorseController {
     @RequestMapping(value = "/racehorseYearSort")
     public ModelAndView RaceDateSort(ModelAndView model, HttpSession session) throws IOException {
         session.setAttribute("racehorsesort", "year");
+        return new ModelAndView("redirect:/racehorse");
+
+    }
+    @RequestMapping(value = "/racehorseOffset+")
+    public ModelAndView increaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        raceHorseOffset+=10;
+        return new ModelAndView("redirect:/racehorse");
+
+    }
+    @RequestMapping(value = "/racehorseOffset-")
+    public ModelAndView decreaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        raceHorseOffset-=10;
+        if(raceHorseOffset < 0){
+            raceHorseOffset = 0;
+        }
         return new ModelAndView("redirect:/racehorse");
 
     }

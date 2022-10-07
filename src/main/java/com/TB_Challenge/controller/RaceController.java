@@ -28,21 +28,35 @@ public class RaceController {
     @Autowired
     private TrackDAO trackDAO;
 
+    private int raceOffset = 0;
+
 
     @RequestMapping(value = "/race")
     public ModelAndView race(ModelAndView model, HttpSession session) throws IOException {
 
-        List<Race> raceList = new ArrayList<Race>();
+        List<Race> raceList;
         List<Track> trackList = raceDAO.getTracks();
 
         if(session.getAttribute("sort") == "name"){
-             raceList = raceDAO.listSortByName(trackList);
+             raceList = raceDAO.listSortByName(trackList, raceOffset);
+            if(raceList.isEmpty()){
+                raceOffset-=10;
+                raceList = raceDAO.listSortByName(trackList, raceOffset);
+            }
         }
         else if (session.getAttribute("sort") == "date"){
-             raceList = raceDAO.listSortByDate(trackList);
+             raceList = raceDAO.listSortByDate(trackList, raceOffset);
+            if(raceList.isEmpty()){
+                raceOffset-=10;
+                raceList = raceDAO.listSortByDate(trackList, raceOffset);
+            }
         }
         else {
-             raceList = raceDAO.list(trackList);
+             raceList = raceDAO.list(trackList, raceOffset);
+             if(raceList.isEmpty()){
+                 raceOffset-=10;
+                 raceList = raceDAO.list(trackList, raceOffset);
+             }
         }
 
 
@@ -60,7 +74,7 @@ public class RaceController {
         }
         model.addObject("WelcomeMessage", login);
         model.addObject("RaceList", raceList);
-        session.setAttribute("test", "is this working");
+        session.setAttribute("raceOffset", raceOffset);
 
 
         return model;
@@ -74,6 +88,23 @@ public class RaceController {
     @RequestMapping(value = "/raceDateSort")
     public ModelAndView RaceDateSort(ModelAndView model, HttpSession session) throws IOException {
         session.setAttribute("sort", "date");
+        return new ModelAndView("redirect:/race");
+
+    }
+    @RequestMapping(value = "/raceOffset+")
+    public ModelAndView increaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        raceOffset+=10;
+        return new ModelAndView("redirect:/race");
+
+    }
+    @RequestMapping(value = "/raceOffset-")
+    public ModelAndView decreaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        raceOffset-=10;
+        if(raceOffset < 0){
+            raceOffset = 0;
+        }
         return new ModelAndView("redirect:/race");
 
     }

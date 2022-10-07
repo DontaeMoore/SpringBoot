@@ -50,8 +50,9 @@ public class UserDAOImpl implements UserDAO {
         return list;
     }
 
-    public List<User> Adminlist(List<Status> s, List<Role> r) {
-        List<User> list = jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
+    public List<User> Adminlist(List<Status> s, List<Role> r, int adminOffset) {
+        System.out.println("adminOffset is " + adminOffset);
+        List<User> list = jdbcTemplate.query("SELECT * FROM users LIMIT 10 OFFSET "+adminOffset, new RowMapper<User>() {
 
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {

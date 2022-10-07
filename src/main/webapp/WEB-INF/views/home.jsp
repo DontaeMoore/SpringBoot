@@ -46,6 +46,9 @@
          </tr>
       </c:forEach>
 </table>
+<div><a href="homeOffset+"><input type="submit" value="Next 10"/></a>
+  <a href="homeOffset-"><input type="submit" value="Previous 10"/></a>
+  </div>
 <h3><a href = "add">Add Tracks</a></h3>
 
 </div>

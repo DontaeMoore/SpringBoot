@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserDAO {
 
     List<User> list();
-    List<User> Adminlist(List<Status> s, List<Role> r);
+    List<User> Adminlist(List<Status> s, List<Role> r, int adminOffset);
 
     User getUserInfo(String username);
 

@@ -30,11 +30,17 @@ public class ChallengeController {
     @Autowired
     private RaceDAO raceDAO;
 
+    private int challengeOffset = 0;
+
     @RequestMapping(value = "/challenge")
     public ModelAndView challenge(ModelAndView model) throws IOException {
 
         List<Status> s = challengeDAO.status();
-        List<Challenge> challengeList = challengeDAO.list(s);
+        List<Challenge> challengeList = challengeDAO.list(s, challengeOffset);
+        if(challengeList.isEmpty()){
+            challengeOffset-=10;
+            challengeList = challengeDAO.list(s, challengeOffset);
+        }
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -224,6 +230,21 @@ public class ChallengeController {
 
         challengeDAO.delete(id);
 
+        return new ModelAndView("redirect:/challenge");
+
+    }
+    @RequestMapping(value = "/cOffset+")
+    public ModelAndView increaseChalOffset(ModelAndView model, HttpSession session) throws IOException {
+        challengeOffset+=10;
+        return new ModelAndView("redirect:/challenge");
+
+    }
+    @RequestMapping(value = "/cOffset-")
+    public ModelAndView decreaseChalOffset(ModelAndView model, HttpSession session) throws IOException {
+        challengeOffset-=10;
+        if(challengeOffset < 0){
+            challengeOffset = 0;
+        }
         return new ModelAndView("redirect:/challenge");
 
     }

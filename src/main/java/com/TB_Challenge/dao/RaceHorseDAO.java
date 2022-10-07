@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface RaceHorseDAO {
 
-    List<RaceHorse> list();
-    List<RaceHorse> listSortByName();
-    List<RaceHorse> listSortByFoalYear();
+    List<RaceHorse> list(int offset);
+    List<RaceHorse> listSortByName(int offset);
+    List<RaceHorse> listSortByFoalYear(int offset);
 
     RaceHorse getRaceHorse(int racehorseID);
 

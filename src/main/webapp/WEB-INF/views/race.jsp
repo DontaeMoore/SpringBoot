@@ -48,9 +48,13 @@
          </tr>
       </c:forEach>
 </table>
+  <div><a href="raceOffset+"><input type="submit" value="Next 10"/></a>
+  <a href="raceOffset-"><input type="submit" value="Previous 10"/></a>
+  </div>
 <h3><span><a href = "addRace">Add Race</a></span></h3>
 
 
 </div>
+
 </body>
 </html>

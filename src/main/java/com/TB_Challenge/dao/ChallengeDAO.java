@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ChallengeDAO {
 
-    List<Challenge> list(List<Status> s);
+    List<Challenge> list(List<Status> s, int offset);
     List<Status> status();
 
     Challenge getChallenge(int challengeID);

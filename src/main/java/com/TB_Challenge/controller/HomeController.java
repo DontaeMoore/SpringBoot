@@ -43,6 +43,9 @@ public class HomeController {
     @Autowired
     private RoleDAO roleDAO;
 
+    private int homeOffset = 0;
+    private int adminOffset = 0;
+
     @RequestMapping(value = "/2")
     public ModelAndView test(HttpServletResponse response) throws IOException {
         return new ModelAndView("home");
@@ -88,7 +91,11 @@ public class HomeController {
     @RequestMapping(value = {"/", "/home"})
     public ModelAndView track(ModelAndView model, HttpSession session) throws IOException {
 
-        List<Track> listTrack = trackDAO.list();
+        List<Track> listTrack = trackDAO.list(homeOffset);
+        if(listTrack.isEmpty()){
+            homeOffset-=10;
+            listTrack = trackDAO.list(homeOffset);
+        }
         List<User> userList = userDAO.list();
         System.out.println(userList);
         model.addObject("listContact", listTrack);
@@ -211,7 +218,12 @@ public class HomeController {
         model.addObject("user", user);
         List<Role> roleList = roleDAO.roleList();
         List<Status> s = challengeDAO.status();
-        List<User> userList = userDAO.Adminlist(s, roleList);
+        List<User> userList = userDAO.Adminlist(s, roleList, adminOffset);
+        if(userList.isEmpty()){
+            System.out.println(adminOffset + " admin offset");
+            adminOffset-=10;
+            userList = userDAO.Adminlist(s, roleList, adminOffset);
+        }
 
         for(User c : userList){
             System.out.println("user " + c.getUsername());
@@ -222,6 +234,25 @@ public class HomeController {
         return model;
 
     }
+    @RequestMapping(value = "/aOffset+")
+    public ModelAndView increaseAdminOffset(ModelAndView model, HttpSession session) throws IOException {
+
+        adminOffset+=10;
+        return new ModelAndView("redirect:/admin");
+
+    }
+    @RequestMapping(value = "/aOffset-")
+    public ModelAndView decreaseAdminOffset(ModelAndView model, HttpSession session) throws IOException {
+
+        adminOffset-=10;
+        if(adminOffset < 0){
+            adminOffset = 0;
+        }
+        return new ModelAndView("redirect:/admin");
+
+    }
+
+
 
     @RequestMapping(value = "/saveForget", method = RequestMethod.POST)
     public ModelAndView saveUser(@ModelAttribute ForgotPassword fp, HttpSession session) {
@@ -325,6 +356,24 @@ public class HomeController {
 
 
         return user;
+    }
+
+    @RequestMapping(value = "/homeOffset+")
+    public ModelAndView increaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        homeOffset+=10;
+        return new ModelAndView("redirect:/home");
+
+    }
+    @RequestMapping(value = "/homeOffset-")
+    public ModelAndView decreaseRaceOffset(ModelAndView model, HttpSession session) throws IOException {
+        System.out.println("Increased race offset");
+        homeOffset-=10;
+        if(homeOffset < 0){
+            homeOffset = 0;
+        }
+        return new ModelAndView("redirect:/home");
+
     }
 
     @RequestMapping(value = "/updateTrackCheck", method = RequestMethod.GET)

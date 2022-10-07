@@ -23,8 +23,8 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
     }
 
     @Override
-    public List<RaceHorse> list() {
-        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse ", new RowMapper<RaceHorse>() {
+    public List<RaceHorse> list(int offset) {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse LIMIT 10 OFFSET " + offset, new RowMapper<RaceHorse>() {
 
             @Override
             public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -64,8 +64,8 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
     }
     @Override
-    public List<RaceHorse> listSortByName() {
-        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by name ", new RowMapper<RaceHorse>() {
+    public List<RaceHorse> listSortByName(int offset) {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by name LIMIT 10 OFFSET " + offset, new RowMapper<RaceHorse>() {
 
             @Override
             public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -105,8 +105,8 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
     }
     @Override
-    public List<RaceHorse> listSortByFoalYear() {
-        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by foalyear ", new RowMapper<RaceHorse>() {
+    public List<RaceHorse> listSortByFoalYear(int offset) {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse order by foalyear LIMIT 10 OFFSET "+offset, new RowMapper<RaceHorse>() {
 
             @Override
             public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {

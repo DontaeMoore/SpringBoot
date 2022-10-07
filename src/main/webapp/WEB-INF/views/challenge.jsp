@@ -50,6 +50,9 @@
          </tr>
       </c:forEach>
 </table>
+<div><a href="cOffset+"><input type="submit" value="Next 10"/></a>
+  <a href="cOffset-"><input type="submit" value="Previous 10"/></a>
+  </div>
 <h3><a href = "addChallenge">Add a Challenge</a></h3>
 
 </div>

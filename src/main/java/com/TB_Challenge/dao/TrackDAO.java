@@ -14,7 +14,7 @@ public interface TrackDAO {
 	
 	int delete(Integer id);
 	
-	List<Track> list();
+	List<Track> list(int offset);
 
 	List<Integer> getTrackID();
 
