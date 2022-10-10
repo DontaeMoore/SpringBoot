@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,6 +65,13 @@ public class HomeController {
 
 
         return model;
+    }
+
+    @RequestMapping("/check")
+    @ResponseBody
+    public String check(HttpServletRequest request,
+                        HttpServletResponse response, ModelAndView model) {
+        return "This is a JQUERY AJAX COMMAND";
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)

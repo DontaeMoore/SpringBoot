@@ -11,6 +11,11 @@
     </head>
     <body>
     <script type="text/javascript" src="resources/RaceFunctions.js" ></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+
+
+
+
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
         <a href="home"><input type="submit" value="Home"/></a>

@@ -9,12 +9,39 @@
         <title>Home</title>
     </head>
      <style><%@include file="/WEB-INF/includes/style.css"%></style>
+     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+     <script type="text/javascript" src="resources/basic.js" ></script>
     <body>
     <div align="center">
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
+
+
+
+
     <a href="home"><input type="submit" value="Home"/></a>
         <h1>Hello World!</h1>
          <p>This is the Horse Page</p>
+         <div>
+             <input id="btn" type="button" value="button" />
+         </div>
+         <input id = "check" type="checkbox" />Enable AutoSave
+
+        <script>
+        $(document).ready(function() {
+
+            buttonCheck();
+            $('#btn').click(function() {
+                yo();
+            });
+              $('#check').click(function() {
+                            yo();
+                        });
+
+
+
+
+        });
+        </script>
 
 
 

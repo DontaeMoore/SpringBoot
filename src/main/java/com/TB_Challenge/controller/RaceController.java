@@ -273,7 +273,7 @@ public class RaceController {
 
     @RequestMapping(value = "/autoSaveFinish", method = RequestMethod.GET)
     public ModelAndView autoFinish(@ModelAttribute Race race, HttpSession session, @RequestParam double finish) {
-
+        System.out.print("got here");
 
         //make sql call
         //update race, pass it back to the page

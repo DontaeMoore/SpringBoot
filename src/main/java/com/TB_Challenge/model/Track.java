@@ -42,7 +42,7 @@ public Track() {
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + ", name=" + name + ", city=" + city + ", state=" + state + ", zip=" + zip
+		return "Track [id=" + id + ", name=" + name + ", city=" + city + ", state=" + state + ", zip=" + zip
 				+ ", ownership=" + ownership + "]";
 	}
 
