@@ -1,7 +1,9 @@
 package com.TB_Challenge.security;
 
 public enum ApplicationUserPermission {
-    ADMIN_VIEW("admin:view");
+    ADMIN_VIEW("admin:view"),
+    OFFICER_VIEW("officer:view");
+
     private final String permission;
     ApplicationUserPermission(String permission) {
         this.permission = permission;

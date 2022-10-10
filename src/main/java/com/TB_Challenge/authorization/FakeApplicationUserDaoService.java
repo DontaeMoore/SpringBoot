@@ -12,8 +12,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
-import static com.TB_Challenge.security.ApplicationUserRole.ADMIN;
-import static com.TB_Challenge.security.ApplicationUserRole.USER;
+import static com.TB_Challenge.security.ApplicationUserRole.*;
 
 @Repository("fake")
 public class FakeApplicationUserDaoService implements ApplicationUserDao{
@@ -76,7 +75,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
 
 
             if(!u.getStatus().equals("2")) { //don't make accounts for users with inactive status
-                if (u.getRole().equals("1")) {
+                if (u.getRole().equals("1"))
                     appUser.add(
                             new ApplicationUser(
                                     u.getUsername(),
@@ -88,7 +87,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                                     true
                             )
                     );
-                } else {
+                } else if(u.getRole().equals("2")){
                     appUser.add(
                             new ApplicationUser(
 
@@ -101,7 +100,21 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                                     true
                             )
                     );
+
                 }
+            else {
+                appUser.add(
+                        new ApplicationUser(
+
+                                u.getUsername(),
+                                decodedPass,
+                                OFFICER.getGrantedAuthorities(),
+                                true,
+                                true,
+                                true,
+                                true
+                        )
+                );
             }
 
 

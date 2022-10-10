@@ -12,7 +12,8 @@ import static com.TB_Challenge.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     USER(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(ADMIN_VIEW));
+    ADMIN(Sets.newHashSet(ADMIN_VIEW)),
+    OFFICER(Sets.newHashSet(OFFICER_VIEW));
 
     private final Set<ApplicationUserPermission> permissions;
 

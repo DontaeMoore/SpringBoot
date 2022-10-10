@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.TB_Challenge.security.ApplicationUserRole.ADMIN;
+import static com.TB_Challenge.security.ApplicationUserRole.OFFICER;
 
 
 @Configuration
@@ -33,6 +34,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                .authorizeRequests()
                .antMatchers("/", "index","/home", "/css*", "/js/*", "/resources/**", "/forgot", "/saveForget", "/passwordReset", "/saveUser").permitAll()
                .antMatchers("/admin").hasRole(ADMIN.name())
+               .antMatchers("/editRace","/addRace", "/deleteRace", "/editChallenge","/addChallenge","/deleteChallenge",
+                       "/editRaceHorse","/addRaceHorse","/deleteRaceHorse").hasAnyRole(OFFICER.name(), ADMIN.name())
                .anyRequest()
                .authenticated()
                .and()
