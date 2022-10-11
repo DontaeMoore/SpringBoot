@@ -230,6 +230,7 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
     }
     @Override
     public int changeLink(Integer id, String link) {
+        System.out.println("LINK IS " + link);
         String sql = "Update horse set equibaselink = ? WHERE horse_id =" + id;
         return jdbcTemplate.update(sql, link);
     }

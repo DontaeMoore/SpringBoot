@@ -10,14 +10,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View/Edit ${rolename} Account</title>
     </head>
+    <style><%@include file="/WEB-INF/includes/style.css"%></style>
     <body>
      <div align="center">
+     <h1>View/Edit ${rolename} Account</h1>
              <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-             <a href="home"><input type="submit" value="Home"/></a>
+
              </div>
 
-             <div align="center">
-             <h1>View/Edit ${rolename} Account</h1>
+                <p></p>
+             <div align="center" >
+
              <form:form action="saveUser" method="post" modelAttribute="user">
                <table cellpadding="5">
                 <form:hidden path="id" />
@@ -50,5 +53,6 @@
                           </form:form>
 
              </div>
+             <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

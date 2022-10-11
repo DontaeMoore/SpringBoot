@@ -11,7 +11,7 @@
 <div align="center">
 <h1>Derby Challenges</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-<a href="home"><input type="submit" value="Home"/></a>
+
 
 
 <table border="1" cellpadding="5">
@@ -54,7 +54,7 @@
   <a href="cOffset-"><input type="submit" value="Previous 10"/></a>
   </div>
 <h3><a href = "addChallenge">Add a Challenge</a></h3>
-
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </div>
 </body>
 </html>

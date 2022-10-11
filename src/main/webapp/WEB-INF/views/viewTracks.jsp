@@ -10,14 +10,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Track Details!</title>
     </head>
+    <style><%@include file="/WEB-INF/includes/style.css"%></style>
     <body>
     <div align="center">
+    <h1>View Track Details!</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
-    </div>
 
+    </div>
+<p></p>
         <div align="center">
-        <h1>View Track Details!</h1>
+
         <form:form action="save" method="post" modelAttribute="contact">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -52,5 +54,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

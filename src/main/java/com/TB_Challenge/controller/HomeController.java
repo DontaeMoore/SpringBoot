@@ -206,6 +206,7 @@ public class HomeController {
         User user = grabLoggedinUser();
         model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
+        session.setAttribute("rolename", user.getRoleName(Integer.parseInt(user.getRole())));
 
 
 

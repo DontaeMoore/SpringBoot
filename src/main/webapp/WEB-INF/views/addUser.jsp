@@ -12,12 +12,13 @@
     <body>
     <script type="text/javascript" src="resources/TrackFunctions.js" ></script>
      <div align="center">
+      <h1>ADMIN New/Edit User</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-        <a href="home"><input type="submit" value="Home"/></a>
+
         </div>
 
         <div align="center">
-        <h1>ADMIN New/Edit User</h1>
+
         <form:form action="saveUserAdmin" method="post" modelAttribute="user">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -56,5 +57,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

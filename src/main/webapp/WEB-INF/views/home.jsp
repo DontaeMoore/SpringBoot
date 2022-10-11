@@ -6,13 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home</title>
 </head>
- <style><%@include file="/WEB-INF/includes/style.css"%></style>
+
 <body>
 <div align="center">
-<h1>Derby Tracks List
-<a href="forgot"><input type="submit" value="Forgot password? Coming Soon!"/></a>
-</h1>
-
+<h1>Derby Tracks List</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
 
@@ -52,5 +49,6 @@
 <h3><a href = "add">Add Tracks</a></h3>
 
 </div>
+<%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
 </body>
 </html>

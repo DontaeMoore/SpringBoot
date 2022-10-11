@@ -7,14 +7,18 @@
 <title>Contact ManagerHome</title>
 </head>
  <style><%@include file="/WEB-INF/includes/style.css"%></style>
+
 <body>
 <div align="center">
 <h1>Derby Race List</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-<a href="home"><input type="submit" value="Home"/></a>
+
+<script type="text/javascript" src="resources/RaceFunctions.js" ></script>
+<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
 
-<table border="1" cellpadding="5">
+
+<table id="mytable" border="1" cellpadding="5">
 <tr>
 
 	<th>Name</th>
@@ -24,8 +28,10 @@
 	<th>Deadline (military time)</th>
 	<th>Distance (m)</th>
 	<th>Finish Time (s) </th>
-	<th>Action/Sort By <a href="raceNameSort"><input type="submit" value="Name"/></a>
-                           <a href="raceDateSort"><input type="submit" value="Date"/></a></th>
+	<th>Action/Sort By      <input type="submit" value="ajaxName"  onclick="sortbyName()"/>
+                           <a href="raceDateSort"><input type="submit" value="Date"/></a>
+                            <a href="raceNameSort"><input type="submit" value="Name"/></a></th>
+
 
 
 </tr>
@@ -55,6 +61,6 @@
 
 
 </div>
-
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </body>
 </html>

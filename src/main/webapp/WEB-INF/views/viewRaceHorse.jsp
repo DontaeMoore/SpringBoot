@@ -12,12 +12,12 @@
     </head>
     <body>
     <div align="center">
+       <h1>View Race Horse Details!</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
+
     </div>
 
         <div align="center">
-        <h1>View Race Details!</h1>
         <form:form action="save" method="post" modelAttribute="racehorse">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -69,5 +69,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

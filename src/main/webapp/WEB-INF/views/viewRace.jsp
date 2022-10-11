@@ -13,7 +13,7 @@
     <body>
     <div align="center">
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
+
     </div>
 
         <div align="center">
@@ -69,5 +69,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

@@ -8,11 +8,16 @@
         <title>Home</title>
     </head>
     <body>
-    <h3><a href="editUser">${WelcomeMessage}.</a>&emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a> </h3>
+    <style><%@include file="/WEB-INF/includes/style.css"%></style>
+    <h3><a href="editUser">${WelcomeMessage}.</a>&emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a>
+     <a href="forgot"><input type="submit" value="Forgot password?"/></a>
+     </h3>
     <a href="horse"><input type="submit" value="Horse Page"/></a>
     <a href="race"><input type="submit" value="Races Page"/></a>
     <a href="challenge"><input type="submit" value="Challenge Page"/></a>
     <a href="racehorse"><input type="submit" value="Race Horse Page"/></a>
     <a href="admin"><input type="submit" value="Admin Only Page"/></a>
+    <a href="home"><input type="submit" value="Home"/></a>
+    <p></p>
     </body>
 </html>

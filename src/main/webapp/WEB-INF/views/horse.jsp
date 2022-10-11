@@ -13,38 +13,8 @@
      <script type="text/javascript" src="resources/basic.js" ></script>
     <body>
     <div align="center">
+    <h1>Horse Page</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-
-
-
-
-    <a href="home"><input type="submit" value="Home"/></a>
-        <h1>Hello World!</h1>
-         <p>This is the Horse Page</p>
-         <div>
-             <input id="btn" type="button" value="button" />
-         </div>
-         <input id = "check" type="checkbox" />Enable AutoSave
-
-        <script>
-        $(document).ready(function() {
-
-            buttonCheck();
-            $('#btn').click(function() {
-                yo();
-            });
-              $('#check').click(function() {
-                            yo();
-                        });
-
-
-
-
-        });
-        </script>
-
-
-
 
          <p><img src="resources/img/horsepic.jpg"/></p>
 
@@ -55,5 +25,6 @@
             <img src="${Weather[2]}">
 
     </div>
+    <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

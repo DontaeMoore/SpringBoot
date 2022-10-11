@@ -13,12 +13,13 @@
     </head>
     <body>
     <div align="center">
+     <h1>ADMIN View User Details!</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
+
     </div>
 
         <div align="center">
-        <h1>ADMIN View User Details!</h1>
+
         <form:form action="save" method="post" modelAttribute="user">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -61,5 +62,6 @@
 
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

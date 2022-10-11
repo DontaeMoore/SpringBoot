@@ -26,7 +26,7 @@ public class AdminController {
 
     @RequestMapping(value = "/editUserAdmin", method = RequestMethod.GET)
     public ModelAndView editChallenge(HttpServletRequest request, HttpSession session) {
-        session.setAttribute("checkbox", "");
+        session.setAttribute("checkbox", "disabled");
         Integer id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getUser(id);
         byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());

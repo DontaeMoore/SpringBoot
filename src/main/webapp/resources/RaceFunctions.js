@@ -210,5 +210,25 @@ $.ajax({
 
         }
 
+        function sortbyName() {
+
+        $.ajax({
+                             type : "GET",
+                             url : 'raceNameSort',
+                             success: function(data){
+                               console.log("finished");
+
+                             }
+                         });
+
+        alert("finished");
+            $("mytable.table").load(location.href + " mytable.table");
+        }
+
+
+
+
+
+
 
 

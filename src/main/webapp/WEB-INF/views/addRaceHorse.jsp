@@ -12,13 +12,15 @@
 
     <body>
     <script type="text/javascript" src="resources/RaceHorseFunctions.js" ></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
      <div align="center">
+     <h1>New/Edit Race Horse</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-        <a href="home"><input type="submit" value="Home"/></a>
+
         </div>
 
         <div align="center">
-        <h1>New/Edit Race Horse</h1>
+
         <form:form action="saveRaceHorse" method="post" modelAttribute="race">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -45,22 +47,22 @@
 
         <tr>
         <td>Equibase link:</td>
-        <td><form:input path="link" cssStyle="width:350%" onchange="checkLink(race.link)"/></td>
+        <td><form:input path="link"  onchange="checkLink(race.link)"/></td>
         </tr>
 
         <tr>
         <td>Owner:</td>
-        <td><form:input path="owner" cssStyle="width:250%" onchange="checkOwner(race.owner)"/></td>
+        <td><form:input path="owner"  onchange="checkOwner(race.owner)"/></td>
         </tr>
 
         <tr>
          <td>Trainer:</td>
-         <td><form:input path="trainer" cssStyle="width:250%" onchange="checkTrainer(race.trainer)"/></td>
+         <td><form:input path="trainer"  onchange="checkTrainer(race.trainer)"/></td>
          </tr>
 
         <tr>
         <td>Comments:</td>
-        <td><form:input path="comments" cssStyle="width:250%" onchange="checkComments(race.comments)"/></td>
+        <td><form:input path="comments"  onchange="checkComments(race.comments)"/></td>
         </tr>
 
 
@@ -71,5 +73,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

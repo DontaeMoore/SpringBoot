@@ -295,11 +295,15 @@ public class RaceHorseController {
 
     }
     @RequestMapping(value = "/autoSaveRHLink", method = RequestMethod.GET)
-    public ModelAndView autoLink(@ModelAttribute RaceHorse racehorse, HttpSession session, @RequestParam String link) {
+    public ModelAndView autoLink(@ModelAttribute RaceHorse racehorse, HttpSession session, @RequestParam String link, @RequestParam String refno, @RequestParam String registry,
+                                 @RequestParam String rbt) {
         RaceHorse race = (RaceHorse) session.getAttribute("race");
+
+        String concatLink = link + "&refno=" + refno + "&registry=" + registry + "&rbt=" + rbt;
+        System.out.println("LINK IN CONTROLLER IS " + concatLink);
         //make sql call
         //update challenge, pass it back to the page
-        raceHorseDAO.changeLink(race.getId(), link);
+        raceHorseDAO.changeLink(race.getId(), concatLink);
 
         return new ModelAndView("redirect:/editRaceHorse?id=" + race.getId());
 

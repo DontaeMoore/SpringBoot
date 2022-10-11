@@ -16,8 +16,9 @@
     <body>
     <script type="text/javascript" src="resources/adminFunctions.js" ></script>
      <div align="center">
+             <h1>Admin User Panel</h1>
              <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-             <a href="home"><input type="submit" value="Home"/></a>
+
              </div>
 
              <div align="center">
@@ -59,5 +60,6 @@
 
 
              </div>
+             <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

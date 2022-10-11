@@ -66,10 +66,13 @@ public class User {
     {
 
         if(role == 1){
-            return "USER";
+            return "ADMIN";
         }
         if(role == 2){
-            return "ADMIN";
+            return "USER";
+        }
+        if(role == 3){
+            return "OFFICIAL";
         }
         return "NO ROLE ASSIGNED";
     }

@@ -34,10 +34,12 @@ public class RaceController {
     @RequestMapping(value = "/race")
     public ModelAndView race(ModelAndView model, HttpSession session) throws IOException {
 
+        System.out.println("as it should b " + session.getAttribute("sort"));
         List<Race> raceList;
         List<Track> trackList = raceDAO.getTracks();
 
         if(session.getAttribute("sort") == "name"){
+            System.out.println("sorting by =name");
              raceList = raceDAO.listSortByName(trackList, raceOffset);
             if(raceList.isEmpty()){
                 raceOffset-=10;
@@ -78,6 +80,7 @@ public class RaceController {
 
 
         return model;
+
     }
     @RequestMapping(value = "/raceNameSort")
     public ModelAndView RaceNameSort(ModelAndView model, HttpSession session) throws IOException {

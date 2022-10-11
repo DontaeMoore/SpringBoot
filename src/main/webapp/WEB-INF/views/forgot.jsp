@@ -13,10 +13,11 @@
      <style><%@include file="/WEB-INF/includes/style.css"%></style>
     <body>
     <div align="center">
+    <h1>Reset Password Page</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
-        <h1>Hello World!</h1>
-         <p>This is the Forgot Page</p>
+
+
+
          <p>${forgotConfirm}</p>
 
 
@@ -46,5 +47,6 @@
 
 
     </div>
+    <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

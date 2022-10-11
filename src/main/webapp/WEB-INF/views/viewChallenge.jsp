@@ -13,12 +13,13 @@
     </head>
     <body>
     <div align="center">
+    <h1>View Challenge Details!</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-    <a href="home"><input type="submit" value="Home"/></a>
+
     </div>
 
         <div align="center">
-        <h1>View Challenge Details!</h1>
+
         <form:form action="save" method="post" modelAttribute="challenge">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -100,7 +101,9 @@
                   </tr>
                </c:forEach>
          </table>
-
+         <%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
         </div>
+
     </body>
+
 </html>

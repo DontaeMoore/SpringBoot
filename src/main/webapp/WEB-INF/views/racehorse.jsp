@@ -13,7 +13,7 @@
 <div align="center">
 <h1>Derby Race Horses</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-<a href="home"><input type="submit" value="Home"/></a>
+
 
 <table border="2" cellpadding="5">
 <tr>
@@ -53,7 +53,7 @@
   <a href="racehorseOffset-"><input type="submit" value="Previous 10"/></a>
   </div>
 <h3><a href = "addRaceHorse">Add a Race Horse</a></h3>
-
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </div>
 </body>
 </html>

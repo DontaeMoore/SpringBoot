@@ -11,9 +11,10 @@
     </head>
     <body>
     <script type="text/javascript" src="resources/ChallengeFunctions.js" ></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
      <div align="center">
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
-        <a href="home"><input type="submit" value="Home"/></a>
+
         </div>
 
         <div align="center">
@@ -76,5 +77,6 @@
         </form:form>
 
         </div>
+        <%@ include file="/WEB-INF/includes/footer.jsp" %>
     </body>
 </html>

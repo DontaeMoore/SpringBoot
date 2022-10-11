@@ -10,7 +10,15 @@ else {
 check = false;
 }
 console.log("The toggle was flipped, the value is " + check);
-window.location = 'updateChallengeCheck?check='+check;
+
+$.ajax({
+    type : "GET",
+    url : 'updateChallengeCheck?check='+check,
+    success: function(data){
+     console.log("The toggle was flipped, the value is " + check);
+    }
+});
+
 
 
 
@@ -31,7 +39,14 @@ console.log("Autosave is not on, so nothing happens");
  else {
  console.log("Autosave is on, so we should call the save function for this specific field");
  //pass in new value for name
- window.location = 'autoSaveCName?name='+name.value;
+
+ $.ajax({
+     type : "GET",
+     url : 'autoSaveCName?name='+name.value,
+     success: function(data){
+      console.log("The toggle was flipped, the value is " + check);
+     }
+ });
  }
 
  }
@@ -51,7 +66,14 @@ console.log("Autosave is not on, so nothing happens");
   else {
   console.log("Autosave is on, so we should call the save function for this specific field");
   //pass in new value for name
-  window.location = 'autoSaveCDesc?desc='+desc.value;
+
+  $.ajax({
+      type : "GET",
+      url : 'autoSaveCDesc?desc='+desc.value,
+      success: function(data){
+       console.log("The toggle was flipped, the value is " + check);
+      }
+  });
   }
 
   }
@@ -70,7 +92,15 @@ console.log("Autosave is not on, so nothing happens");
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for name
-    window.location = 'autoSaveCFirst?first='+first.value;
+
+    $.ajax({
+          type : "GET",
+          url : 'autoSaveCFirst?first='+first.value,
+          success: function(data){
+           console.log("The toggle was flipped, the value is " + check);
+          }
+      });
+
     }
 
     }
@@ -89,7 +119,14 @@ console.log("Autosave is not on, so nothing happens");
       else {
       console.log("Autosave is on, so we should call the save function for this specific field");
       //pass in new value for name
-      window.location = 'autoSaveCSecond?second='+second.value;
+
+       $.ajax({
+                type : "GET",
+                url : 'autoSaveCSecond?second='+second.value,
+                success: function(data){
+                 console.log("The toggle was flipped, the value is " + check);
+                }
+            });
       }
 
       }
@@ -108,7 +145,14 @@ console.log("Autosave is not on, so nothing happens");
         else {
         console.log("Autosave is on, so we should call the save function for this specific field");
         //pass in new value for name
-        window.location = 'autoSaveCThird?third='+third.value;
+
+         $.ajax({
+                        type : "GET",
+                        url : 'autoSaveCThird?third='+third.value,
+                        success: function(data){
+                         console.log("The toggle was flipped, the value is " + check);
+                        }
+                    });
         }
 
         }
@@ -127,7 +171,14 @@ console.log("Autosave is not on, so nothing happens");
           else {
           console.log("Autosave is on, so we should call the save function for this specific field");
           //pass in new value for name
-          window.location = 'autoSaveCFourth?fourth='+fourth.value;
+
+            $.ajax({
+                                  type : "GET",
+                                  url : 'autoSaveCFourth?fourth='+fourth.value,
+                                  success: function(data){
+                                   console.log("The toggle was flipped, the value is " + check);
+                                  }
+                              });
           }
 
           }
@@ -146,7 +197,14 @@ console.log("Autosave is not on, so nothing happens");
             else {
             console.log("Autosave is on, so we should call the save function for this specific field");
             //pass in new value for name
-            window.location = 'autoSaveCStatus?status='+status.value;
+
+              $.ajax({
+                                              type : "GET",
+                                              url : 'autoSaveCStatus?status='+status.value,
+                                              success: function(data){
+                                               console.log("The toggle was flipped, the value is " + check);
+                                              }
+                                          });
             }
 
             }

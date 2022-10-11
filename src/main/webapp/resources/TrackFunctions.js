@@ -9,8 +9,15 @@ check = true;
 else {
 check = false;
 }
-console.log("The toggle was flipped, the value is " + check);
-window.location = 'updateTrackCheck?check='+check;
+
+
+$.ajax({
+          type : "GET",
+          url : 'updateTrackCheck?check='+check,
+          success: function(data){
+           console.log("The toggle was flipped, the value is " + check);
+          }
+      });
 
 
 
@@ -34,7 +41,14 @@ window.location = 'updateTrackCheck?check='+check;
   else {
   console.log("Autosave is on, so we should call the save function for this specific field");
   //pass in new value for finishLine
-  window.location = 'autoSaveTName?name='+name.value;
+
+  $.ajax({
+            type : "GET",
+            url : 'autoSaveTName?name='+name.value,
+            success: function(data){
+             console.log("The toggle was flipped, the value is " + check);
+            }
+        });
   }
 
   }
@@ -57,7 +71,14 @@ window.location = 'updateTrackCheck?check='+check;
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for city
-    window.location = 'autoSaveTCity?city='+city.value;
+
+    $.ajax({
+                type : "GET",
+                url : 'autoSaveTCity?city='+city.value,
+                success: function(data){
+                 console.log("The toggle was flipped, the value is " + check);
+                }
+            });
     }
 
     }
@@ -80,7 +101,14 @@ function checkState(state) {
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for state
-    window.location = 'autoSaveTState?state='+state.value;
+
+     $.ajax({
+                    type : "GET",
+                    url : 'autoSaveTState?state='+state.value,
+                    success: function(data){
+                     console.log("The toggle was flipped, the value is " + check);
+                    }
+                });
     }
 
     }
@@ -103,7 +131,14 @@ function checkZip(zip) {
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for zip
-    window.location = 'autoSaveTZip?zip='+zip.value;
+
+     $.ajax({
+                        type : "GET",
+                        url : 'autoSaveTZip?zip='+zip.value,
+                        success: function(data){
+                         console.log("The toggle was flipped, the value is " + check);
+                        }
+                    });
     }
 
     }
@@ -125,7 +160,14 @@ function checkOwner(owner) {
     else {
     console.log("Autosave is on, so we should call the save function for this specific field");
     //pass in new value for owner
-    window.location = 'autoSaveTOwner?owner='+owner.value;
+
+    $.ajax({
+                            type : "GET",
+                            url : 'autoSaveTOwner?owner='+owner.value,
+                            success: function(data){
+                             console.log("The toggle was flipped, the value is " + check);
+                            }
+                        });
     }
 
     }
