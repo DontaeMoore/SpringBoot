@@ -12,7 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View/Edit User Account</title>
     </head>
-     <style><%@include file="/WEB-INF/includes/style.css"%></style>
+     <style><%@include file="/WEB-INF/includes/style.css"%>
+     <%@include file="/WEB-INF/includes/dataTable.css"%>
+     </style>
     <body>
     <script type="text/javascript" src="resources/adminFunctions.js" ></script>
      <div align="center">
@@ -21,8 +23,30 @@
 
              </div>
 
+            <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+            <script>
+
+                // Initialize the DataTable
+                $(document).ready(function () {
+                  $('#mytable3').DataTable({
+                    initComplete: function () {
+                      $('#mytable3').show();
+
+
+                    }
+                  });
+                });
+              </script>
+
+
+
+
              <div align="center">
-            <table border="1" cellpadding="5">
+             <div class="feat">
+            <table id = "mytable3" border="1" cellpadding="5" hidden>
+            <thead>
             <tr>
 
             	<th>Username</th>
@@ -33,6 +57,8 @@
 
 
             </tr>
+            </thead>
+            <tbody>
             		<c:forEach items="${userList}" var="c" varStatus="status">
                      <tr>
 
@@ -42,9 +68,9 @@
                    		 <td>${c.status}</td>
 
                            <td>
-                                               		  <a href="viewUserAdmin?id=${c.id}">View User</a> and
+                                               		  <a href="viewUserAdmin?id=${c.id}">View User</a>&nbsp;
                                                		  <a href="editUserAdmin?id=${c.id}">Edit User</a>
-                                               		  &nbsp;&nbsp;
+                                               		  &nbsp;
                                                		   <a href="deleteUserAdmin?id=${c.id}">Delete User</a>
                                                		  </td>
 
@@ -52,10 +78,10 @@
 
                      </tr>
                   </c:forEach>
+                  </tbody>
             </table>
-            <div><a href="aOffset+"><input type="submit" value="Next 10"/></a>
-              <a href="aOffset-"><input type="submit" value="Previous 10"/></a>
-              </div>
+            </div>
+
             <h3><a href = "addUserAdmin">Add a new User!</a></h3>
 
 

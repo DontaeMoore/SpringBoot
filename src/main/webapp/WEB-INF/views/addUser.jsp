@@ -10,7 +10,8 @@
         <title>ADMIN New/Edit User</title>
     </head>
     <body>
-    <script type="text/javascript" src="resources/TrackFunctions.js" ></script>
+    <script type="text/javascript" src="resources/adminFunctions.js" ></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
      <div align="center">
       <h1>ADMIN New/Edit User</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
@@ -24,29 +25,29 @@
         <form:hidden path="id" />
         <tr>
                                  <td>
-                                <input type="checkbox" ${checkbox}  onclick="ToggleCheck()"  id = "remember"  ${checkValue} />Enable AutoSave
+                                <input type="checkbox" ${checkbox}  onclick= "ToggleCheck()" id = "remember"  ${checkValue} />Enable AutoSave
                                 </td>
                                 </tr>
 
 
         <tr>
         <td>UserName:</td>
-        <td><form:input path="username" /></td>
+        <td><form:input path="username" onchange="checkUserName(user.username)"/></td>
         </tr>
 
          <tr>
         <td>Password:</td>
-        <td><form:input path="password" /></td>
+        <td><form:input path="password" onchange="checkPassword(user.password)"/></td>
         </tr>
 
          <tr>
         <td>Role_ID:</td>
-        <td><form:input path="role" /></td>
+        <td><form:input path="role" onchange="checkRole(user.role)"/></td>
         </tr>
 
          <tr>
         <td>Status_ID:</td>
-        <td><form:input path="status"/></td>
+        <td><form:input path="status" onchange="checkStatus(user.status)"/></td>
         </tr>
 
 

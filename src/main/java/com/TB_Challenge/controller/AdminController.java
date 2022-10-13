@@ -1,5 +1,7 @@
 package com.TB_Challenge.controller;
 
+import com.TB_Challenge.model.Race;
+import com.TB_Challenge.model.Track;
 import com.TB_Challenge.model.User;
 import com.TB_Challenge.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Base64;
 
+@SessionAttributes("user")
 @Controller
 public class AdminController {
 
@@ -26,7 +26,7 @@ public class AdminController {
 
     @RequestMapping(value = "/editUserAdmin", method = RequestMethod.GET)
     public ModelAndView editChallenge(HttpServletRequest request, HttpSession session) {
-        session.setAttribute("checkbox", "disabled");
+        session.setAttribute("checkbox", "");
         Integer id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getUser(id);
         byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());
@@ -152,6 +152,77 @@ public class AdminController {
         return new ModelAndView("redirect:/admin");
 
     }
+
+    @RequestMapping(value = "/updateAdminCheck", method = RequestMethod.GET)
+    public ModelAndView updateCheck(@ModelAttribute User user, HttpSession session, @RequestParam boolean check) {
+        System.out.println("BOOLEAN User check is " + check + " " + user.getUsername());
+
+
+        if(check == true){
+            session.setAttribute("checkValue", "checked");
+        }
+        else {
+            session.setAttribute("checkValue", "");
+        }
+
+
+        return new ModelAndView("redirect:/editUserAdmin?id=" + user.getId());
+
+    }
+
+    @RequestMapping(value = "/autoSaveUsername", method = RequestMethod.GET)
+    public ModelAndView autouser(@ModelAttribute User user, HttpSession session, @RequestParam String username) {
+        System.out.print("got here");
+
+        //make sql call
+        //update user, pass it back to the page
+        userDAO.changeUserName(user.getId(), username);
+
+
+
+        return new ModelAndView("redirect:/editUserAdmin?id=" + user.getId());
+
+    }
+    @RequestMapping(value = "/autoSavePassword", method = RequestMethod.GET)
+    public ModelAndView autopassword(@ModelAttribute User user, HttpSession session, @RequestParam String password) {
+        System.out.print("got here");
+
+        //make sql call
+        //update user, pass it back to the page
+        userDAO.changePassword(user.getId(), password);
+
+
+
+        return new ModelAndView("redirect:/editUserAdmin?id=" + user.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveRole_ID", method = RequestMethod.GET)
+    public ModelAndView autorole(@ModelAttribute User user, HttpSession session, @RequestParam String role) {
+        System.out.print("got here");
+
+        //make sql call
+        //update user, pass it back to the page
+        userDAO.changeRole(user.getId(), role);
+
+
+
+        return new ModelAndView("redirect:/editUserAdmin?id=" + user.getId());
+
+    }
+    @RequestMapping(value = "/autoSaveStatus_ID", method = RequestMethod.GET)
+    public ModelAndView autostatus(@ModelAttribute User user, HttpSession session, @RequestParam String status) {
+        System.out.print("got here");
+
+        //make sql call
+        //update user, pass it back to the page
+        userDAO.changeStatus(user.getId(), status);
+
+
+
+        return new ModelAndView("redirect:/editUserAdmin?id=" + user.getId());
+
+    }
+
 
 
 }

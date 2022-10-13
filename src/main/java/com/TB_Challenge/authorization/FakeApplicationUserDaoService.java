@@ -65,17 +65,19 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                 )
         );
 
-        for(User u: userList){
+        for(User u: userList) {
             //Assumes the password stored in db is encoded with base64
             byte[] decodedPassBytes = Base64.getDecoder().decode(u.getPassword());
             String decodedPass = new String(decodedPassBytes);
-            System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword()
-                    + " decoded password -> " +decodedPass+  " role " +u.getRole() + " status " + u.getStatus());
 
 
+            if (!u.getStatus().equals("2")) { //don't make accounts for users with inactive status
 
-            if(!u.getStatus().equals("2")) { //don't make accounts for users with inactive status
-                if (u.getRole().equals("1"))
+                if (u.getRole().equals("1")) {
+                    System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword()
+                            + " decoded password -> " + decodedPass + " role " + u.getRole() + " status " + u.getStatus());
+
+
                     appUser.add(
                             new ApplicationUser(
                                     u.getUsername(),
@@ -87,7 +89,10 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                                     true
                             )
                     );
-                } else if(u.getRole().equals("2")){
+                }
+                 else if (u.getRole().equals("2")) {
+                    System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword()
+                            + " decoded password -> " + decodedPass + " role " + u.getRole() + " status " + u.getStatus());
                     appUser.add(
                             new ApplicationUser(
 
@@ -101,26 +106,27 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                             )
                     );
 
+                } else {
+                    System.out.println("Defined a new user  from db with username " + u.getUsername() + " " + u.getPassword()
+                            + " decoded password -> " + decodedPass + " role " + u.getRole() + " status " + u.getStatus());
+                    appUser.add(
+                            new ApplicationUser(
+
+                                    u.getUsername(),
+                                    decodedPass,
+                                    OFFICER.getGrantedAuthorities(),
+                                    true,
+                                    true,
+                                    true,
+                                    true
+                            )
+                    );
                 }
-            else {
-                appUser.add(
-                        new ApplicationUser(
 
-                                u.getUsername(),
-                                decodedPass,
-                                OFFICER.getGrantedAuthorities(),
-                                true,
-                                true,
-                                true,
-                                true
-                        )
-                );
+
+
             }
-
-
-
         }
-
 
         return appUser;
     }

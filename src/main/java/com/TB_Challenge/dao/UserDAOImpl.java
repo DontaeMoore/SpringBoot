@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
 
     public List<User> Adminlist(List<Status> s, List<Role> r, int adminOffset) {
         System.out.println("adminOffset is " + adminOffset);
-        List<User> list = jdbcTemplate.query("SELECT * FROM users LIMIT 10 OFFSET "+adminOffset, new RowMapper<User>() {
+        List<User> list = jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
 
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -182,6 +182,28 @@ public class UserDAOImpl implements UserDAO {
         String sql = "INSERT INTO users (user_name, password, role_id, status_id) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(sql,u.getUsername(), u.getPassword(), u.getRole(), u.getStatus());
 
+    }
+
+    @Override
+    public int changeUserName(Integer id, String username) {
+        String sql = "Update users set user_name = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, username);
+    }
+    @Override
+    public int changePassword(Integer id, String password) {
+        String encodedString = Base64.getEncoder().encodeToString(password.getBytes());
+        String sql = "Update users set password = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, encodedString);
+    }
+    @Override
+    public int changeRole(Integer id, String role) {
+        String sql = "Update users set role_id = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, role);
+    }
+    @Override
+    public int changeStatus(Integer id, String status) {
+        String sql = "Update users set status_id = ? WHERE id =" + id;
+        return jdbcTemplate.update(sql, status);
     }
 
 }

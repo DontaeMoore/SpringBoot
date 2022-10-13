@@ -26,7 +26,7 @@ public class RaceDAOImpl implements RaceDAO {
 
     @Override
     public List<Race> list(List<Track> t, int offset) {
-        List<Race> list = jdbcTemplate.query("SELECT * FROM race LIMIT 10 OFFSET "+offset, new RowMapper<Race>() {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race ", new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {

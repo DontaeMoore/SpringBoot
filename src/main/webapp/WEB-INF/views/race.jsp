@@ -6,35 +6,55 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact ManagerHome</title>
 </head>
- <style><%@include file="/WEB-INF/includes/style.css"%></style>
+ <style><%@include file="/WEB-INF/includes/style.css"%>
+ <%@include file="/WEB-INF/includes/dataTable.css"%>
+</style>
 
 <body>
 <div align="center">
 <h1>Derby Race List</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
-<script type="text/javascript" src="resources/RaceFunctions.js" ></script>
+
+
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="resources/RaceFunctions.js" ></script>
+
+<script>
+
+    // Initialize the DataTable
+    $(document).ready(function () {
+      $('#mytable').DataTable({
+        initComplete: function () {
+          $('#mytable').show();
 
 
+        }
+      });
+    });
+  </script>
 
-<table id="mytable" border="1" cellpadding="5">
+
+<div class="feat">
+<table id="mytable" class="hover display" border="1" hidden>
+<thead>
 <tr>
 
 	<th>Name</th>
-	<script type="text/javascript" src="../resources/test.js" ></script>
 	<th>Track</th>
 	<th>Date</th>
 	<th>Deadline (military time)</th>
 	<th>Distance (m)</th>
 	<th>Finish Time (s) </th>
-	<th>Action/Sort By      <input type="submit" value="ajaxName"  onclick="sortbyName()"/>
-                           <a href="raceDateSort"><input type="submit" value="Date"/></a>
-                            <a href="raceNameSort"><input type="submit" value="Name"/></a></th>
+	<th>Action/Sort By </th>
+
 
 
 
 </tr>
+</thead>
+<tbody>
 		<c:forEach items="${RaceList}" var="race" varStatus="status">
          <tr>
 
@@ -45,22 +65,22 @@
        		  <td>${race.distance}</td>
                <td>${race.finish_time}</td>
                <td>
-                      		  <a href="viewRace?id=${race.id}">View Race</a> and
+                      		  <a href="viewRace?id=${race.id}">View Race</a>&nbsp;
                       		  <a href="editRace?id=${race.id}">Edit Race</a>
-                      		  &nbsp;&nbsp;
+                      		  &nbsp;
                       		   <a href="deleteRace?id=${race.id}">Delete</a>
                       		  </td>
 
          </tr>
       </c:forEach>
+ </tbody>
 </table>
-  <div><a href="raceOffset+"><input type="submit" value="Next 10"/></a>
-  <a href="raceOffset-"><input type="submit" value="Previous 10"/></a>
-  </div>
+</div>
+
 <h3><span><a href = "addRace">Add Race</a></span></h3>
 
 
 </div>
-<%@ include file="/WEB-INF/includes/footer.jsp" %>
+<%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
 </body>
 </html>

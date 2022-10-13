@@ -70,7 +70,7 @@ public class TrackDAOImpl implements TrackDAO {
 
 	@Override
 	public List<Track> list(int offset) {
-		List<Track> list = jdbcTemplate.query("SELECT * FROM tracks LIMIT 10 OFFSET " + offset, new RowMapper<Track>() {
+		List<Track> list = jdbcTemplate.query("SELECT * FROM tracks" , new RowMapper<Track>() {
 
 			@Override
 			public Track mapRow(ResultSet rs, int rowNum) throws SQLException {

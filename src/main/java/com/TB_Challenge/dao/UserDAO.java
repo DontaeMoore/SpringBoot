@@ -23,5 +23,10 @@ public interface UserDAO {
 
     int saveAdmin(User u);
 
+    int changeUserName(Integer id, String username);
+    int changePassword(Integer id, String password);
+    int changeRole(Integer id, String role);
+    int changeStatus(Integer id, String status);
+
 
 }

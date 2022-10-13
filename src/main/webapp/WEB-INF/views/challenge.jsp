@@ -6,15 +6,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact ManagerHome</title>
 </head>
- <style><%@include file="/WEB-INF/includes/style.css"%></style>
+ <style><%@include file="/WEB-INF/includes/style.css"%>
+ <%@include file="/WEB-INF/includes/dataTable.css"%>
+ </style>
 <body>
 <div align="center">
 <h1>Derby Challenges</h1>
+
+
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
 
+<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-<table border="1" cellpadding="5">
+<script>
+
+    // Initialize the DataTable
+    $(document).ready(function () {
+      $('#mytable2').DataTable({
+        initComplete: function () {
+          $('#mytable2').show();
+
+
+        }
+      });
+    });
+  </script>
+
+<div class = "feat">
+<table id = "mytable2" border="1" cellpadding="5" hidden>
+<thead>
 <tr>
 
 	<th>Name</th>
@@ -27,6 +49,8 @@
 	<th>Action</th>
 
 </tr>
+</thead>
+<tbody>
 		<c:forEach items="${challenge}" var="c" varStatus="status">
          <tr>
 
@@ -49,10 +73,11 @@
 
          </tr>
       </c:forEach>
+      </tbody>
 </table>
-<div><a href="cOffset+"><input type="submit" value="Next 10"/></a>
-  <a href="cOffset-"><input type="submit" value="Previous 10"/></a>
-  </div>
+</div>
+
+
 <h3><a href = "addChallenge">Add a Challenge</a></h3>
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
 </div>

@@ -1,4 +1,9 @@
 
+
+
+
+
+
 //find out what the value of check is and then update it
 function ToggleCheck() {
 
@@ -214,15 +219,15 @@ $.ajax({
 
         $.ajax({
                              type : "GET",
-                             url : 'raceNameSort',
+                             url : 'raceNameSort2',
                              success: function(data){
-                               console.log("finished");
+                               console.log(data);
 
                              }
                          });
 
-        alert("finished");
-            $("mytable.table").load(location.href + " mytable.table");
+
+
         }
 
 

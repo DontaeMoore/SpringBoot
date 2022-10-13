@@ -4,6 +4,7 @@ import com.TB_Challenge.dao.RaceDAO;
 import com.TB_Challenge.dao.TrackDAO;
 import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.Track;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -86,6 +87,19 @@ public class RaceController {
     public ModelAndView RaceNameSort(ModelAndView model, HttpSession session) throws IOException {
         session.setAttribute("sort", "name");
         return new ModelAndView("redirect:/race");
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/raceNameSort2")
+    public String RaceNameSort2(ModelAndView model, HttpSession session) throws IOException {
+        Gson gson = new Gson();
+        List<Race> raceList;
+        List<Track> trackList = raceDAO.getTracks();
+        raceList = raceDAO.listSortByName(trackList, raceOffset);
+        String jsonraceList = gson.toJson(raceList);
+        return jsonraceList;
+
 
     }
     @RequestMapping(value = "/raceDateSort")

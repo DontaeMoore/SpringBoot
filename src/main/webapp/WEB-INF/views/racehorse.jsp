@@ -7,15 +7,34 @@
 <title>Race Horse Page</title>
 </head>
 
-<style><%@include file="/WEB-INF/includes/style.css"%></style>
+<style><%@include file="/WEB-INF/includes/style.css"%>
+<%@include file="/WEB-INF/includes/dataTable.css"%>
+</style>
 
 <body>
 <div align="center">
 <h1>Derby Race Horses</h1>
 <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
+<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-<table border="2" cellpadding="5">
+<script>
+
+    // Initialize the DataTable
+    $(document).ready(function () {
+      $('#mytable3').DataTable({
+        initComplete: function () {
+          $('#mytable3').show();
+
+
+        }
+      });
+    });
+  </script>
+<div class = "feat">
+<table id = "mytable3" border="2" cellpadding="5" hidden>
+<thead>
 <tr>
 
 	<th>Name</th>
@@ -28,6 +47,8 @@
                                          <a href="racehorseYearSort"><input type="submit" value="Foal Year"/></a></th>
 
 </tr>
+</thead>
+<tbody>
 		<c:forEach items="${racehorse}" var="r" varStatus="status">
          <tr>
 
@@ -48,12 +69,12 @@
 
          </tr>
       </c:forEach>
+      </tbody>
 </table>
- <div><a href="racehorseOffset+"><input type="submit" value="Next 10"/></a>
-  <a href="racehorseOffset-"><input type="submit" value="Previous 10"/></a>
-  </div>
+<div>
+
 <h3><a href = "addRaceHorse">Add a Race Horse</a></h3>
-<%@ include file="/WEB-INF/includes/footer.jsp" %>
+<%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
 </div>
 </body>
 </html>

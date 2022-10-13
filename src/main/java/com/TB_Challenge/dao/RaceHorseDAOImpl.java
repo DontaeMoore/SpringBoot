@@ -24,7 +24,7 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
 
     @Override
     public List<RaceHorse> list(int offset) {
-        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse LIMIT 10 OFFSET " + offset, new RowMapper<RaceHorse>() {
+        List<RaceHorse> list = jdbcTemplate.query("SELECT * FROM horse", new RowMapper<RaceHorse>() {
 
             @Override
             public RaceHorse mapRow(ResultSet rs, int rowNum) throws SQLException {
