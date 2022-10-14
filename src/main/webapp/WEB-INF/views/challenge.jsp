@@ -63,10 +63,10 @@
              <td>${c.status}</td>
 
                <td>
-                                   		  <a href="viewChallenge?id=${c.id}">View Challenge</a> and
-                                   		  <a href="editChallenge?id=${c.id}">Edit Challenge</a>
-                                   		  &nbsp;&nbsp;
-                                   		   <a href="deleteChallenge?id=${c.id}">Delete Challenge</a>
+                                   		  <a href="viewChallenge?id=${c.id}">View</a>&nbsp;
+                                   		  <a href="editChallenge?id=${c.id}">Edit</a>
+                                   		  &nbsp;
+                                   		   <a href="deleteChallenge?id=${c.id}">Delete</a>
                                    		  </td>
 
                       </tr>

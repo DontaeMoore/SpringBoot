@@ -68,10 +68,10 @@
                    		 <td>${c.status}</td>
 
                            <td>
-                                               		  <a href="viewUserAdmin?id=${c.id}">View User</a>&nbsp;
-                                               		  <a href="editUserAdmin?id=${c.id}">Edit User</a>
+                                               		  <a href="viewUserAdmin?id=${c.id}">View</a>&nbsp;
+                                               		  <a href="editUserAdmin?id=${c.id}">Edit</a>
                                                		  &nbsp;
-                                               		   <a href="deleteUserAdmin?id=${c.id}">Delete User</a>
+                                               		   <a href="deleteUserAdmin?id=${c.id}">Delete</a>
                                                		  </td>
 
                                   </tr>

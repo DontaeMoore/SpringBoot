@@ -9,8 +9,9 @@
     </head>
     <body>
     <style><%@include file="/WEB-INF/includes/style.css"%></style>
-    <h3><a href="editUser">${WelcomeMessage}.</a>&emsp; &emsp;<a href="logout"><input type="submit" value="Logout"/></a>
-     <a href="forgot"><input type="submit" value="Forgot password?"/></a>
+    <h3><a href="editUser">${WelcomeMessage}.</a>&emsp; &emsp;
+     <a href="logout"><input type="submit" value="Logout"/ ${seeLogout}></a>
+     <a href="forgot"><input type="submit" value="Forgot password?" ${seeForgot}/></a>
      </h3>
     <a href="horse"><input type="submit" value="Horse Page"/></a>
     <a href="race"><input type="submit" value="Races Page"/></a>

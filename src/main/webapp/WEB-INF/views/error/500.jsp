@@ -13,7 +13,7 @@
     <div align="center">
     <%@ include file="/WEB-INF/includes/errorHeader.jsp" %>
     <a href="home"><input type="submit" value="Home"/></a>
-        <h1>ERROR 500</h1>
+        <h1></h1>
          <p>The entity you are looking for does not exist.</p>
 
 

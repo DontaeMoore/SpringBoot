@@ -26,6 +26,7 @@
     // Initialize the DataTable
     $(document).ready(function () {
       $('#mytable').DataTable({
+        order: [[2, 'asc']],
         initComplete: function () {
           $('#mytable').show();
 
@@ -47,7 +48,7 @@
 	<th>Deadline (military time)</th>
 	<th>Distance (m)</th>
 	<th>Finish Time (s) </th>
-	<th>Action/Sort By </th>
+	<th>Action</th>
 
 
 
@@ -65,8 +66,8 @@
        		  <td>${race.distance}</td>
                <td>${race.finish_time}</td>
                <td>
-                      		  <a href="viewRace?id=${race.id}">View Race</a>&nbsp;
-                      		  <a href="editRace?id=${race.id}">Edit Race</a>
+                      		  <a href="viewRace?id=${race.id}">View</a>&nbsp;
+                      		  <a href="editRace?id=${race.id}">Edit</a>
                       		  &nbsp;
                       		   <a href="deleteRace?id=${race.id}">Delete</a>
                       		  </td>

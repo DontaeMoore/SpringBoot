@@ -116,6 +116,12 @@ public class HomeController {
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
 
+        if(login.equals("You are not logged in")){
+            session.setAttribute("seeLogout", "hidden");
+            session.setAttribute("seeForgot", "");
+        }
+
+
 
 
         model.setViewName("home");
@@ -135,6 +141,7 @@ public class HomeController {
         session.setAttribute("checkValue", "");
 
         String login = securityLoginInfo();
+
         model.addObject("WelcomeMessage", login);
         model.addObject("track", newTrack);
         User user = grabLoggedinUser();
@@ -207,6 +214,10 @@ public class HomeController {
         model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
         session.setAttribute("rolename", user.getRoleName(Integer.parseInt(user.getRole())));
+        session.setAttribute("seeForgot", "hidden");
+        session.setAttribute("seeLogout", "");
+
+
 
 
 
@@ -348,7 +359,6 @@ public class HomeController {
             System.out.println(login);
         } else {
             login = "Welcome " + StringUtils.capitalize(authentication.getName());
-
             System.out.println(login);
         }
 

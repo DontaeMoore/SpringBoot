@@ -17,12 +17,13 @@
 
 
      <div align="center">
+     <h1>New/Edit Race  <br /> ${sessionMessage}</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
         <a href="home"><input type="submit" value="Home"/></a>
         </div>
 
         <div align="center">
-        <h1>New/Edit Race  <br /> ${sessionMessage}</h1>
+
         <form:form action="saveRace" method="post" modelAttribute="race">
         <table cellpadding="5">
         <form:hidden path="id" />
@@ -73,12 +74,7 @@
         <td colspan="2" align="center"><input type="submit" name = "save" value="Submit Form"/></td>
         </tr>
 
-        <tr>
-        <td colspan="2" align="center"><input type="submit" disabled="disabled" name = "submitSession" value="Save And Return Later"/>
-        <input type="submit" disabled="disabled" name = "clearSession" value="Clear the session"/>
-        </td>
 
-        </tr>
 
         </tr>
 

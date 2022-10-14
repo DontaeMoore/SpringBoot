@@ -93,7 +93,7 @@
          		<c:forEach items="${r}" var="race" varStatus="status">
                   <tr>
 
-                		 <td>${race.name}</td>
+                		 <td><a href = "viewRace?id=${race.id}">${race.name}</a></td>
                 		 <td>${race.date}</td>
                 		 <td>${race.trackName}</td>
 

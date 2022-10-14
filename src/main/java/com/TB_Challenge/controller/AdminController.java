@@ -1,8 +1,8 @@
 package com.TB_Challenge.controller;
 
-import com.TB_Challenge.model.Race;
-import com.TB_Challenge.model.Track;
-import com.TB_Challenge.model.User;
+import com.TB_Challenge.dao.ChallengeDAO;
+import com.TB_Challenge.dao.RoleDAO;
+import com.TB_Challenge.model.*;
 import com.TB_Challenge.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @SessionAttributes("user")
 @Controller
@@ -23,6 +25,12 @@ public class AdminController {
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private ChallengeDAO challengeDAO;
+
+    @Autowired
+    private RoleDAO roleDAO;
 
     @RequestMapping(value = "/editUserAdmin", method = RequestMethod.GET)
     public ModelAndView editChallenge(HttpServletRequest request, HttpSession session) {
@@ -32,7 +40,22 @@ public class AdminController {
         byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());
         String decodedPass = new String(decodedPassBytes);
         user.setPassword(decodedPass);
+
+
+
         System.out.println("we want to edit this User " + user.toString());
+
+        List<Role> roleList = roleDAO.roleList();
+        List<String> roleNameList = new ArrayList<>();
+        for(Role r : roleList){
+            roleNameList.add(r.getName());
+        }
+
+        List<Status> s = challengeDAO.status();
+        List<String> statusNameList = new ArrayList<>();
+        for(Status stat : s){
+            statusNameList.add(stat.getName());
+        }
 
         ModelAndView model = new ModelAndView("addUser");
 
@@ -52,6 +75,8 @@ public class AdminController {
 
         model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
+        model.addObject("rolelist", roleNameList);
+        model.addObject("statuslist", statusNameList);
 
 
         return model;
@@ -62,6 +87,8 @@ public class AdminController {
     public ModelAndView viewUserAdmin(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getUser(id);
+
+
 
         byte[] decodedPassBytes = Base64.getDecoder().decode(user.getPassword());
         String decodedPass = new String(decodedPassBytes);
@@ -133,6 +160,7 @@ public class AdminController {
     @RequestMapping(value = "/saveUserAdmin", method = RequestMethod.POST)
     public ModelAndView saveChallenge(@ModelAttribute User user) {
         System.out.println("save was called for ADMIN user");
+
         System.out.println(user.toString());
         System.out.println();
 

@@ -13,12 +13,13 @@
     <script type="text/javascript" src="resources/TrackFunctions.js" ></script>
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
      <div align="center">
+     <h1>New/Edit Track</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
         </div>
    
         <div align="center">
-        <h1>New/Edit Track</h1>
+
         <form:form action="save" method="post" modelAttribute="track">
         <table cellpadding="5">
         <form:hidden path="id" />

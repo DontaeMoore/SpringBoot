@@ -45,6 +45,8 @@
         <td><form:input path="role" onchange="checkRole(user.role)"/></td>
         </tr>
 
+
+
          <tr>
         <td>Status_ID:</td>
         <td><form:input path="status" onchange="checkStatus(user.status)"/></td>

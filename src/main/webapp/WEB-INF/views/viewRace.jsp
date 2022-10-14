@@ -12,12 +12,13 @@
     </head>
     <body>
     <div align="center">
+    <h1>View Race Details!</h1>
     <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
     </div>
 
         <div align="center">
-        <h1>View Race Details!</h1>
+
         <form:form action="save" method="post" modelAttribute="race">
         <table cellpadding="5">
         <form:hidden path="id" />

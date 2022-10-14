@@ -13,7 +13,7 @@
     <div align="center">
     <%@ include file="/WEB-INF/includes/errorHeader.jsp" %>
     <a href="home"><input type="submit" value="Home"/></a>
-        <h1>ERROR 403</h1>
+        <h1></h1>
          <p>You do not possess the required permissions to access this page</p>
 
 

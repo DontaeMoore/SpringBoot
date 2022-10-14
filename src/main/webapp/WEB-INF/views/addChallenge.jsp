@@ -13,12 +13,13 @@
     <script type="text/javascript" src="resources/ChallengeFunctions.js" ></script>
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
      <div align="center">
+     <h1>New/Edit Challenge</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
 
         </div>
 
         <div align="center">
-        <h1>New/Edit Challenge ${challenge.id}</h1>
+
         <form:form action="saveChallenge" method="post" modelAttribute="challenge">
         <table cellpadding="5">
         <form:hidden path="id" />

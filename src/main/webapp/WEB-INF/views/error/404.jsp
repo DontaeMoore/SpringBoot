@@ -13,7 +13,7 @@
     <div align="center">
     <%@ include file="/WEB-INF/includes/errorHeader.jsp" %>
     <a href="home"><input type="submit" value="Home"/></a>
-        <h1>ERROR 404</h1>
+        <h1></h1>
          <p>This page does not exist in the derby application</p>
 
 

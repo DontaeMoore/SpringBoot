@@ -43,8 +43,7 @@
 	<th>Owner </th>
 	<th>Trainer </th>
 	<th>Comments</th>
-	<th>Action/Sort By <a href="racehorseNameSort"><input type="submit" value="Name"/></a>
-                                         <a href="racehorseYearSort"><input type="submit" value="Foal Year"/></a></th>
+	<th>Action</th>
 
 </tr>
 </thead>
@@ -59,10 +58,10 @@
        		 <td>${r.trainer}</td>
              <td>${r.comments}</td>
                <td>
-                                                		  <a href="viewRaceHorse?id=${r.id}">View Race Horse</a> and
-                                                		  <a href="editRaceHorse?id=${r.id}">Edit Race Horse</a>
-                                                		  &nbsp;&nbsp;
-                                                		   <a href="deleteRaceHorse?id=${r.id}">Delete Race Horse</a>
+                                                		  <a href="viewRaceHorse?id=${r.id}">View</a>&nbsp;
+                                                		  <a href="editRaceHorse?id=${r.id}">Edit</a>
+                                                		  &nbsp;
+                                                		   <a href="deleteRaceHorse?id=${r.id}">Delete</a>
                                                 		  </td>
 
                                    </tr>

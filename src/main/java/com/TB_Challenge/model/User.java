@@ -7,6 +7,10 @@ public class User {
     private String role;
     private String status;
 
+
+
+
+
     public User (String username, String password, String  role, String status) {
         this.username = username;
         this.password = password;
@@ -66,13 +70,13 @@ public class User {
     {
 
         if(role == 1){
-            return "ADMIN";
+            return "Admin";
         }
         if(role == 2){
-            return "USER";
+            return "User";
         }
         if(role == 3){
-            return "OFFICIAL";
+            return "Official";
         }
         return "NO ROLE ASSIGNED";
     }
@@ -83,8 +87,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password " + password + ", role " + role + ", status " + status
-                +  "]";
-    }
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", status='" + status + '\'' +
 
+                '}';
+    }
 }

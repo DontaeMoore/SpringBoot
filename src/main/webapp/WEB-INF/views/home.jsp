@@ -58,8 +58,8 @@
        		  <td><img src="${contact.icon}" width="40" height="40" alt = "N/A"></td>
 
        		  <td>
-       		  <a href="view?id=${contact.id}">View Details</a>&nbsp;
-       		  <a href="edit?id=${contact.id}">Edit Track</a>
+       		  <a href="view?id=${contact.id}">View</a>&nbsp;
+       		  <a href="edit?id=${contact.id}">Edit</a>
        		  &nbsp;
        		   <a href="delete?id=${contact.id}">Delete</a>
        		  </td>
