@@ -67,6 +67,8 @@
                                    		  <a href="editChallenge?id=${c.id}">Edit</a>
                                    		  &nbsp;
                                    		   <a href="deleteChallenge?id=${c.id}">Delete</a>
+
+                                   		    <a href="challengeraces?id=${c.id}">Races</a>
                                    		  </td>
 
                       </tr>

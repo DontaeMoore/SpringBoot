@@ -85,7 +85,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
                 c.setDesc(rs.getString("description"));
                 c.setStatus(rs.getString("status"));
 
-                System.out.println(c.toString());
+
 
                 return c;
             }
@@ -153,7 +153,7 @@ public class ChallengeDAOImpl implements ChallengeDAO {
     @Override
     public List<Race> listRaces(int challengeID, List<Track> t) {
 
-        List<Race> list = jdbcTemplate.query("SELECT * FROM challengeraces join race where race_id = id AND challenge_id =" + challengeID, new RowMapper<Race>() {
+        List<Race> list = jdbcTemplate.query("SELECT * FROM challenge_race join race where race_id = id AND challenge_id =" + challengeID, new RowMapper<Race>() {
 
             @Override
             public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -186,6 +186,13 @@ public class ChallengeDAOImpl implements ChallengeDAO {
         return list;
 
     }
+
+    @Override
+    public int deleteRace(Integer Cid, Integer Rid) {
+        String sql = "DELETE FROM challenge_race where challenge_id = ? AND race_id = ?";
+        return jdbcTemplate.update(sql, Cid, Rid);
+    }
+
 
     @Override
     public int changeName(Integer id, String name) {

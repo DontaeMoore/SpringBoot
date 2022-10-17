@@ -77,30 +77,7 @@
         </table>
         </form:form>
 
-        <h1>Every Race that occurs in ${challenge.name}</h1>
 
-
-
-         <table border="1" cellpadding="5">
-         <tr>
-
-         	<th>Name</th>
-         	<th>Starting Date</th>
-         	<th>Track Name</th>
-
-
-         </tr>
-         		<c:forEach items="${r}" var="race" varStatus="status">
-                  <tr>
-
-                		 <td><a href = "viewRace?id=${race.id}">${race.name}</a></td>
-                		 <td>${race.date}</td>
-                		 <td>${race.trackName}</td>
-
-
-                  </tr>
-               </c:forEach>
-         </table>
          <%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
         </div>
 

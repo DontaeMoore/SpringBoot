@@ -37,16 +37,16 @@
         </tr>
 
        <tr>
-       <td>Status ID:</td>
-       <td>${user.status}</td>
+       <td>Status:</td>
+       <td>${user.statusName}</td>
        </tr>
 
 
 
 
         <tr>
-        <td>Role ID:</td>
-        <td>${user.role}</td>
+        <td>Role:</td>
+        <td>${user.roleName}</td>
         </tr>
 
 

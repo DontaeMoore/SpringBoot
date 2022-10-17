@@ -21,6 +21,8 @@ public interface ChallengeDAO {
 
     int delete(Integer id);
 
+    int deleteRace(Integer Cid, Integer Rid);
+
     List<Race> listRaces(int challengeID, List<Track> t);
 
     int changeName(Integer id, String name);

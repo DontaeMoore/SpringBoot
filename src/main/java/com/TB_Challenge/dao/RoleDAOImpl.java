@@ -32,7 +32,6 @@ public class RoleDAOImpl implements RoleDAO{
                 r.setDesc(rs.getString("description"));
 
 
-                System.out.println(r.toString());
 
                 return r;
             }

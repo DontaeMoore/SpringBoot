@@ -78,4 +78,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Bean
+    public Challenge_RaceDAO getChallengeRaceDAO() { return new Challenge_RaceDAOImpl(getDataSource());
+
+    }
+
 }

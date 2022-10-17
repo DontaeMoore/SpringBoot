@@ -12,6 +12,7 @@
     <body>
     <script type="text/javascript" src="resources/adminFunctions.js" ></script>
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+
      <div align="center">
       <h1>ADMIN New/Edit User</h1>
         <%@ include file="/WEB-INF/includes/mainHeader.jsp" %>
@@ -40,17 +41,27 @@
         <td><form:input path="password" onchange="checkPassword(user.password)"/></td>
         </tr>
 
-         <tr>
-        <td>Role_ID:</td>
-        <td><form:input path="role" onchange="checkRole(user.role)"/></td>
-        </tr>
+
+
+                <tr>
+                <td>Role:</td>
+                <td><form:select path="roleName">
+                <form:options items="${rolelist}"></form:options>
+                </form:select>
+                </td>
+                </tr>
+
+                <tr>
+                                 <td>Status:</td>
+                                <td><form:select path="statusName">
+                                <form:options items="${statuslist}"></form:options>
+                                </form:select>
+                                </td>
+                                </tr>
 
 
 
-         <tr>
-        <td>Status_ID:</td>
-        <td><form:input path="status" onchange="checkStatus(user.status)"/></td>
-        </tr>
+
 
 
         <tr>

@@ -234,20 +234,11 @@ public class HomeController {
         User user = grabLoggedinUser();
         String login = securityLoginInfo();
         model.addObject("WelcomeMessage", login);
-
         model.addObject("user", user);
         List<Role> roleList = roleDAO.roleList();
         List<Status> s = challengeDAO.status();
         List<User> userList = userDAO.Adminlist(s, roleList, adminOffset);
-        if(userList.isEmpty()){
-            System.out.println(adminOffset + " admin offset");
-            adminOffset-=10;
-            userList = userDAO.Adminlist(s, roleList, adminOffset);
-        }
 
-        for(User c : userList){
-            System.out.println("user " + c.getUsername());
-        }
         model.addObject("userList", userList);
 
 

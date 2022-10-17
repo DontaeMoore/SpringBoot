@@ -1,5 +1,6 @@
 package com.TB_Challenge.dao;
 
+import com.TB_Challenge.model.Challenge;
 import com.TB_Challenge.model.Race;
 import com.TB_Challenge.model.Status;
 import com.TB_Challenge.model.Track;
@@ -47,6 +48,40 @@ public class RaceDAOImpl implements RaceDAO {
                         r.setTrackName(track.getName());
                     }
                 }
+
+
+
+                System.out.println(r.toString() + " " + r.getFinish_time());
+
+
+                return r;
+            }
+
+        });
+
+        return list;
+
+    }
+
+    @Override
+    public List<Race> listRaceNotInChallenge(int challengeId) {
+        System.out.println("is races being hit");
+        List<Race> list = jdbcTemplate.query("SELECT * FROM race where id NOT IN " +
+                "(SELECT id FROM challenge_race join race where race_id = id And challenge_id =" + challengeId + ")"  , new RowMapper<Race>() {
+
+            @Override
+            public Race mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Race r = new Race();
+
+                r.setId(rs.getInt("id"));
+                r.setName(rs.getString("name"));
+                r.setYear(rs.getString("year"));
+                r.setTrack_id(rs.getInt("track_id"));
+                r.setDate(rs.getString("date"));
+                String time = rs.getString("deadline");
+                r.setDeadline(time.substring(0,5));
+                r.setDistance(rs.getDouble("distance"));
+                r.setFinish_time(rs.getDouble("finish_time"));
 
 
 
@@ -185,6 +220,42 @@ public class RaceDAOImpl implements RaceDAO {
                             r.setTrackName(track.getName());
                         }
                     }
+                    return r;
+                }
+
+                return null;
+            }
+
+        };
+
+        return jdbcTemplate.query(sql, extractor);
+
+
+    }
+
+    @Override
+    public Race getRaceID(String name2) {
+
+        String sql = "SELECT * FROM race WHERE name = '" + name2 + "'";
+
+
+        ResultSetExtractor<Race> extractor = new ResultSetExtractor<Race>() {
+
+            @Override
+            public Race extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (rs.next()) {
+
+                    Race r = new Race();
+                    r.setId(rs.getInt("id"));
+                    r.setName(rs.getString("name"));
+                    r.setYear(rs.getString("year"));
+                    r.setTrack_id(rs.getInt("track_id"));
+                    r.setDate(rs.getString("date"));
+                    String time = rs.getString("deadline");
+                    r.setDeadline(time.substring(0,5));
+                    r.setDistance(rs.getDouble("distance"));
+                    r.setFinish_time(rs.getDouble("finish_time"));
+
                     return r;
                 }
 

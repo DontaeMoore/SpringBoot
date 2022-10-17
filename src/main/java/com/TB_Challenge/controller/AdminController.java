@@ -160,9 +160,23 @@ public class AdminController {
     @RequestMapping(value = "/saveUserAdmin", method = RequestMethod.POST)
     public ModelAndView saveChallenge(@ModelAttribute User user) {
         System.out.println("save was called for ADMIN user");
-
+        System.out.println("yo");
+        List<Role> roleList = roleDAO.roleList();
+        List<Status> statusList = challengeDAO.status();
+        for(Role r : roleList){
+            if(r.getName().equals(user.getRoleName())){
+                user.setRole(r.getId());
+            }
+        }
+        for(Status s : statusList){
+            if(s.getName().equals(user.getStatusName())){
+                user.setStatus(s.getId().toString());
+            }
+        }
         System.out.println(user.toString());
         System.out.println();
+
+
 
 
        if(user.getId() == null){

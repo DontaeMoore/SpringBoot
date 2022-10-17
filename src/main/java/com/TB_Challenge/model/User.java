@@ -4,8 +4,38 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
     private String role;
     private String status;
+
+    public User(Integer id, String username, String password, String role, String status, String roleName, String statusName) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+        this.roleName = roleName;
+        this.statusName = statusName;
+    }
+
+    private String roleName;
+    private String statusName;
 
 
 
@@ -93,7 +123,8 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", status='" + status + '\'' +
-
+                ", roleName='" + roleName + '\'' +
+                ", statusName='" + statusName + '\'' +
                 '}';
     }
 }

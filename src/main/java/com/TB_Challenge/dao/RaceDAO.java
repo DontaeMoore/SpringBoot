@@ -6,7 +6,7 @@ import com.TB_Challenge.model.Track;
 import java.util.List;
 
 public interface RaceDAO {
-
+    List<Race> listRaceNotInChallenge(int challengeId);
     List<Race> list(List<Track> t, int offset);
     List<Race> listSortByDate(List<Track> t, int offset);
     List<Race> listSortByName(List<Track> t, int offset);
@@ -20,6 +20,8 @@ public interface RaceDAO {
     int update(Race race);
 
     int delete(Integer id);
+
+    Race getRaceID(String name);
 
     int changefinish(Integer id, double new_finish);
 

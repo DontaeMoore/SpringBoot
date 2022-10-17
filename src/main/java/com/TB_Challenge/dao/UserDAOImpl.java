@@ -3,6 +3,7 @@ package com.TB_Challenge.dao;
 import com.TB_Challenge.model.Role;
 import com.TB_Challenge.model.Status;
 import com.TB_Challenge.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -26,6 +27,11 @@ public class UserDAOImpl implements UserDAO {
         this.passwordEncoder = new BCryptPasswordEncoder();
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    @Autowired
+    private RoleDAO roleDAO;
+    @Autowired
+    private ChallengeDAO challengeDAO;
 
     @Override
     public List<User> list() {
@@ -51,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public List<User> Adminlist(List<Status> s, List<Role> r, int adminOffset) {
-        System.out.println("adminOffset is " + adminOffset);
+
         List<User> list = jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
 
             @Override
@@ -125,6 +131,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getUser(Integer id) {
 
+        List<Role> roleList = roleDAO.roleList();
+        List<Status> statusList = challengeDAO.status();
 
         String sql = "SELECT * FROM  users WHERE id =" + id;
         System.out.println(sql);
@@ -138,9 +146,23 @@ public class UserDAOImpl implements UserDAO {
                     String password = rs.getString("password");
                     String  role = rs.getString("role_id");
                     String status = rs.getString("status_id");
+                    String rolename = "";
+                    String statusname = "";
+
+                    for(Role r : roleList){
+                        if(r.getId().equals(role)){
+                            rolename = r.getName();
+                        }
+                    }
+                    for(Status s : statusList){
+                        if(s.getId().toString().equals(status)){
+                            statusname = s.getName();
+
+                        }
+                    }
 
 
-                    return new User(id, username, password, role, status);
+                    return new User(id, username, password, role, status, rolename, statusname);
                 }
 
                 return null;
