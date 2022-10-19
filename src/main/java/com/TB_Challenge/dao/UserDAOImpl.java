@@ -13,7 +13,9 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,6 +57,26 @@ public class UserDAOImpl implements UserDAO {
 
         return list;
     }
+
+    @Override
+    public HashMap<Integer, String> fastlookup() {
+
+        HashMap<Integer, String> users = new HashMap<Integer, String>();
+        jdbcTemplate.query("select id, user_name from users", new ResultSetExtractor<Map>() {
+            @Override
+            public Map extractData(ResultSet rs) throws SQLException, DataAccessException {
+
+                while (rs.next()) {
+                    users.put(rs.getInt("id"), rs.getString("user_name"));
+                }
+                return users;
+            }
+        });
+        return users;
+    }
+
+
+
 
     public List<User> Adminlist(List<Status> s, List<Role> r, int adminOffset) {
 

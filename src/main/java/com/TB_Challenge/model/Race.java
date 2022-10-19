@@ -2,6 +2,11 @@ package com.TB_Challenge.model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Race {
 
     private Integer id;
@@ -14,6 +19,11 @@ public class Race {
     private double finish_time = 0.00;
 
     private String trackName;
+
+
+    List<String> rh = new ArrayList<>();
+    List<Integer> postPositions = new ArrayList<>();
+    List<Integer> hIDs = new ArrayList<>();
 
 
 
@@ -113,6 +123,46 @@ public class Race {
 
     public void setFinish_time(double finish_time) {
         this.finish_time = finish_time;
+    }
+
+    public List<String> getRh() {
+        return rh;
+    }
+
+    public void setRh(List<RaceHorse> racehorselist) {
+
+        for(RaceHorse r : racehorselist){
+
+            rh.add(r.getName());
+            hIDs.add(r.getId());
+        }
+
+
+    }
+
+    public List<Integer> getPostPositions() {
+        return postPositions;
+    }
+
+    public void setPostPositions(List<RaceHorse> racehorselist) {
+        for(int i = 1; i <= 10; i++)
+        {
+            postPositions.add(i);
+        }
+        for(RaceHorse r : racehorselist){
+            System.out.println("checking" + r.toString());
+            postPositions.remove(r.getPost());
+        }
+
+        System.out.println(postPositions);
+    }
+
+    public List<Integer> gethIDs() {
+        return hIDs;
+    }
+
+    public void sethIDs(List<Integer> hIDs) {
+        this.hIDs = hIDs;
     }
 
     @Override

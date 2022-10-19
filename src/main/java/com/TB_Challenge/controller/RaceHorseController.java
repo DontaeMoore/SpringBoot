@@ -339,5 +339,16 @@ public class RaceHorseController {
 
     }
 
+    @RequestMapping(value = "/deleteHorseFromRace", method = RequestMethod.GET)
+    public ModelAndView deleteRace(@RequestParam Integer hID, @RequestParam Integer rID) {
+
+        //make sql call
+        //update challenge, pass it back to the page
+        raceHorseDAO.deleteRace(hID, rID);
+
+        return new ModelAndView("redirect:/viewHorses?id=" + rID);
+
+    }
+
 
 }

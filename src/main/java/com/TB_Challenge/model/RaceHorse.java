@@ -11,6 +11,10 @@ public class RaceHorse {
     private String trainer;
     private String comments;
 
+    private String chosen;
+
+    private Integer post;
+
     public RaceHorse() {
 
 
@@ -93,16 +97,42 @@ public class RaceHorse {
         this.id = id;
     }
 
+    public Integer getPost() {
+        return post;
+    }
+
+    public void setPost(Integer post) {
+        this.post = post;
+    }
+
+    public String getChosen() {
+        return chosen;
+    }
+
+    public void setChosen(String chosen) {
+        this.chosen = chosen;
+    }
+
+    public String setButton(String chosen){
+        if(chosen.equals("Not picked")){
+            return "";
+        }
+        return "disabled";
+    }
+
     @Override
     public String toString() {
         return "RaceHorse{" +
-                "name='" + name + '\'' +
-                ", gender=" + gender +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
                 ", foalyear='" + foalyear + '\'' +
                 ", link='" + link + '\'' +
                 ", owner='" + owner + '\'' +
                 ", trainer='" + trainer + '\'' +
                 ", comments='" + comments + '\'' +
+                ", chosen='" + chosen + '\'' +
+                ", post=" + post +
                 '}';
     }
 }

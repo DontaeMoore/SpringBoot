@@ -83,4 +83,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     }
 
+    @Bean
+    public RaceppsDAO getRaceppsDAO() { return new RaceppsDAOImpl(getDataSource());
+
+    }
+
 }

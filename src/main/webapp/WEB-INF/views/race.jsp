@@ -70,6 +70,7 @@
                       		  <a href="editRace?id=${race.id}">Edit</a>
                       		  &nbsp;
                       		   <a href="deleteRace?id=${race.id}">Delete</a>
+                      		   <a href="viewHorses?id=${race.id}">Horses</a>
                       		  </td>
 
          </tr>

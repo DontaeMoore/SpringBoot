@@ -26,7 +26,7 @@
 
 
                                <tr>
-                              <td>All Races Not In ${challenge.name}:</td>
+                              <td>All Races Not Associated with a Challenge:</td>
                               <td><form:select path="racename">
                               <form:options items="${races}"></form:options>
                               </form:select>

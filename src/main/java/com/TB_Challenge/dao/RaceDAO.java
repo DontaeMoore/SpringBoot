@@ -14,6 +14,7 @@ public interface RaceDAO {
     List<Track> getTracks();
 
     Race getRace(int raceID, List<Track> t);
+    Race getRace(int raceID);
 
     int save(Race race);
 

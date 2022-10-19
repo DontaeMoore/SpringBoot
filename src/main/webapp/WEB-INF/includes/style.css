@@ -39,3 +39,8 @@ html, body {
   text-align: center;
 }
 
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+

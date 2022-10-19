@@ -1,9 +1,7 @@
 package com.TB_Challenge.controller;
 
-import com.TB_Challenge.dao.RaceDAO;
-import com.TB_Challenge.dao.TrackDAO;
-import com.TB_Challenge.model.Race;
-import com.TB_Challenge.model.Track;
+import com.TB_Challenge.dao.*;
+import com.TB_Challenge.model.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @SessionAttributes("race")
@@ -27,7 +26,16 @@ public class RaceController {
     private RaceDAO raceDAO;
 
     @Autowired
+    private RaceppsDAO raceappsDAO;
+
+    @Autowired
+    private RaceHorseDAO racehorseDAO;
+
+    @Autowired
     private TrackDAO trackDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     private int raceOffset = 0;
 
@@ -385,6 +393,170 @@ public class RaceController {
 
     }
 
+    @RequestMapping(value = "/viewHorses", method = RequestMethod.GET)
+    public ModelAndView Viewhorses(HttpServletRequest request, ModelAndView model, @RequestParam String id) {
+        System.out.println("You reached the view horses in this race page.");
+
+        Integer race_id = Integer.parseInt(request.getParameter("id"));
+
+        Race r = raceDAO.getRace(race_id);
+        System.out.println("get all horses for " + r.toString());
+        List<RaceHorse> horseList = racehorseDAO.getRaceHorseInRace(race_id);
+        System.out.println("get all horse picks ");
+        List<UserPicks> picks = racehorseDAO.listPicks();
+        for(UserPicks p : picks){
+            System.out.println(p.toString());
+        }
+
+        HashMap<Integer, String> users = new HashMap<Integer, String>();
+        users = userDAO.fastlookup();
+        System.out.println(users.toString() + " yo");
+
+
+
+
+
+        //set up the chosen string value
+
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = "";
+
+        if(authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        }
+        else {
+            login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+
+
+
+        User u = userDAO.getUserInfo(authentication.getName());
+
+        for(RaceHorse rh : horseList){
+
+            for(UserPicks userp : picks){
+
+                if(
+                userp.getRace_id() == r.getId() &&
+                rh.getId() == userp.getHorse_id()){
+                    System.out.println(u.getUsername() + " has selected " + rh.getName()+ " for race " + r.getName());
+                    rh.setChosen("Picked by " + StringUtils.capitalize(users.get(userp.getUser_id())));
+
+
+                }
+                if(rh.getChosen() == null){
+                    System.out.println(u.getUsername() +" has not selected " + rh.getName()+ " for race " + r.getName());
+                    rh.setChosen("Not picked");
+
+                }
+
+            }
+
+
+
+
+
+        }
+
+
+
+
+        model.addObject("race", r);
+        model.addObject("WelcomeMessage", login);
+        model.addObject("horses", horseList);
+
+        model.setViewName("viewHorses");
+
+
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/addHorseToRace", method = RequestMethod.GET)
+    public ModelAndView addHorsetorace(HttpServletRequest request, ModelAndView model, @RequestParam String id) {
+        System.out.println("You reached the add horse to race page");
+
+        Integer race_id = Integer.parseInt(request.getParameter("id"));
+        List<Track> t = raceDAO.getTracks();
+        Race r = raceDAO.getRace(race_id, t);
+        System.out.println("get all horses not in " + r.getName());
+         RaceHorse raceHorse = new RaceHorse();
+        List<RaceHorse> horseList = racehorseDAO.getRaceHorseNotInRace(race_id);
+        List<RaceHorse> horseListInRace = racehorseDAO.getRaceHorseInRace(race_id);
+        r.setRh(horseList);
+        r.setPostPositions(horseListInRace);
+        System.out.println(r.getRh());
+        System.out.println(r.gethIDs());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = "";
+
+        if(authentication.getName().equals("anonymousUser")) {
+            login = "You are not logged in";
+            System.out.println(login);
+        }
+        else {
+            login = "Welcome " + StringUtils.capitalize(authentication.getName());
+            System.out.println(login);
+        }
+
+
+
+
+        model.addObject("race", r);
+        model.addObject("WelcomeMessage", login);
+        model.addObject("horses", horseList);
+        model.addObject("horsePick", raceHorse);
+        model.setViewName("addHorseToRace");
+
+
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/saveHorseToRace", method = RequestMethod.POST)
+    public ModelAndView saveChallengeToRace(@ModelAttribute RaceHorse rh, @RequestParam Integer rID) {
+
+        System.out.println(rh.toString());
+        RaceHorse r = racehorseDAO.getRaceHorse(rh.getId());
+        System.out.println("We will add this horse to the race!" + r.toString());
+        Integer race_id = rID;
+        Integer horse_id = r.getId();
+        Integer post_position = rh.getPost();
+
+        raceappsDAO.save(race_id, horse_id, post_position);
+
+
+
+
+
+        return new ModelAndView("redirect:/viewHorses?id="+rID);
+
+    }
+    @RequestMapping(value = "/choseRaceHorse", method = RequestMethod.GET)
+    public ModelAndView saveChallengeToRace(@RequestParam Integer rID, @RequestParam Integer hID) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+        User u = userDAO.getUserInfo(authentication.getName());
+        System.out.println("We made it!" + u.getId() +" " + hID + " " +  rID);
+        racehorseDAO.updatePick(u.getId(), rID, hID);
+
+
+
+
+
+
+        return new ModelAndView("redirect:/viewHorses?id="+rID);
+
+    }
 
 
 
