@@ -18,7 +18,7 @@
 
          <p><img src="resources/img/horsepic.jpg"/></p>
 
-            <p>Here is a weather Report from here in Lexington!</p>
+            <p>Here is a weather Report2 from here in Lexington!</p>
          <p> It is ${Weather[0]} Degrees Fahrenheit , With ${Weather[1]}, The wind speed is ${Weather[3]} MPH  </p>
 
 

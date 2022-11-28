@@ -103,6 +103,6 @@
 
 
     </div>
-    <%@ include file="/WEB-INF/includes/footer.jsp" %>
+    <%@ include file="/WEB-INF/includes/footerNonAbs.jsp" %>
     </body>
 </html>

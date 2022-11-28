@@ -2,6 +2,7 @@ package com.TB_Challenge.dao;
 
 
 import com.TB_Challenge.model.RaceHorse;
+import com.TB_Challenge.model.User;
 import com.TB_Challenge.model.UserPicks;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public interface RaceHorseDAO {
     int deleteRace(Integer hID, Integer rID);
 
     List<UserPicks> listPicks();
+
+    List<UserPicks> listPicks(User user);
     int updatePick(Integer user_id, Integer race_id, Integer horse_id);
 
 

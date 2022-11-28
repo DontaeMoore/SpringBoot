@@ -26,7 +26,14 @@
     // Initialize the DataTable
     $(document).ready(function () {
       $('#mytable').DataTable({
+        "language": {
+                          "lengthMenu": "Display  _MENU_ -- All Known Races",
+                          "zeroRecords": "No matching records found - No Races available that match your search.",
+                          "infoEmpty": "No Races available"
+                      },
         order: [[2, 'asc']],
+
+
         initComplete: function () {
           $('#mytable').show();
 

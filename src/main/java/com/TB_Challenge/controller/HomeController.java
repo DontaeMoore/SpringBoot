@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.TB_Challenge.config.EmailSenderService;
-import com.TB_Challenge.dao.ChallengeDAO;
-import com.TB_Challenge.dao.RoleDAO;
-import com.TB_Challenge.dao.TrackDAO;
+import com.TB_Challenge.dao.*;
 import com.TB_Challenge.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,9 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-
-import com.TB_Challenge.dao.UserDAO;
 
 @Controller
 @SessionAttributes("track")
@@ -43,6 +38,9 @@ public class HomeController {
 
     @Autowired
     private RoleDAO roleDAO;
+
+    @Autowired
+    private RaceHorseDAO raceHorseDAO;
 
     private int homeOffset = 0;
     private int adminOffset = 0;
@@ -67,12 +65,9 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping("/check")
-    @ResponseBody
-    public String check(HttpServletRequest request,
-                        HttpServletResponse response, ModelAndView model) {
-        return "This is a JQUERY AJAX COMMAND";
-    }
+
+
+
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView viewTrack(HttpServletRequest request) {
@@ -211,8 +206,13 @@ public class HomeController {
         String login = securityLoginInfo();
 
         User user = grabLoggedinUser();
+        List<UserPicks> u = raceHorseDAO.listPicks(user);
+        user.setUsername(StringUtils.capitalize(user.getUsername()));
+        for(UserPicks us : u){ System.out.println(us.toString());
+        }
         model.addObject("WelcomeMessage", login);
         model.addObject("user", user);
+        model.addObject("picks", u);
         session.setAttribute("rolename", user.getRoleName(Integer.parseInt(user.getRole())));
         session.setAttribute("seeForgot", "hidden");
         session.setAttribute("seeLogout", "");

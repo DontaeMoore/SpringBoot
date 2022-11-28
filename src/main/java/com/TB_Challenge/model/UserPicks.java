@@ -12,6 +12,11 @@ public class UserPicks {
 
     private String time;
 
+    private String raceName;
+
+    private String horseName;
+    private String date;
+
     public UserPicks(Integer upID,Integer user_id, Integer race_id, Integer horse_id, String time) {
         this.upID = upID;
         this.race_id = race_id;
@@ -63,6 +68,22 @@ public class UserPicks {
         this.time = time;
     }
 
+    public String getRaceName() {
+        return raceName;
+    }
+
+    public void setRaceName(String raceName) {
+        this.raceName = raceName;
+    }
+
+    public String getHorseName() {
+        return horseName;
+    }
+
+    public void setHorseName(String horseName) {
+        this.horseName = horseName;
+    }
+
     @Override
     public String toString() {
         return "UserPicks{" +
@@ -71,6 +92,18 @@ public class UserPicks {
                 ", race_id=" + race_id +
                 ", horse_id=" + horse_id +
                 ", time='" + time + '\'' +
+                ", raceName='" + raceName + '\'' +
+                ", horseName='" + horseName + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }

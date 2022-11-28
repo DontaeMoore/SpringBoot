@@ -2,13 +2,17 @@ package com.TB_Challenge.security;
 
 import com.TB_Challenge.authorization.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.TB_Challenge.security.ApplicationUserRole.ADMIN;
@@ -19,14 +23,16 @@ import static com.TB_Challenge.security.ApplicationUserRole.OFFICER;
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
+    public final PasswordEncoder passwordEncoder;
+    public final ApplicationUserService applicationUserService;
 
     @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService){
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = NoOpPasswordEncoder.getInstance();
         this.applicationUserService = applicationUserService;
     }
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -1,6 +1,7 @@
 package com.TB_Challenge.dao;
 
 import com.TB_Challenge.model.RaceHorse;
+import com.TB_Challenge.model.User;
 import com.TB_Challenge.model.UserPicks;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -354,6 +355,38 @@ public class RaceHorseDAOImpl implements RaceHorseDAO{
                 u.setUser_id(rs.getInt("up_user_id"));
                 u.setRace_id(rs.getInt("up_race_id"));
                 u.setHorse_id(rs.getInt("up_horse_id"));
+
+
+
+
+
+
+
+                return u;
+            }
+
+        });
+
+        return list;
+
+    }
+
+    @Override
+    public List<UserPicks> listPicks(User user) {
+        List<UserPicks> list = jdbcTemplate.query("SELECT * FROM userpicks " +
+                "join horse join race where up_horse_id = horse_id and up_race_id = id and up_user_id =" + user.getId(), new RowMapper<UserPicks>() {
+
+            @Override
+            public UserPicks mapRow(ResultSet rs, int rowNum) throws SQLException {
+                UserPicks u = new UserPicks();
+
+
+                u.setUser_id(rs.getInt("up_user_id"));
+                u.setRace_id(rs.getInt("up_race_id"));
+                u.setHorse_id(rs.getInt("up_horse_id"));
+                u.setHorseName(rs.getString(6));
+                u.setRaceName(rs.getString(15));
+                u.setDate(rs.getString(17));
 
 
 
